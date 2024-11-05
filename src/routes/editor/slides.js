@@ -10,7 +10,7 @@ export const slides = [
         "name": "",
         "content": "",
         "showAt": 0,
-        "extra": {
+        "itemExtra": {
           "text": {
             "initialValue": "Chapter 4 Ex 4.1 Q 5",
             "setCommands": []
@@ -59,8 +59,8 @@ export const slides = [
         }
       }
     ],
-    "slideExtra": [],
-    "extra": {
+    "slideArray": [],
+    "slideExtra": {
       "backgroundColor": "#044810",
       "canvasWidth": 1000,
       "canvasHeight": 360,

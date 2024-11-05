@@ -23,7 +23,7 @@ value={selectedIndex}
 >
 {#each itemObjects as item, index}
     <option value={index}>
-    {item.itemData.extra.name}
+    {item.itemData.itemExtra.name}
     </option>
 {/each}
 </select>

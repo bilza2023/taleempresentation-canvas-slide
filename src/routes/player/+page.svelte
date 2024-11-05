@@ -61,8 +61,7 @@
               "shadowBlur": 0,
               "useShowHide": false,
               "setCommands": []
-            },
-            "itemArray": []
+            }
            
           }
         ],
@@ -132,11 +131,11 @@ onMount(async()=>{
       
         items={currentSlide.items}
         
-        startTime={currentSlide.startTime}
-        endTime={currentSlide.endTime}
+        startTime={0}
+        endTime={10}
       
-        itemExtra={currentSlide.itemExtra}
-        itemArray={currentSlide.itemArray}
+        slideExtra={currentSlide.slideExtra}
+        slideArray={currentSlide.slideArray}
       
       spriteImgArray={assets.spriteImages}
       bgImages={assets.bgImages}
