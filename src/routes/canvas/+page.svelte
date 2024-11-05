@@ -1,8 +1,8 @@
 <script>
-  import {CanvasEditor}  from "../../lib";
+  import {CanvasPlayer}  from "../../lib";
   import {onMount} from "svelte";
-  // import audioData from "./audioData.js";
-  import {slides as defualtSlide} from "../slides/slides.js";
+  import audioData from "./audioData.js";
+  import {slides as defualtSlide} from "./slides.js";
   import loadAssets from "../assets/loadAssets";
   let currentTime=0;
 
@@ -22,14 +22,12 @@ onMount(async()=>{
 //--also send slideArray
 </script>
 
-<div class="w-full bg-gray-700 text-white p-2 min-h-screen ">
-
 {#if slides && assets}
-  <CanvasEditor
-   bind:startTime = {canvasSlide.startTime}
-   bind:endTime = {canvasSlide.endTime}
-   bind:items = {canvasSlide.items}
-   slideExtra = {canvasSlide.slideExtra}
+  <CanvasPlayer
+    startTime = {canvasSlide.startTime}
+    endTime = {canvasSlide.endTime}
+    items = {canvasSlide.items}
+   extra = {canvasSlide.extra}
    currentSlide={canvasSlide}
    icons={assets.icons}
    bgImages={assets.bgImages}
@@ -39,5 +37,3 @@ onMount(async()=>{
   />
 
 {/if}
-
-</div>

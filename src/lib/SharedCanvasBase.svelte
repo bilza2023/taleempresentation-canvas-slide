@@ -101,8 +101,15 @@
       if (interval) {
         clearInterval(interval);
       }
-  
+      
       ctx = canvas.getContext("2d");
+      // Set the canvas size to the device's pixel ratio
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width =  canvas.width * dpr;
+      canvas.height = canvas.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      
       drawLib = new DrawLib(canvas, ctx);
   
       isInitialized = true;

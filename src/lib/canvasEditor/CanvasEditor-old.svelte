@@ -24,7 +24,7 @@
   export let selectedItemIndex = 0; //this should not be export
   export let items; // items are currentSlide.items (it should just be slide)
   export let currentSlide;// items are currentSlide.items (it should just be slide)
-  export let slideExtra;   //this should be slideExtra not to be confused with item.slideExtra
+  export let extra;   //this should be slideExtra not to be confused with item.extra
   export let currentTime = 0; // pulse ???
 
   export let spriteImages = [];
@@ -48,6 +48,7 @@
   $: selectedItemObject = selectedItemIndex !== null ? itemObjects[selectedItemIndex] : null;
  
   $:{
+    debugger;
     currentSlide;//every slide must have uuid
     if (currentSlide.uuid != oldSlideUuid){
       currentSlide.startTime = currentSlide.startTime ?? 0;
@@ -118,7 +119,7 @@
 </script>
 
 {#if items}
-<div class='p-2 bg-stone-900'>
+<div class='p-2 bg-stone-800 w-full min-h-screen '>
   <EditorToolbar
     bind:items={items}
     toggleShowCanvas={toggleShowCanvas}
@@ -126,15 +127,12 @@
     addNewItem={handleAddNewItem}
     {icons}
   />
-     <!-- slideExtra renamed as slideExtra inside CanvasEditorPlayer   -->
+     <!-- extra renamed as slideExtra inside CanvasEditorPlayer   -->
   <div class='flex justify-between gap-2 '>
-
-    <div class="flex gap-2 w-full">
-
-      <div class='w-75 w-full'> 
+      <div class='w-[75%] flex-grow'> 
         <CanvasEditorPlayer 
           {items}
-          slideExtra={slideExtra}
+          slideExtra={extra}
           {currentTime}
           {spriteImages}
           {bgImages}
@@ -158,7 +156,6 @@
             bind:value={currentTime}
             step="1.0"  
           />
-        </div>
       </div>
     
       <div class="w-25 max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2">
@@ -183,7 +180,7 @@
             /> -->
           </div>
         {:else}
-          <CanvasCommand {slideExtra} />
+          <CanvasCommand {extra} />
         {/if}
       </div>
     </div>

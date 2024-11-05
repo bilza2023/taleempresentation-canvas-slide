@@ -8,6 +8,7 @@
   import { toast } from "@zerodevx/svelte-toast";
   
   import EditorToolbar from './EditorToolbar.svelte';
+  import Range from './Range.svelte';
   import CanvasEditorPlayer from "./CanvasEditorPlayer.svelte";
   import SelectItemMenu from './json-ui/SelectItemMenu.svelte';   
   import Toolbar from "./json-ui/Toolbar.svelte";
@@ -19,12 +20,11 @@
   import { addNewItem, moveUp, moveDown, copyItem, pasteItem, cloneItem, deleteItem } from './itemOperations.js';
   
   ///////////////////////////////////////////////////////////////////////////////
-  
   // Props
   export let selectedItemIndex = 0; //this should not be export
   export let items; // items are currentSlide.items (it should just be slide)
   export let currentSlide;// items are currentSlide.items (it should just be slide)
-  export let slideExtra;   //this should be slideExtra not to be confused with item.slideExtra
+  export let extra;   //this should be slideExtra not to be confused with item.extra
   export let currentTime = 0; // pulse ???
 
   export let spriteImages = [];
@@ -118,7 +118,8 @@
 </script>
 
 {#if items}
-<div class='p-2 bg-stone-900'>
+<div class='p-2 bg-stone-800 w-full min-h-screen '>
+  
   <EditorToolbar
     bind:items={items}
     toggleShowCanvas={toggleShowCanvas}
@@ -126,15 +127,14 @@
     addNewItem={handleAddNewItem}
     {icons}
   />
-     <!-- slideExtra renamed as slideExtra inside CanvasEditorPlayer   -->
-  <div class='flex justify-between gap-2 '>
 
-    <div class="flex gap-2 w-full">
 
-      <div class='w-75 w-full'> 
+  <div class='flex justify-between p-1 '>
+    
+    <div class='w-[75%] flex-grow'> 
         <CanvasEditorPlayer 
           {items}
-          slideExtra={slideExtra}
+          slideExtra={extra}
           {currentTime}
           {spriteImages}
           {bgImages}
@@ -143,31 +143,17 @@
           {itemObjects}
           selectedItem={selectedItemObject}
         />
-             
-        <div class="w-full">
-          <div class="flex gap-2">
-            <div class="border-2 border-white rounded-md p-1 text-xs">Seconds:{currentTime}</div>
-            <div class="border-2 border-white rounded-md p-1 text-xs">items:{items.length}</div>
-          </div>
-        
-          <input 
-            class="w-full" 
-            type="range"  
-            min={currentSlide.startTime} 
-            max={currentSlide.endTime}  
-            bind:value={currentTime}
-            step="1.0"  
-          />
-        </div>
-      </div>
     
-      <div class="w-25 max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2">
+    </div>
+
+      <div class=" max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2">
         {#if selectedItemIndex !== null}
           <SelectItemMenu 
             {itemObjects} 
             selectedItem={selectedItemObject}
             on:select={event => selectedItemIndex = event.detail.index}
           />
+  
           <div class="p-4 bg-gray-800 rounded-lg shadow-md">
             <Toolbar
               {selectedItemIndex}
@@ -182,11 +168,13 @@
               on:change={() => dispatch('itemChange')}
             /> -->
           </div>
-        {:else}
-          <CanvasCommand {slideExtra} />
+        <!-- {:else}
+          <CanvasCommand {extra} /> -->
         {/if}
+                 
       </div>
     </div>
+
+    <Range  {currentTime} startTime={currentSlide.startTime} endTime={currentSlide.endTime} {items} />
   </div>
-</div>
 {/if}
