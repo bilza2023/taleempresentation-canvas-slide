@@ -1,126 +1,191 @@
 <script>
-  import EditorToolbar from './EditorToolbar.svelte'; //canvas slide toolbar 
+  /**
+   * 5-Nov-2024 -merged CanvasEditor and EditorFrame.svelte
+   * The main actors are currentSlide , items , itemObjects and selectedItemObject.
+  */
+
+  import { createEventDispatcher, onMount } from 'svelte';
   import { toast } from "@zerodevx/svelte-toast";
-  import getNewItem from './getNewItem.js';
-  import EditorFrame from "./EditorFrame.svelte";
+  
+  import EditorToolbar from './EditorToolbar.svelte';
+  import CanvasEditorPlayer from "./CanvasEditorPlayer.svelte";
+  import SelectItemMenu from './json-ui/SelectItemMenu.svelte';   
+  import Toolbar from "./json-ui/Toolbar.svelte";
+  import CanvasCommand from "./json-ui/commands/CanvasCommand.svelte";
+  // import CommandUi from './dialogueBoxModule/CommandUi.svelte';
+  
+  import itemToObject from "./componentObjects/itemToObject";
+  
+  import { addNewItem, moveUp, moveDown, copyItem, pasteItem, cloneItem, deleteItem } from './itemOperations.js';
+  
+  ///////////////////////////////////////////////////////////////////////////////
+  
   // Props
-  // export let currentSlide;
-  export let selectedItemIndex=0;
-  export let items;
-  export let currentSlide;
-  export let extra;
-  export let currentTime=0;
-  // export let startTime; ///important
-  // export let endTime; // important
-  export let spriteImages=[];
-  export let bgImages=[];
+  export let selectedItemIndex = 0; //this should not be export
+  export let items; // items are currentSlide.items (it should just be slide)
+  export let currentSlide;// items are currentSlide.items (it should just be slide)
+  export let extra;   //this should be slideExtra not to be confused with item.extra
+  export let currentTime = 0; // pulse ???
+
+  export let spriteImages = [];
+  export let bgImages = [];
   export let icons;
-         let playerImages=[];
   
+  let playerImages = [];
+  const dispatch = createEventDispatcher();
+
   // State
-  let securrentSlidelectedItemIndex = null;
   let showSideBar = 0;
-  
-  // Item manipulation functions
-  function addNewItem(newItemExtraFn) {
-    const newItemExtra = newItemExtraFn();
-    const newItem = getNewItem();
-    newItem.extra = newItemExtra;    
-    items.unshift(newItem);      
-    items = [...items];
-  }
-  
-  function moveUp(index) {
-    if (index > 0) {
-      const item = items.splice(index, 1)[0];
-      items.splice(index - 1, 0, item);
-      items = [...items];
-    }selectedItemIndex
-  }
-  
-  function moveDown(index) {
-    if (index >= 0 && index < items.length - 1) {
-      const item = items.splice(index, 1)[0];
-      items.splice(index + 1, 0, item);
-      items = [...items];
-    }
-  }
-  
-  function copyItem(index) {
-    if (index >= 0) {
-      localStorage.setItem("copiedItem", JSON.stringify(items[index]));
-      toast.push("item copied");
-    }
-  }
-  
-  function pasteItem() {
-    const copiedItem = localStorage.getItem("copiedItem");
-    if (copiedItem) {
-      const item = JSON.parse(copiedItem);
-      item._id = null;
-      items = [...items, item];
-      toast.push("item pasted");
-    } else {
-      toast.push("no copied item found");
-    }
-  }
-  
-  function cloneItem(index) {
+  let oldSlideUuid = "";
+  let itemObjects = [];
+
+  onMount(async () => {
+    currentSlide.startTime = currentSlide.startTime ?? 0;
+    currentSlide.endTime = currentSlide.endTime ?? 10;
+    currentTime = currentSlide.startTime;
+  });
+// this is not selected slide BUT selected item
+  $: selectedItemObject = selectedItemIndex !== null ? itemObjects[selectedItemIndex] : null;
+ 
+  $:{
     debugger;
-    if (index >= 0) {
-      const clonedItem = JSON.parse(JSON.stringify(items[index]));
-      delete clonedItem._id;
-      items.unshift(clonedItem);
-      items = [...items];
+    currentSlide;//every slide must have uuid
+    if (currentSlide.uuid != oldSlideUuid){
+      currentSlide.startTime = currentSlide.startTime ?? 0;
+      currentSlide.endTime = currentSlide.endTime ?? 10;
+      //here is the problem
+      currentTime = currentSlide.startTime;
+      oldSlideUuid = currentSlide.uuid;
     }
   }
+
+  // Convert items to itemObjects whenever items change
+  $: {
+    itemObjects = items.map((item, index) => {
+      return itemToObject(
+        item,
+        {
+          // cloneComponent: () => cloneItem(index),
+          cloneComponent: () => {},
+          del: () => handleDeleteItem(index)
+        },
+        spriteImages
+      );
+    });
+  }
   
-  function deleteItem(index) {
-    if (index >= 0) {
-      items.splice(index, 1);
-      items = [...items];
-    }
+  function handleAddNewItem(newItemExtraFn) {
+    items = addNewItem(items, newItemExtraFn);
+  }
+  
+  function handleMoveUp(index) {
+    items = moveUp(items, index);
+  }
+  
+  function handleMoveDown(index) {
+    items = moveDown(items, index);
+  }
+  
+  function handleCopyItem(index) {
+    copyItem(items, index);
+  }
+  
+  function handlePasteItem() {
+    items = pasteItem(items);
+  }
+  
+  function handleCloneItem(index) {
+    items = cloneItem(items, index);
+  }
+  
+  function handleDeleteItem(index) {
+    items = deleteItem(items, index);
   }
   
   function toggleShowCanvas() {
     showSideBar = (showSideBar >= 2) ? 0 : showSideBar + 1;
   }
-  
-  function handleSelectionChange(event) {
-    selectedItemIndex = event.detail.index;
-  }
 
-  debugger;
-  </script>
-  
-  {#if items}
-  <div class='p-2 bg-stone-900'>
-    <EditorToolbar
-      bind:items={items}
-      {toggleShowCanvas}
-      {pasteItem}
-      {addNewItem}
-      {icons}
-    />
-       
-    <div class='flex justify-between gap-2'>
-      <EditorFrame 
-      {currentSlide}
-        {items}
-        {extra}
-        {currentTime}
-        {spriteImages}
-        {bgImages}
-        {playerImages}
-        {selectedItemIndex}
-        {moveUp}
-        {moveDown}
-        {deleteItem}
-        {cloneItem}
-        {copyItem}
-        {icons}
-        on:selectionChange={handleSelectionChange}
-      />
+  function handleClickParent(e, mouseX, mouseY) {
+    for (let i = 0; i < itemObjects.length; i++) {
+      const item = itemObjects[i];
+      if (item.isHit(mouseX, mouseY)) {
+        selectedItemIndex = i;
+        return;
+      }
+    }
+    selectedItemIndex = null;
+  }
+</script>
+
+{#if items}
+<div class='p-2 bg-stone-900'>
+  <EditorToolbar
+    bind:items={items}
+    toggleShowCanvas={toggleShowCanvas}
+    pasteItem={handlePasteItem}
+    addNewItem={handleAddNewItem}
+    {icons}
+  />
+     <!-- extra renamed as slideExtra inside CanvasEditorPlayer   -->
+  <div class='flex justify-between gap-2'>
+    <div class="flex gap-2">
+      <div class='w-75'> 
+        <CanvasEditorPlayer 
+          {items}
+          slideExtra={extra}
+          {currentTime}
+          {spriteImages}
+          {bgImages}
+          {playerImages}
+          {handleClickParent}
+          {itemObjects}
+          selectedItem={selectedItemObject}
+        />
+             
+        <div class="w-full">
+          <div class="flex gap-2">
+            <div class="border-2 border-white rounded-md p-1 text-xs">Seconds:{currentTime}</div>
+            <div class="border-2 border-white rounded-md p-1 text-xs">items:{items.length}</div>
+          </div>
+        
+          <input 
+            class="w-full" 
+            type="range"  
+            min={currentSlide.startTime} 
+            max={currentSlide.endTime}  
+            bind:value={currentTime}
+            step="1.0"  
+          />
+        </div>
+      </div>
+    
+      <div class="w-25 max-w-[25%] min-w-[25%] bg-stone-600 rounded-md p-2">
+        {#if selectedItemIndex !== null}
+          <SelectItemMenu 
+            {itemObjects} 
+            selectedItem={selectedItemObject}
+            on:select={event => selectedItemIndex = event.detail.index}
+          />
+          <div class="p-4 bg-gray-800 rounded-lg shadow-md">
+            <Toolbar
+              {selectedItemIndex}
+              moveUp={handleMoveUp}
+              moveDown={handleMoveDown}
+              deleteItem={handleDeleteItem}
+              cloneItem={handleCloneItem}
+              copyItem={handleCopyItem}
+            />
+            <!-- <CommandUi 
+              selectedItem={selectedItemObject}
+              on:change={() => dispatch('itemChange')}
+            /> -->
+          </div>
+        {:else}
+          <CanvasCommand {extra} />
+        {/if}
+      </div>
     </div>
   </div>
-  {/if}
+</div>
+{/if}

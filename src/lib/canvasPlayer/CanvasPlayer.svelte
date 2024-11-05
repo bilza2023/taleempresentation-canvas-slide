@@ -5,7 +5,7 @@
   import DrawLib from "../drawLib/drawLib";
   import itemToObject from "../canvasEditor/componentObjects/itemToObject";
 
-  export let items;
+  export let items; 
   export let currentTime;
   export let bgImages;
   export let spriteImgArray;

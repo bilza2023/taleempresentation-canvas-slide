@@ -1,7 +1,6 @@
 <script>
   //@ts-nocheck
   import { onMount,onDestroy } from "svelte";
-  import DrawLibInterpretor from "../drawLib/drawLibInterpretor"; //?
   import checkHandles from "./fn/checkHandles.js";
   import itemToObject from "./componentObjects/itemToObject";
   import setHandlesForEachItem from "./handleObject/setHandlesForEachItem"; //?
@@ -12,7 +11,7 @@
   export let spriteImages; // images for this slide
   export let handleClickParent; //??
   export let bgImages; // images for slide background
-  export let extra; // this is slide extra object
+  export let slideExtra; // this is slideExtra renamed here from extra
   export let itemObjects; // 
   export let selectedItem;
 
@@ -24,16 +23,28 @@
   function gameLoop() {
     try {
       if (itemObjects) {
-        //This extra is slide extra------yesss....!!!!
-        drawLibInterpretor.showGrid = extra.showGrid;
-        drawLibInterpretor.gridLineWidth = extra.gridLineWidth;
-        drawLibInterpretor.gridLineColor = extra.gridLineColor;
-        drawLibInterpretor.cellWidth = extra.cellWidth;
-        drawLibInterpretor.cellHeight = extra.cellHeight;
+        debugger;
+      
+        if(!slideExtra.bgGlobalAlpha){slideExtra.bgGlobalAlpha=1;}
 
+          drawLib.clear(slideExtra.backgroundColor);
+
+if(slideExtra.bgImg !== "null"){
+    for (let i = 0; i < bgImages.length; i++) {
+        const element = bgImages[i];
+        if(element.name == slideExtra.bgImg){
+            // debugger;
+            drawLib.bgImage(element.img,slideExtra.bgGlobalAlpha || 1);
+            break;
+        }
+    }
+}         
+
+if(slideExtra.showGrid){
+    drawLib.grid(slideExtra.cellWidth, slideExtra.cellHeight, slideExtra.gridLineWidth, slideExtra.gridLineColor);
+}
         ///////////////////////////////////////////////////////////////////////////
         
-        drawLibInterpretor.interpret(currentTime, extra);
 
     for (let i = 0; i < itemObjects.length; i++) {
       // debugger;
@@ -41,11 +52,9 @@
         // console.log("item" , item);
         if(item.isVisible(currentTime)){
           // debugger;
-            item.draw(drawLib.ctx, currentTime, extra);
+            item.draw(drawLib.ctx, currentTime, slideExtra);
           }
     }
-
-        ///////////////////////////////////////////////////
         // debugger;
         if(selectedItem){
           selectedItem.drawHandles(ctx);
@@ -53,7 +62,7 @@
       }
       
     } catch (error) {
-      drawLibInterpretor.jsonError();
+      console.error("Error in gameLoop:", error);
     }
   }
   //////////////////////////////////
@@ -67,19 +76,11 @@
       ////////////////////////////////////////////////////////////////////////
       drawLib = new DrawLib(canvas,ctx);
       ////////////////////////////////////////////////////////////////////////
-      drawLibInterpretor = new DrawLibInterpretor(
-        canvas,
-        ctx,
-        extra,
-        spriteImages,
-        bgImages
-      );
     }
     interval = setInterval(gameLoop, 20);
   }
   //////////////////////////////////
   let interval;
-  let drawLibInterpretor;
  
   onMount(async () => {
     await init();
@@ -136,8 +137,8 @@
   <canvas
     class="w-full m-2"
     bind:this={canvas}
-    width={extra.canvasWidth}
-    height={extra.canvasHeight}
+    width={slideExtra.canvasWidth}
+    height={slideExtra.canvasHeight}
     on:mousemove={handleMouseMove}
     on:mousedown={(e) => handleMouseDown(e)}
     on:mouseup={handleMouseUp}
