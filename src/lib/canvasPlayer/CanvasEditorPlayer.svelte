@@ -1,5 +1,5 @@
 <script>
-  import SharedCanvasBase from '../SharedCanvasBase.svelte';
+  import SharedCanvasBase from './SharedCanvasBase.svelte';
 
   export let currentTime;
   

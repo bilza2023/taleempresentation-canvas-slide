@@ -8,7 +8,7 @@
   import { toast } from "@zerodevx/svelte-toast";
   
   import EditorToolbar from './EditorToolbar.svelte';
-  import CanvasEditorPlayer from "./CanvasEditorPlayer.svelte";
+  import CanvasEditorPlayer from "../canvasPlayer/CanvasEditorPlayer.svelte";
   import SelectItemMenu from './json-ui/SelectItemMenu.svelte';   
   import Toolbar from "./json-ui/Toolbar.svelte";
   import CanvasCommand from "./json-ui/commands/CanvasCommand.svelte";

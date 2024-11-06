@@ -1,15 +1,16 @@
 <script>
-    import { onMount, onDestroy } from "svelte";
-    import DrawLib from "./drawLib/drawLib";
-    import itemToObject from "./canvasEditor/componentObjects/itemToObject";
-  
+  import { onMount, onDestroy } from "svelte";
+  import DrawLib from "../drawLib/drawLib";
+  import itemToObject from "./componentObjects/itemToObject";
+
     // Common props
     export let currentTime;
-    export let bgImages;
-    export let spriteImgArray;
-    export let slideExtra = {};
-    export let slideArray = [];
+    export let slideData;
     export let items = []; // Optional for editor mode
+    export let slideExtra = {};
+    export let assets;
+
+    ///////////////////////////////////////////
     export let itemObjects = []; // Can be passed directly in editor mode
     export let isEditorMode = false;
     export let selectedItem = null; // Only used in editor mode
@@ -31,7 +32,7 @@
         itemObjects = [];
         for (let i = 0; i < items.length; i++) {
           const item = items[i];
-          const itemObj = itemToObject(item, fnList, spriteImgArray);
+          const itemObj = itemToObject(item, fnList, assets.spriteImages);
           if (itemObj) {
             itemObjects.push(itemObj);
           }
@@ -53,8 +54,8 @@
       drawLib.clear(slideExtra.backgroundColor);
   
       if(slideExtra.bgImg !== "null") {
-        for (let i = 0; i < bgImages.length; i++) {
-          const element = bgImages[i];
+        for (let i = 0; i < assets.bgImages.length; i++) {
+          const element = assets.bgImages[i];
           if(element.name === slideExtra.bgImg) {
             drawLib.bgImage(element.img, slideExtra.bgGlobalAlpha || 1);
             break;
@@ -104,10 +105,10 @@
       
       ctx = canvas.getContext("2d");
       // Set the canvas size to the device's pixel ratio
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width =  canvas.width * dpr;
-      canvas.height = canvas.height * dpr;
-      ctx.scale(dpr, dpr);
+      // const dpr = window.devicePixelRatio || 1;
+      // canvas.width =  canvas.width * dpr;
+      // canvas.height = canvas.height * dpr;
+      // ctx.scale(dpr, dpr);
 
       
       drawLib = new DrawLib(canvas, ctx);
@@ -164,9 +165,8 @@
     function handleClick(e) {
       if (!isEditorMode) return;
       setMousePosition(e);
-      if ($$props.handleClickParent) {
-        $$props.handleClickParent(e, mouseX, mouseY);
-      }
+    
+      
     }
   </script>
   

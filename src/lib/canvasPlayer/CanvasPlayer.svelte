@@ -1,22 +1,22 @@
 <script>
-  import SharedCanvasBase from '../SharedCanvasBase.svelte';
+  import SharedCanvasBase from './SharedCanvasBase.svelte';
 
-  export let items;
-  export let startTime;
-  export let endTime;
   export let currentTime;
-  export let bgImages;
-  export let spriteImgArray;
-  export let slideExtra = {};
-  export let slideArray = [];
+  export let slideData;
+  export let items;
+  export let slideExtra;
+  export let assets;
+  
 </script>
 
 <SharedCanvasBase
-  {items}
   {currentTime}
-  {bgImages}
-  {spriteImgArray}
+
+  {slideData}
+  {items}
   {slideExtra}
-  {slideArray}
+  
+  {assets}
+  
   isEditorMode={false}
 />

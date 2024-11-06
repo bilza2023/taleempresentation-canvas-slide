@@ -1,10 +1,13 @@
 
 export const slides = [
   {
+    "data" : {
     "startTime": 0,
     "endTime": 3,
     "type": "canvas",
-    "template": "",
+    "template": ""
+    },
+    
     "items": [
       {
         "name": "",
@@ -59,6 +62,7 @@ export const slides = [
         }
       }
     ],
+    
     "slideExtra": [],
     "extra": {
       "backgroundColor": "#044810",
