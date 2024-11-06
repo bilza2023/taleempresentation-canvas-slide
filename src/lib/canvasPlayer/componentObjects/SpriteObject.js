@@ -1,111 +1,11 @@
 //@ts-nocheck
 import ComponentObject from './ComponentObject';
-import DraggerHandle from '../handleObject/DraggerHandle';
-import ButtonHandle from '../handleObject/ButtonHandle';
 import getVal from "../../getVal";
 
 export default class SpriteObject extends ComponentObject {
     constructor(itemData , fnList , spriteImgArray) {
         super(itemData , fnList);
         this.spriteImgArray = spriteImgArray;
-        this.dialogueBox = [
-            
-            {
-              componentName: 'TrPropNumber',
-              title: 'dx',
-              props: {}
-            },
-            {
-              componentName: 'TrPropNumber',
-              title: 'dy',
-              props: {}
-            },
-            {
-              componentName: 'TrNo',
-              title: 'wFactor',
-              props: {}
-            },
-            {
-              componentName: 'TrNo',
-              title: 'hFactor',
-              props: {}
-            },
-            // CommonCommands
-            {
-              componentName: 'TrText',
-              title: 'name',
-              props: {}
-            },
-            {
-              componentName: 'TrPropColor',
-              title: 'color',
-              props: {}
-            },
-            {
-              componentName: 'TrNo',
-              title: 'showAt',
-              props: {}
-            },
-            {
-              componentName: 'TrPropNumber',
-              title: 'globalAlpha',
-              props: {
-                min: '0.0',
-                max: '1.0',
-                step: '0.1'
-              }
-            },
-            // ShadowCommands
-            {
-              componentName: 'TrNo',
-              title: 'shadowOffsetX',
-              props: {}
-            },
-            {
-              componentName: 'TrNo',
-              title: 'shadowOffsetY',
-              props: {}
-            },
-            {
-              componentName: 'TrPropNumber',
-              title: 'shadowBlur',
-              props: {}
-            },
-            {
-              componentName: 'TrPropColor',
-              title: 'shadowColor',
-              props: {}
-            }
-          ];
-          
-    }
-
-    loadHandles() {
-        ////////////////////////////////////////////////////////////////////////////
-        let btnHandle = new ButtonHandle(this.itemData,this.fnList); 
-        btnHandle.color = 'silver';
-
-        btnHandle.getX = function() {
-            return this.itemData.extra.dx.initialValue - 15;
-        }
-
-        btnHandle.getY = function() {
-            return this.itemData.extra.dy.initialValue + 15;
-        }
-        btnHandle.useInitialValue = true;
-
-        this.handleObjects.push(btnHandle);        
-        ////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////    
-        let draggerHandle = new DraggerHandle(this.itemData,'dx' ,'dy'); 
-        draggerHandle.getX = function() {
-            return this.itemData.extra.dx.initialValue - 15;
-        }
-
-        draggerHandle.getY = function() {
-            return this.itemData.extra.dy.initialValue - 10;
-        }
-        this.handleObjects.push(draggerHandle);    
     }
 
     draw(ctx, currentTime) { 
@@ -114,7 +14,7 @@ export default class SpriteObject extends ComponentObject {
             let sprite;
             for (let i = 0; i < this.spriteImgArray.length; i++) {
                 const element = this.spriteImgArray[i];
-                if(element.name == this.itemData.extra.sheet) {
+                if(element.name == this.itemData.itemExtra.sheet) {
                     sprite = element;
                     break;
                 }
@@ -122,22 +22,22 @@ export default class SpriteObject extends ComponentObject {
             if(!sprite) { throw Error("Sprite not found"); }  
             
 /////////////////////////////////////////////////////////////////                                      
-            sprite.applyItem(this.itemData.extra.sheetItem);
+            sprite.applyItem(this.itemData.itemExtra.sheetItem);
             if (!sprite.selectedData) { console.warn("sheetItem not found"); return; }
 
-            this.itemData.extra.x = getVal(currentTime , this.itemData.extra.dx);
-            this.itemData.extra.y = getVal(currentTime , this.itemData.extra.dy);
+            this.itemData.itemExtra.x = getVal(currentTime , this.itemData.itemExtra.dx);
+            this.itemData.itemExtra.y = getVal(currentTime , this.itemData.itemExtra.dy);
 
-            // drawLib.sprite(sprite, this.itemData.extra);
+            // drawLib.sprite(sprite, this.itemData.itemExtra);
             ctx.drawImage(sprite.img,
               sprite.selectedData.sx, //x on source image
               sprite.selectedData.sy, //y on source image
               sprite.selectedData.sw, //width on source image
               sprite.selectedData.sh, //height on source image
-              this.itemData.extra.x,//x on destination image
-              this.itemData.extra.y,//y on destination image
-              sprite.selectedData.sw * Math.abs(this.itemData.extra.wFactor), //width on source image
-              sprite.selectedData.sh * Math.abs(this.itemData.extra.hFactor) //height on source image
+              this.itemData.itemExtra.x,//x on destination image
+              this.itemData.itemExtra.y,//y on destination image
+              sprite.selectedData.sw * Math.abs(this.itemData.itemExtra.wFactor), //width on source image
+              sprite.selectedData.sh * Math.abs(this.itemData.itemExtra.hFactor) //height on source image
           );
         } catch (error) {
             console.error(error);
@@ -145,21 +45,21 @@ export default class SpriteObject extends ComponentObject {
     }
 
     getX() {
-        return this.itemData.extra.x.initialValue;
+        return this.itemData.itemExtra.x.initialValue;
     }
 
     getY() {
-        return this.itemData.extra.y.initialValue;
+        return this.itemData.itemExtra.y.initialValue;
     }
 
     isHit(mouseX, mouseY) {
         const hitMargin = 40;
 
         return (
-            mouseX >= this.itemData.extra.dx.initialValue - hitMargin &&
-            mouseX <= this.itemData.extra.dx.initialValue + hitMargin &&
-            mouseY >= this.itemData.extra.dy.initialValue - hitMargin &&
-            mouseY <= this.itemData.extra.dy.initialValue + hitMargin
+            mouseX >= this.itemData.itemExtra.dx.initialValue - hitMargin &&
+            mouseX <= this.itemData.itemExtra.dx.initialValue + hitMargin &&
+            mouseY >= this.itemData.itemExtra.dy.initialValue - hitMargin &&
+            mouseY <= this.itemData.itemExtra.dy.initialValue + hitMargin
         );
     }
 } // class

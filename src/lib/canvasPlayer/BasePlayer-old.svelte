@@ -28,7 +28,8 @@
     const fnList = {};
   
     function updateItemObjects() {
-      if (!isEditorMode && items.length > 0) {
+      // debugger;
+      // if (!isEditorMode && items.length > 0) {
         itemObjects = [];
         for (let i = 0; i < items.length; i++) {
           const item = items[i];
@@ -37,13 +38,15 @@
             itemObjects.push(itemObj);
           }
         }
-      }
+      // }
     }
   
     $: {
-      if (!isEditorMode && items.length > 0 && isInitialized) {
+      // debugger;
+      items;
+      // if (!isEditorMode && items.length > 0 && isInitialized) {
         updateItemObjects();
-      }
+      // }
     }
   
     function drawBackground() {
@@ -122,7 +125,6 @@
   
     onMount(async () => {
       if (canvas) {
-        debugger;
         await initializeCanvas();
       }
     });

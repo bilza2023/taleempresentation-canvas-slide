@@ -1,101 +1,11 @@
 //@ts-nocheck
 import ComponentObject from './ComponentObject';
-import DraggerHandle from '../handleObject/DraggerHandle';
-import AdderHandle from '../handleObject/AdderHandle';
-import ButtonHandle from '../handleObject/ButtonHandle';
 import getVal from "../../getVal";
 
 export default class DotObject extends ComponentObject {
     constructor(itemData , fnList) {
         super(itemData , fnList);
-        this.dialogueBox = [
-            {
-              componentName: 'TrPropNumber',
-              title: 'x',
-              props: {}
-            },
-            {
-              componentName: 'TrPropNumber',
-              title: 'y',
-              props: {}
-            },
-            {
-              componentName: 'TrPropText',
-              title: 'label',
-              props: {}
-            },
-            {
-              componentName: 'TrPropNumber',
-              title: 'dot_width',
-              props: {}
-            },
-            {
-              componentName: 'TrPropColor',
-              title: 'text_color',
-              props: {}
-            },
-            {
-              componentName: 'TrPropNumber',
-              title: 'text_size',
-              props: {}
-            },
-            // CommonCommands
-            {
-              componentName: 'TrText',
-              title: 'name',
-              props: {}
-            },
-            {
-              componentName: 'TrPropColor',
-              title: 'color',
-              props: {}
-            },
-            {
-              componentName: 'TrNo',
-              title: 'showAt',
-              props: {}
-            },
-            {
-              componentName: 'TrPropNumber',
-              title: 'globalAlpha',
-              props: {
-                min: '0.0',
-                max: '1.0',
-                step: '0.1'
-              }
-            }
-          ];
-          
-    }
-
-    loadHandles(){
-////////////////////////////////////////////////////////////////////////////
-let btnHandle = new ButtonHandle(this.itemData,this.fnList); 
-
-btnHandle.getX = function(){
-    return this.itemData.extra.x.initialValue ;
-}
-btnHandle.getY = function(){
-    return this.itemData.extra.y.initialValue + 25;
-}
-btnHandle.useInitialValue = true;
-
-this.handleObjects.push(btnHandle);  
-
-/////////////////////////////////////////////////////////////////////////////          
-////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////    
-            //    debugger;
-            let draggerHandle = new DraggerHandle(this.itemData); 
-//--every Component-object can have different x and y e.g x1 x0 etc 
-            draggerHandle.getX = function(){
-                return this.itemData.extra.x.initialValue -15;
-            }
-
-            draggerHandle.getY = function(){
-                return  this.itemData.extra.y.initialValue -10;
-            }
-            this.handleObjects.push(draggerHandle);    
+ 
     }
 ////////////////////////////////////////////////////////////
 draw(ctx, currentTime) {
@@ -108,7 +18,7 @@ draw(ctx, currentTime) {
       color,
       text_color,
       globalAlpha
-  } = this.itemData.extra;
+  } = this.itemData.itemExtra;
 
   ctx.save();
   ctx.globalAlpha = getVal(currentTime, globalAlpha);
@@ -139,17 +49,17 @@ draw(ctx, currentTime) {
 ////////////////////////////////////////////////////
 
 width(){
-    return this.itemData.extra.x.initialValue + (this.itemData.extra.dot_width.initialValue *  1.5);
+    return this.itemData.itemExtra.x.initialValue + (this.itemData.itemExtra.dot_width.initialValue *  1.5);
  }
  height(){
-    return this.itemData.extra.x.initialValue + (this.itemData.extra.dot_width.initialValue *  1.5);
+    return this.itemData.itemExtra.x.initialValue + (this.itemData.itemExtra.dot_width.initialValue *  1.5);
  }
  getX(){
-    return this.itemData.extra.x.initialValue;
+    return this.itemData.itemExtra.x.initialValue;
  }
  
  getY(){
-    return this.itemData.extra.y.initialValue;
+    return this.itemData.itemExtra.y.initialValue;
  }
 
 
