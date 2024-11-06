@@ -1,90 +1,134 @@
 //@ts-nocheck
 
-// The itemData that i have used here allow me to use the same class (interface) with different data . itemData is the data and for each different data type i will have to write my own implementation of it.
 export default class ComponentObject {
-
- constructor(itemData,fnList){
-   
-        this.itemData = itemData;
-        this.fnList = fnList;
-        this.handleObjects = [];
-        this.loadHandles(); 
- }
- loadHandles(){} //child objects will use it
-//****************************************************************** */
-
-isVisible(currentTime){
-   if(!this.itemData.itemExtra.showAt){
-      // this.itemData.itemExtra.showAt = 0; //no need to edit data here this function is just for checking showAt
-      return true;
-   }else {
-      if( currentTime >= this.itemData.itemExtra.showAt ){
-         return true;
-      }else {
-         return false;
-      }
+   constructor(itemData, fnList) {
+       this.itemData = itemData;
+       this.fnList = fnList;
+       this.handleObjects = [];
    }
-}
-// eslint-disable-next-line no-unused-vars
-draw(drawLib,currentTime){
-   console.log("ComponentObject draw");
-}
- update(mouseX, mouseY) {
-   // debugger;
-    for (let i = 0; i < this.handleObjects.length; i++) {
-        const obj = this.handleObjects[i];
-        obj.update(this.itemData, mouseX, mouseY);
-    }
-}
+   isVisible(currentTime) {
+       if (!this.itemData.itemExtra.showAt) {
+           return true;
+       } else {
+           return currentTime >= this.itemData.itemExtra.showAt;
+       }
+   }
 
- drawHandles(ctx){
-    for (let i = 0; i < this.handleObjects.length; i++) {
-        const obj = this.handleObjects[i];
-        obj.draw(ctx);
-        
-    }
- }
+   draw(ctx , currentTime=0){
+      console.log("ComponentObject draw");
+   }
 
- deselect(){
+   width() {
+       return this.itemData.itemExtra.width.initialValue;
+   }
 
-    for (let i = 0; i < this.handleObjects.length; i++) {
-        const handleObject = this.handleObjects[i];
-            handleObject.deselect();
-    }
- }
- selectHandlesIfHit(mouseX, mouseY){
+   height() {
+       return this.itemData.itemExtra.height.initialValue;
+   }
 
-    for (let i = 0; i < this.handleObjects.length; i++) {
-        const handleObject = this.handleObjects[i];
-        handleObject.selectIfHit(mouseX, mouseY);
-    }
+   getX() {
+       return this.itemData.itemExtra.x.initialValue;
+   }
 
- }
- //comp object also has width height x,y for its on isHit
- width(){
-    return this.itemData.itemExtra.width.initialValue;
- }
- height(){
-    return this.itemData.itemExtra.height.initialValue;
- }
- getX(){
-    return this.itemData.itemExtra.x.initialValue;
- }
+   getY() {
+       return this.itemData.itemExtra.y.initialValue;
+   }
+
+   isHit(mouseX, mouseY) {
+       return (
+           mouseX >= this.getX() &&
+           mouseX <= this.getX() + this.width() &&
+           mouseY >= this.getY() &&
+           mouseY <= this.getY() + this.height()
+       );
+   }
+//////////////////////////////////////////////////////////////////////
  
- getY(){
-    return this.itemData.itemExtra.y.initialValue;
- }
-
- isHit(mouseX , mouseY){
-
-      return (
-          mouseX  >= this.getX() &&
-          mouseX  <= this.getX() + this.width() &&
-          mouseY  >= this.getY() &&
-          mouseY  <= this.getY() + this.height()
-      );
-  
- }
-
-}//componentn class
-
+   get command() {
+     return this.itemData.itemExtra.command;
+   }
+   set command(value) {
+     this.itemData.itemExtra.command = value;
+   }
+ 
+   // Getter and setter for 'name' property
+   get name() {
+     return this.itemData.itemExtra.name;
+   }
+   set name(value) {
+     this.itemData.itemExtra.name = value;
+   }
+ 
+   // Getter and setter for 'color' property
+   get color() {
+     return this.itemData.itemExtra.color;
+   }
+   set color(value) {
+     this.itemData.itemExtra.color = value;
+   }
+ 
+   // Getter and setter for 'showAt' property
+   get showAt() {
+     return this.itemData.itemExtra.showAt;
+   }
+   set showAt(value) {
+     this.itemData.itemExtra.showAt = value;
+   }
+ 
+   // Getter and setter for 'globalAlpha' property
+   get globalAlpha() {
+     return this.itemData.itemExtra.globalAlpha;
+   }
+   set globalAlpha(value) {
+     this.itemData.itemExtra.globalAlpha = value;
+   }
+ 
+   // Getter and setter for 'gap' property
+   get gap() {
+     return this.itemData.itemExtra.gap;
+   }
+   set gap(value) {
+     this.itemData.itemExtra.gap = value;
+   }
+ 
+   // Getter and setter for 'dash' property
+   get dash() {
+     return this.itemData.itemExtra.dash;
+   }
+   set dash(value) {
+     this.itemData.itemExtra.dash = value;
+   }
+ 
+   // Getter and setter for 'shadowOffsetX' property
+   get shadowOffsetX() {
+     return this.itemData.itemExtra.shadowOffsetX;
+   }
+   set shadowOffsetX(value) {
+     this.itemData.itemExtra.shadowOffsetX = value;
+   }
+ 
+   // Getter and setter for 'shadowOffsetY' property
+   get shadowOffsetY() {
+     return this.itemData.itemExtra.shadowOffsetY;
+   }
+   set shadowOffsetY(value) {
+     this.itemData.itemExtra.shadowOffsetY = value;
+   }
+ 
+   // Getter and setter for 'shadowColor' property
+   get shadowColor() {
+     return this.itemData.itemExtra.shadowColor;
+   }
+   set shadowColor(value) {
+     this.itemData.itemExtra.shadowColor = value;
+   }
+ 
+   // Getter and setter for 'shadowBlur' property
+   get shadowBlur() {
+     return this.itemData.itemExtra.shadowBlur;
+   }
+   set shadowBlur(value) {
+     this.itemData.itemExtra.shadowBlur = value;
+   }   
+//////////////////////////////////////////////////////////////////////   
+}

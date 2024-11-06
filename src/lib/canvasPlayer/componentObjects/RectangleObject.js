@@ -1,182 +1,28 @@
 //@ts-nocheck
 import ComponentObject from './ComponentObject';
-import DraggerHandle from '../handleObject/DraggerHandle';
-import AdderHandle from '../handleObject/AdderHandle';
-import ButtonHandle from '../handleObject/ButtonHandle';
 import getVal from "../../getVal";
 
 export default class RectangleObject extends ComponentObject {
     constructor(itemData , fnList) {
         super(itemData , fnList);
-////////////////////////////////////////////////////////////
-        this.dialogueBox = [
-    {
-      componentName: 'TrPropNumber',
-      title: 'x',
-      props: {}
-    },
-    {
-      componentName: 'TrPropNumber',
-      title: 'y',
-      props: {}
-    },
-    {
-      componentName: 'TrPropNumber',
-      title: 'width',
-      props: {
-        min: '1',
-        max: '500'
-      }
-    },
-    {
-      componentName: 'TrPropNumber',
-      title: 'height',
-      props: {
-        min: '1',
-        max: '500'
-      }
-    },
-    {
-      componentName: 'TrPropNumber',
-      title: 'lineWidth',
-      props: {}
-    },
-    {
-      componentName: 'TrPropBoolean',
-      title: 'filled',
-      props: {}
-    },
-    //CommonCommands
-    {
-      componentName: 'TrText',
-      title: 'name',
-      props: {}
-    },
-    {
-      componentName: 'TrPropColor',
-      title: 'color',
-      props: {}
-    },
-    {
-      componentName: 'TrNo',
-      title: 'showAt',
-      props: {}
-    },
-    {
-      componentName: 'TrPropNumber',
-      title: 'globalAlpha',
-      props: {
-        min: '0.0',
-        max: '1.0',
-        step: '0.1'
-      }
-    },
-    //gap-dash
-    {
-      componentName: 'TrPropNumber',
-      title: 'dash',
-      props: {}
-    },
-    {
-      componentName: 'TrPropNumber',
-      title: 'gap',
-      props: {}
-    },
-  //shadow
-    {
-      componentName: 'TrNo',
-      title: 'shadowOffsetX',
-      props: {}
-    },
-    {
-      componentName: 'TrNo',
-      title: 'shadowOffsetY',
-      props: {}
-    },
-    {
-      componentName: 'TrNo',
-      title: 'shadowBlur',
-      props: {}
-    },
-    {
-      componentName: 'TrColor',
-      title: 'shadowColor',
-      props: {}
-    },
-
-  ];
-////////////////////////////////////////////////////////////
     }
 
-loadHandles(){
-////////////////////////////////////////////////////////////////////////
-let btnHandle = new ButtonHandle(this.itemData,this.fnList); 
-
-            btnHandle.getX = function(){
-                return this.itemData.extra.x.initialValue - 20;
-            }
-            btnHandle.getY = function(){
-                return this.itemData.extra.y.initialValue + 25;
-            }
-            btnHandle.useInitialValue = true;
-
-            this.handleObjects.push(btnHandle);        
-////////////////////////////////////////////////////////////////////////        
-        let widthAdder = new AdderHandle(this.itemData,'width'); 
-        widthAdder.color = 'silver';
-            widthAdder.getX = function(){
-                return this.itemData.extra.x.initialValue + this.itemData.extra.width.initialValue ;
-            }
-            widthAdder.getY = function(){
-                return this.itemData.extra.y.initialValue;
-            }
-            widthAdder.useInitialValue = true;
-
-            this.handleObjects.push(widthAdder);
-////////////////////////////////////////////////////////////////////////////
-
-            let heightAdder = new AdderHandle(this.itemData,'height'); 
-            heightAdder.color = 'silver';
-            heightAdder.getX = function(){
-                return this.itemData.extra.x.initialValue +  this.itemData.extra.width.initialValue ;
-            }
-            heightAdder.getY = function(){
-                return this.itemData.extra.y.initialValue  + this.itemData.extra.height.initialValue -20;
-            }
-            heightAdder.useInitialValue = true;
-            heightAdder.lookingforX = false;
-
-            this.handleObjects.push(heightAdder);
-/////////////////////////////////////////////////////////////////////////////    
-            //    debugger;
-            let draggerHandle = new DraggerHandle(this.itemData);
-            draggerHandle.color = 'silver'; 
-//--every Component-object can have different x and y e.g x1 x0 etc 
-            draggerHandle.getX = function(){
-                return this.itemData.extra.x.initialValue -20;
-            }
-
-            draggerHandle.getY = function(){
-                return  this.itemData.extra.y.initialValue;
-            }
-            this.handleObjects.push(draggerHandle);    
-    }
 ////////////////////////////////////////////////////
 draw(ctx, currentTime) {
   // Save the current context state
   ctx.save();
 
   // Extract values
-  const x = getVal(currentTime, this.itemData.extra.x);
-  const y = getVal(currentTime, this.itemData.extra.y);
-  const width = getVal(currentTime, this.itemData.extra.width);
-  const height = getVal(currentTime, this.itemData.extra.height);
-  const color = getVal(currentTime, this.itemData.extra.color) || 'white';
-  const filled = getVal(currentTime, this.itemData.extra.filled) || true;
-  const dash = getVal(currentTime, this.itemData.extra.dash) || 0;
-  const gap = getVal(currentTime, this.itemData.extra.gap) || 0;
-  const lineWidth = getVal(currentTime, this.itemData.extra.lineWidth) || 1;
-  const globalAlpha = getVal(currentTime, this.itemData.extra.globalAlpha) || 1;
+  const x = getVal(currentTime, this.itemData.itemExtra.x);
+  const y = getVal(currentTime, this.itemData.itemExtra.y);
+  const width = getVal(currentTime, this.itemData.itemExtra.width);
+  const height = getVal(currentTime, this.itemData.itemExtra.height);
+  const color = getVal(currentTime, this.itemData.itemExtra.color) || 'white';
+  const filled = getVal(currentTime, this.itemData.itemExtra.filled) || true;
+  const dash = getVal(currentTime, this.itemData.itemExtra.dash) || 0;
+  const gap = getVal(currentTime, this.itemData.itemExtra.gap) || 0;
+  const lineWidth = getVal(currentTime, this.itemData.itemExtra.lineWidth) || 1;
+  const globalAlpha = getVal(currentTime, this.itemData.itemExtra.globalAlpha) || 1;
 
   // Set properties
   ctx.lineWidth = lineWidth;
@@ -202,17 +48,17 @@ draw(ctx, currentTime) {
 }
 
 width(){
-    return this.itemData.extra.width.initialValue;
+    return this.itemData.itemExtra.width.initialValue;
  }
  height(){
-    return this.itemData.extra.height.initialValue;
+    return this.itemData.itemExtra.height.initialValue;
  }
  getX(){
-    return this.itemData.extra.x.initialValue;
+    return this.itemData.itemExtra.x.initialValue;
  }
  
  getY(){
-    return this.itemData.extra.y.initialValue;
+    return this.itemData.itemExtra.y.initialValue;
  }
 
  getLeft() {
