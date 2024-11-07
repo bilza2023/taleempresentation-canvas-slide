@@ -25,12 +25,9 @@ import SelectedItem from "./SelectedItem";
   export let slideExtra;   //this should be slideExtra not to be confused with item.slideExtra
   export let assets;
   export let itemObjects = []; // Can be passed directly in editor mode
-  let selectedItemIndex = 0; //this should not be export
 
   let selectedItem = new SelectedItem();
-
   let interval=null;
-
   onMount(async () => {
     interval = setInterval(update, 20); 
     
@@ -55,34 +52,53 @@ function updateItemObjects(){
         console.log("itemObjects",itemObjects);
   }
   $: {
-    debugger;
     items;
     updateItemObjects();
   }
   
-async function eventClick(e){
-  const isHit = await selectedItem.checkHit(e,itemObjects);
-  console.log("isHit",isHit);
+async function eventClick(e,ctx){
+  
   
 }
 function postDraw(ctx){
-  selectedItem.drawHandles(ctx);
+  selectedItem.drawHandles(ctx,itemObjects);
+}
+function eventMouseDown(e,ctx){
+  
+  const r = selectedItem.checkHandleHit(e,ctx,itemObjects);
+  console.log("r",r);
+}
+function eventMouseMove(e,ctx){
+  selectedItem.mouseMove(e,ctx,itemObjects);
+}
+
+function eventMouseUp(){
+  selectedItem.isDrag = false;
+}
+
+async function eventDblClick(e,ctx){
+  // console.log("eventDblClick");
+  const isHit = await selectedItem.checkHit(e,itemObjects,ctx);
+  console.log("isHit",isHit,ctx);
 }
 </script>
 
 {#if items}
 <div class='p-2 bg-stone-900'>
   
-  <CanvasPlayer   
-  {currentTime}
-  slideData={slideData} 
-  {items}        
-  slideExtra={slideExtra} 
-  {assets}
-  eventClick={eventClick}
-  {postDraw}
-  />
+    <CanvasPlayer   
+    {currentTime}
+    slideData={slideData} 
+    {items}        
+    slideExtra={slideExtra} 
+    {assets}
+    eventClick={eventClick}
+    {postDraw}
+    {eventMouseDown}
+    {eventMouseUp}
+    {eventDblClick}
+    {eventMouseMove}
+    />
     
 </div>
-
 {/if}

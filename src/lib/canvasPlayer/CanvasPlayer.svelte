@@ -34,7 +34,20 @@
     export let eventMouseDown = () => {};
     export let eventMouseUp = () => {};  
     export let eventClick = () => {};  
+    export let eventDblClick = () => {};  
     // export let eventKeyDown = () => {};  
+    function handleMouseMove(event) {
+      eventMouseMove(event, ctx);
+  }
+    function handleClick(event) {
+    eventClick(event, ctx);
+  }
+    function handleMouseDown(event) {
+      eventMouseDown(event, ctx);
+  }
+    function handleDbClick(event) {
+      eventDblClick(event, ctx);
+  }
     ///////////////////////////////////////////
     
     let canvas;
@@ -140,11 +153,11 @@
       width={slideExtra.canvasWidth}
       height={slideExtra.canvasHeight}
 
-      on:mousemove={eventMouseMove}
-      on:mousedown={eventMouseDown}
+      on:mousemove={handleMouseMove}
+      on:mousedown={handleMouseDown}
       on:mouseup=  {eventMouseUp}
-      on:click =  {eventClick}
-
+      on:click =  {handleClick}
+      on:dblclick={handleDbClick}
     ></canvas>
   </div>
   

@@ -49,12 +49,20 @@ if(!this.itemData.itemExtra.fontSize || this.itemData.itemExtra.fontSize.initial
 
     ////////////////////////////////////////////////////
 
-width(){
-    return this.itemData.itemExtra.width.initialValue;
- }
- height(){
-    return this.itemData.itemExtra.height.initialValue;
- }
+    width(ctx) {
+      //currentTime == 0 
+      const text = getVal(0, this.itemData.itemExtra.text);
+      const font = this.itemData.itemExtra.font || '12px Arial';
+      ctx.font = font;
+      return ctx.measureText(text).width;
+  }
+
+  height(ctx) {
+      // Approximate the text height by measuring the width of the letter 'W'
+      const font = this.itemData.itemExtra.font || '12px Arial';
+      ctx.font = font;
+      return ctx.measureText('W').width * 1.2;
+  }
  getX(){
     return this.itemData.itemExtra.x.initialValue;
  }
@@ -63,25 +71,13 @@ width(){
     return this.itemData.itemExtra.y.initialValue;
  }
 
- getHitAreaRadius() {
-    // Base the hit area radius on font size and text length
-    const baseRadius = this.itemData.itemExtra.fontSize.initialValue / 2;
-    const textLength = this.itemData.itemExtra.text.initialValue.length;
-    return baseRadius + (textLength * 2); // Adjust this formula as needed
-}
-
-isHit(mouseX, mouseY) {
-    const centerX = this.getX();
-    const centerY = this.getY();
-    const radius = this.getHitAreaRadius();
-
-    // Calculate the distance between the mouse click and the text origin
-    const distance = Math.sqrt(
-        Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
-    );
-
-    // Check if the distance is less than or equal to the hit area radius
-    return distance <= radius;
+   isHit(mouseX, mouseY,ctx) {
+  return (
+    mouseX >= this.getX() &&
+    mouseX <= this.getX() + this.width(ctx) &&
+    mouseY >= this.getY() &&
+    mouseY <= this.getY() + this.height(ctx)
+);
 }
     
 }//class

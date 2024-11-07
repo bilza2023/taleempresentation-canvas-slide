@@ -16,11 +16,11 @@ export const slides = [
             "setCommands": []
           },
           "x": {
-            "initialValue": 8,
+            "initialValue": 50,
             "setCommands": []
           },
           "y": {
-            "initialValue": 5,
+            "initialValue": 50,
             "setCommands": []
           },
           "font": "60px Arial",
