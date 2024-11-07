@@ -1,6 +1,6 @@
 //@ts-nocheck
 import ComponentObject from './ComponentObject';
-import getVal from "../../getVal";
+import getVal from "../getVal";
 
 export default class AngleObject extends ComponentObject {
     constructor(itemData , fnList) {

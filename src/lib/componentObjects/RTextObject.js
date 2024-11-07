@@ -3,7 +3,7 @@ import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
 import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
-import getVal from "../../getVal";
+import getVal from "../getVal";
 
 export default class RTextObject extends ComponentObject {
     constructor(itemData , fnList) {

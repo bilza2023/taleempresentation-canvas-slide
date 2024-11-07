@@ -1,6 +1,6 @@
 <script>
   /**   
-   * 7-Nov-2024 
+   * 7-Nov-2024 --Final
    * ==========
     - CanvasPlayer.svelte is for  display on the canvas and thats all.
     -  **do not add any functinality into it**.
@@ -14,13 +14,14 @@
     - i should add functions for mouse events like click , mouse move etc.
 
    */
+  
   import { onMount, onDestroy } from "svelte";
   import DrawLib from "../drawLib/drawLib";
-  import itemToObject from "./componentObjects/itemToObject";
+  import itemToObject from "../componentObjects/itemToObject";
 
     // Common props
     export let currentTime;
-    export let slideData; // ? why is this not used?? 
+    export let slideData={}; // ? why is this not used?? 
     export let items = []; // Optional for editor mode
     export let slideExtra = {};
     export let assets;
@@ -32,6 +33,7 @@
     export let eventMouseMove = () => {};
     export let eventMouseDown = () => {};
     export let eventMouseUp = () => {};  
+    export let eventClick = () => {};  
     // export let eventKeyDown = () => {};  
     ///////////////////////////////////////////
     
@@ -141,6 +143,7 @@
       on:mousemove={eventMouseMove}
       on:mousedown={eventMouseDown}
       on:mouseup=  {eventMouseUp}
+      on:click =  {eventClick}
 
     ></canvas>
   </div>

@@ -1,14 +1,15 @@
 <script>
-  import {CanvasEditor}  from "../../lib";
+  import CanvasEditorPlayer  from "../../lib/CanvasEditor/CanvasEditorPlayer.svelte";
   import {onMount} from "svelte";
+  
   // import audioData from "./audioData.js";
   import {slides as defualtSlide} from "../slides/slides.js";
   import loadAssets from "../assets/loadAssets";
   let currentTime=0;
 
-  import AppToolbar from "./AppToolbar.svelte";
+  // import AppToolbar from "./AppToolbar.svelte";
   let slides = defualtSlide;
-  let canvasSlide = slides[0];
+  let slide = slides[0];
   let showToolbar=true;
  let assets=null;
 
@@ -25,17 +26,13 @@ onMount(async()=>{
 <div class="w-full bg-gray-700 text-white p-2 min-h-screen ">
 
 {#if slides && assets}
-  <CanvasEditor
-   bind:startTime = {canvasSlide.startTime}
-   bind:endTime = {canvasSlide.endTime}
-   bind:items = {canvasSlide.items}
-   slideExtra = {canvasSlide.slideExtra}
-   currentSlide={canvasSlide}
-   icons={assets.icons}
-   bgImages={assets.bgImages}
-   spriteImages={assets.spriteImages}
+  <CanvasEditorPlayer
+
    {currentTime}
-   selectedItemIndex={0}
+   bind:items = {slide.items}
+   slideExtra = {slide.slideExtra}
+   {assets}
+
   />
 
 {/if}

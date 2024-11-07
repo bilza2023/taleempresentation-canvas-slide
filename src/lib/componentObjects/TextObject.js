@@ -1,7 +1,7 @@
 //@ts-nocheck
 import ComponentObject from './ComponentObject';
-import getVal from "../../getVal";
-import getProp from '../../getProp';
+import getVal from "../getVal";
+import getProp from '../getProp';
 
 
 export default class TextObject extends ComponentObject {

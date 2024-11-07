@@ -2,7 +2,7 @@
 import ComponentObject from './ComponentObject';
 import DraggerHandle from '../handleObject/DraggerHandle';
 import AdderHandle from '../handleObject/AdderHandle';
-import getVal from "../../getVal";
+import getVal from "../getVal";
 
 export default class RDotObject extends ComponentObject {
     constructor(itemData , fnList) {
