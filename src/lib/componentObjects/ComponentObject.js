@@ -12,20 +12,39 @@ export default class ComponentObject {
        }
    }
 
+   // eslint-disable-next-line no-unused-vars
    draw(ctx , currentTime=0){
       console.log("ComponentObject draw");
    }
 
-   width() {
+  get width() {
        return this.itemData.itemExtra.width.initialValue;
    }
+  set width(newWidth) {
+       this.itemData.itemExtra.width.initialValue = newWidth;
+   }
 
-   height() {
+   get height() {
        return this.itemData.itemExtra.height.initialValue;
+   }
+   set height(newHeight) {
+       this.itemData.itemExtra.height.initialValue = newHeight;
    }
 
    getX() {
        return this.itemData.itemExtra.x.initialValue;
+   }
+   get x() {
+       return this.itemData.itemExtra.x.initialValue;
+   }
+   set x(newX) {
+       this.itemData.itemExtra.x.initialValue=newX;
+   }
+   get y() {
+       return this.itemData.itemExtra.y.initialValue;
+   }
+   set y(newY) {
+       this.itemData.itemExtra.y.initialValue=newY;
    }
 
    getY() {

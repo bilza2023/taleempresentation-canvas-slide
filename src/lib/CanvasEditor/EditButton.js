@@ -2,34 +2,39 @@
 
 export default class EditButton {
 
-constructor(itemObject,name='moveX'){
+constructor(itemObject){
 
     this.itemObject = itemObject;
-    this.name = name;
-    this.icons = '🚁';
+
     this.flag = "";
-    this.bgColor = '#374151';
-    this.bgWidth = 30;
-    this.textYoffset = 5;
-    this.textOffset = 0;
+
+    this.offsetX = 0;
+    this.offsetY = 0;
+
+    this.color = 'yellow';
     this.buttonSize = 15;
 
 }
-
+getX(){
+    return this.itemObject.getX() + this.offsetX;
+}
+getY(){
+    return this.itemObject.getY() + this.offsetY;
+}
 drawButton(ctx) {
     // Draw the button
     ctx.globalAlpha = 1;
-    ctx.fillStyle = 'yellow';
-    ctx.fillRect( this.itemObject.getX() , this.itemObject.getY() , this.buttonSize , this.buttonSize );
+    ctx.fillStyle = this.color;
+    ctx.fillRect( this.getX() , this.getY() , this.buttonSize , this.buttonSize );
 }
     
 isHit(x, y) {
 
     return (
-      x >= this.itemObject.getX()  &&
-      x <= this.itemObject.getX()  + this.buttonSize &&
-      y >= this.itemObject.getY()  &&
-      y <= this.itemObject.getY()  + this.buttonSize
+      x >= this.getX()  &&
+      x <= this.getX()  + this.buttonSize &&
+      y >= this.getY()  &&
+      y <= this.getY()  + this.buttonSize
     );
 }
 

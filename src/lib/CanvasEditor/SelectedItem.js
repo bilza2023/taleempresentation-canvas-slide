@@ -4,9 +4,8 @@ import getMouseData from "./getMouseData";
 export default class SelectedItem{
 
 constructor(itemObject){
+
     this.itemObject = itemObject;
-    
-    this.moveXbutton = new EditButton(itemObject,'moveX');
 
     this.handleWidth = 15;
     this.handleHeight = 15;
@@ -14,21 +13,79 @@ constructor(itemObject){
     this.isDrag = false;
     this.selectedHandle = null;
 
+    //moveXYbutton
+    this.moveXYbutton = new EditButton(itemObject);
+
+    //scaleXButton
+    this.scaleXButton = new EditButton(itemObject);
+    this.scaleXButton.color = 'blue';
+    this.scaleXButton.offsetX  = -15;  
+
+    //scaleYButton
+    this.scaleYButton = new EditButton(itemObject);
+    this.scaleYButton.color = 'green';
+    this.scaleYButton.offsetX  = -15;  
+    this.scaleYButton.offsetY  = +15;  
+    
+
+    //cloneButton
+    this.cloneButton = new EditButton(itemObject);
+    this.cloneButton.color = 'pink';
+    this.cloneButton.offsetX  = -15;  
+    this.cloneButton.offsetY  = +30;  
+    
+    //copyButton
+    this.copyButton = new EditButton(itemObject);
+    this.copyButton.color = 'brown';
+    this.copyButton.offsetX  = -15;  
+    this.copyButton.offsetY  = +45;  
+    
+    //deleteButton
+    this.deleteButton = new EditButton(itemObject);
+    this.deleteButton.color = 'red';
+    this.deleteButton.offsetX  = -15;  
+    this.deleteButton.offsetY  = +60;  
+
+
 }
 
 drawHandles(ctx){
   // Draw toolbar buttons
-  this.moveXbutton.drawButton(ctx,'yellow','yellow');
+  this.moveXYbutton.drawButton(ctx);
+  this.scaleXButton.drawButton(ctx);
+  this.scaleYButton.drawButton(ctx);
+  this.cloneButton.drawButton (ctx);
+  this.copyButton.drawButton (ctx);
+  this.deleteButton.drawButton (ctx);
       
 }
 
+// eslint-disable-next-line no-unused-vars
 mouseMove(e, ctx) {
   const {x,y} = getMouseData(e);
+
   if (this.selectedHandle == null) return;
+
   if (this.selectedHandle == "moveXY"){
     this.itemObject.itemData.itemExtra.x.initialValue = (x);
     this.itemObject.itemData.itemExtra.y.initialValue = (y);
   }
+
+if (this.selectedHandle === "scaleX") {
+  this.itemObject.itemData.itemExtra.width.initialValue +=5;
+}
+if (this.selectedHandle === "scaleY") {
+  this.itemObject.itemData.itemExtra.height.initialValue +=5;
+}
+if (this.selectedHandle === "clone") {
+    // Handle cloning
+}
+if (this.selectedHandle === "copy") {
+    // Handle copying
+}
+if (this.selectedHandle === "delete") {
+    // Handle deletion
+}
  
 }
 
@@ -37,15 +94,53 @@ mouseUp(){
   this.isDrag = false;
 }
 
-isHit(x,y){
-
-  const isMoveXhit = this.moveXbutton.isHit(x,y);
-
-  if(isMoveXhit){
-    this.selectedHandle = "moveXY";
-    return "moveXY";
+isHit(x, y) {
+  // debugger;
+  // Check moveXY button
+  const isMoveXYhit = this.moveXYbutton.isHit(x, y);
+  if (isMoveXYhit) {
+      this.selectedHandle = "moveXY";
+      return "moveXY";
   }
- 
 
+  // Check scaleX button
+  const isScaleXhit = this.scaleXButton.isHit(x, y);
+  if (isScaleXhit) {
+      this.selectedHandle = "scaleX";
+      return "scaleX";
+  }
+
+  // Check scaleY button
+  const isScaleYhit = this.scaleYButton.isHit(x, y);
+  if (isScaleYhit) {
+      this.selectedHandle = "scaleY";
+      return "scaleY";
+  }
+
+  // Check clone button
+  const isClonehit = this.cloneButton.isHit(x, y);
+  if (isClonehit) {
+      this.selectedHandle = "clone";
+      return "clone";
+  }
+
+  // Check copy button
+  const isCopyhit = this.copyButton.isHit(x, y);
+  if (isCopyhit) {
+      this.selectedHandle = "copy";
+      return "copy";
+  }
+
+  // Check delete button
+  const isDeletehit = this.deleteButton.isHit(x, y);
+  if (isDeletehit) {
+      this.selectedHandle = "delete";
+      return "delete";
+  }
+
+  // If no button was hit, return null
+  return null;
 }
+
+
 }
