@@ -5,60 +5,8 @@ export const slides = [
     "endTime": 3,
     "type": "canvas",
     "template": "",
-    "items": [
-      {
-        "name": "",
-        "content": "",
-        "showAt": 0,
-        "itemExtra": {
-          "text": {
-            "initialValue": "Chapter 4 Ex 4.1 Q 5",
-            "setCommands": []
-          },
-          "x": {
-            "initialValue": 8,
-            "setCommands": []
-          },
-          "y": {
-            "initialValue": 5,
-            "setCommands": []
-          },
-          "font": "60px Arial",
-          "translate": true,
-          "command": "text",
-          "name": "Chapter ",
-          "color": {
-            "initialValue": "#1e58cc",
-            "setCommands": []
-          },
-          "hideAt": 0,
-          "showAt": 0,
-          "visibility": 0,
-          "globalAlpha": {
-            "initialValue": 1,
-            "setCommands": []
-          },
-          "gap": {
-            "initialValue": 0,
-            "setCommands": []
-          },
-          "dash": {
-            "initialValue": 0,
-            "setCommands": []
-          },
-          "shadowOffsetX": 0,
-          "shadowOffsetY": 0,
-          "shadowColor": "#7261f5",
-          "shadowBlur": 0,
-          "useShowHide": false,
-          "setCommands": []
-        },
-        "arr": [],
-        "_id": {
-          "$oid": "666191b205ea063f6d27b88e"
-        }
-      }
-    ],
+    "items": [ ],
+    
     "slideArray": [],
     "slideExtra": {
       "backgroundColor": "#044810",

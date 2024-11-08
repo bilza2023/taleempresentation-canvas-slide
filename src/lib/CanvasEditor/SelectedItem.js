@@ -2,37 +2,18 @@
 
 export default class SelectedItem{
 
-    constructor(){
-        this.selectedItemIndex = null;
-        this.selectedHandle = -1; // New property to track the selected handle
+    constructor(itemObject){
+       this.itemObject = itemObject;
         this.handleWidth = 15;
         this.handleHeight = 15;
         this.handleColor ='red';
         this.isDrag = false;
+        this.selectedHandle = null;
     }
 
-    async checkHit(e,itemObjects,ctx) {
-            const canvas = e.target; // assuming e.target is the canvas
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-        
-            for (let i = 0; i < itemObjects.length; i++) {
-                const itemObject = itemObjects[i];
-                if (itemObject.isHit(x,y,ctx)){
-                    this.selectedItemIndex = i;
-                    return true;
-                }
-            }
-            this.selectedItemIndex = null; 
-            return false;
-        }
-
-     
-    drawHandles(ctx,itemObjects){
-        if( this.selectedItemIndex == null){return;}
+    drawHandles(ctx){
 // debugger;
-        const itemObject = itemObjects[this.selectedItemIndex];
+        const itemObject = this.itemObject;
         
         const x = itemObject.getX();
         const y = itemObject.getY();
@@ -61,34 +42,32 @@ export default class SelectedItem{
 
     } 
     
-    checkHandleHit(e, ctx, itemObjects) {
+    checkHandleHit(e, ctx) {
         this.isDrag = false;
-        if (this.selectedItemIndex == null) return;
-      debugger;
+        this.selectedHandle = null; //important
         const canvas = e.target;
         const rect = canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
       
-        const itemObject = itemObjects[this.selectedItemIndex];
-        const x = itemObject.getX();
-        const y = itemObject.getY();
-        const width = itemObject.width(ctx);
-        const height = itemObject.height(ctx);
+        const x = this.itemObject.getX();
+        const y = this.itemObject.getY();
+        const width = this.itemObject.width(ctx);
+        const height = this.itemObject.height(ctx);
       
         // Calculate handle coordinates
         const handleSize = this.handleWidth / 2;
         const handles = [
-          { x: x - handleSize, y: y - handleSize }, // Top left
-          { x: x + width - handleSize, y: y - handleSize }, // Top right
-          { x: x - handleSize, y: y + height - handleSize }, // Bottom left
-          { x: x + width - handleSize, y: y + height - handleSize }, // Bottom right
-          { x: x + width / 2 - handleSize, y: y - handleSize }, // Top middle
-          { x: x + width / 2 - handleSize, y: y + height - handleSize }, // Bottom middle
-          { x: x - handleSize, y: y + height / 2 - handleSize }, // Left middle
-          { x: x + width - handleSize, y: y + height / 2 - handleSize }, // Right middle
+          { x: x - handleSize, y: y - handleSize, name: 'topLeft' }, // Top left
+          { x: x + width - handleSize, y: y - handleSize, name: 'topRight' }, // Top right
+          { x: x - handleSize, y: y + height - handleSize, name: 'bottomLeft' }, // Bottom left
+          { x: x + width - handleSize, y: y + height - handleSize, name: 'bottomRight' }, // Bottom right
+          { x: x + width / 2 - handleSize, y: y - handleSize, name: 'topMiddle' }, // Top middle
+          { x: x + width / 2 - handleSize, y: y + height - handleSize, name: 'bottomMiddle' }, // Bottom middle
+          { x: x - handleSize, y: y + height / 2 - handleSize, name: 'leftMiddle' }, // Left middle
+          { x: x + width - handleSize, y: y + height / 2 - handleSize, name: 'rightMiddle' }, // Right middle
         ];
-      
+      // debugger;
         for (let i = 0; i < handles.length; i++) {
           const { x: handleX, y: handleY } = handles[i];
           if (
@@ -98,6 +77,8 @@ export default class SelectedItem{
             mouseY <= handleY + this.handleHeight
           ) {
             this.isDrag = true;
+            this.selectedHandle = handles[i].name;
+            console.log("Handle clicked: " ,this.selectedHandle ,i);
             return i;
           }
         }
@@ -106,8 +87,12 @@ export default class SelectedItem{
         return -1;
       }
 
-      mouseMove(e, ctx, itemObjects) {
-    //     if (this.selectedItemIndex == null) return;
+      mouseMove(e, ctx) {
+        
+        if (this.selectedHandle == null) return;
+        if (this.selectedHandle == "leftTop"){
+          this.itemObject.itemData.itemExtra.x.initialValue += 4;
+        }
       
     //     if (this.isDrag) {
     //         debugger;
@@ -118,6 +103,11 @@ export default class SelectedItem{
     //       const height = itemObject.height(ctx);
     
     //     }
+      }
+
+      mouseUp(){
+        this.selectedHandle = null;
+        this.isDrag = false;
       }
 
 }
