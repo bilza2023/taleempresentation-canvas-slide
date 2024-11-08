@@ -21,6 +21,7 @@ import CanvasPlayer from "../canvasPlayer/CanvasPlayer.svelte";
 import SelectedItem from "./SelectedItem";
 import AddToolbar from "./AddToolbar.svelte";
 import getNewItem from "./getNewItem";
+import getMouseData from "./getMouseData";
 
   export let currentTime = 0; // pulse ???
   export let items; // items are currentSlide.items (it should just be slide)
@@ -81,13 +82,17 @@ function postDraw(ctx){
     selectedItem.drawHandles(ctx,itemObjects);
   }
 }
+
 function eventMouseDown(e,ctx){
 
   if(selectedItem !== null){
-  const r = selectedItem.checkHandleHit(e,ctx,itemObjects);
+    // debugger;
+    const {x,y} = getMouseData(e);
+  const r = selectedItem.isHit(x,y);
   console.log("r",r);
   }
 }
+
 function eventMouseMove(e,ctx){
   if(selectedItem !== null){
   selectedItem.mouseMove(e,ctx,itemObjects);
