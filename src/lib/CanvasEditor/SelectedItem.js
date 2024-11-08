@@ -13,6 +13,8 @@ constructor(itemObject){
     this.isDrag = false;
     this.selectedHandle = null;
 
+    this.clone = ()=>{};
+
     //moveXYbutton
     this.moveXYbutton = new EditButton(itemObject);
     this.moveXYbutton.icon = '🧷';
@@ -127,6 +129,7 @@ isHit(x, y) {
   const isClonehit = this.cloneButton.isHit(x, y);
   if (isClonehit) {
       this.selectedHandle = "clone";
+      this.clone();
       return "clone";
   }
 

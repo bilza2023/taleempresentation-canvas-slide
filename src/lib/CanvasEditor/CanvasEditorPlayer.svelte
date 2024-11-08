@@ -22,6 +22,7 @@ import SelectedItem from "./SelectedItem";
 import AddToolbar from "./AddToolbar.svelte";
 import getNewItem from "./getNewItem";
 import getMouseData from "./getMouseData";
+import uuid from "./uuid";
 
   export let currentTime = 0; // pulse ???
   export let items; // items are currentSlide.items (it should just be slide)
@@ -83,6 +84,16 @@ function postDraw(ctx){
   }
 }
 
+function clone(){
+  // debugger;
+  const clonedItem = JSON.parse(JSON.stringify(selectedItem.itemObject.itemData));
+  clonedItem.itemExtra.x.initialValue +=10;
+  clonedItem.itemExtra.y.initialValue +=10;
+  clonedItem._id = null;
+  clonedItem.uuid = uuid();
+  items = [...items, clonedItem];
+  console.log("cloned");
+}
 function eventMouseDown(e,ctx){
 
   if(selectedItem !== null){
@@ -120,6 +131,7 @@ async function checkHit(e,ctx) {
                 const itemObject = itemObjects[i];
                 if (itemObject.isHit(x,y,ctx)){
                   selectedItem = new SelectedItem(itemObject);
+                  selectedItem.clone = clone;
                   return; // important
                 }
             }
