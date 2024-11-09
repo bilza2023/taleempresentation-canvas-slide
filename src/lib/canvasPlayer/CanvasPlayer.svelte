@@ -125,6 +125,7 @@
       if (interval) { clearInterval(interval);}
       
       ctx = canvas.getContext("2d");
+      // const scale = canvas.width / canvas.getBoundingClientRect().width;
       drawLib = new DrawLib(canvas, ctx);//just used twice we can remove drawLib if we want
       isInitialized = true;
       updateItemObjects();

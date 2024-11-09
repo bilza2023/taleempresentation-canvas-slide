@@ -15,39 +15,34 @@ export default class HandleManager {
 
     initializeHandles() {
         // Resize handles
-        this.addHandle('resize-nw', new Handle('top-left', { 
-            cursor: 'nw-resize',
-            color: '#2196f3'
-        }));
-        this.addHandle('resize-ne', new Handle('top-right', { 
+    
+        this.addHandle('widthHandle', new Handle('top-right', { 
             cursor: 'ne-resize',
             color: '#2196f3'
         }));
-        this.addHandle('resize-sw', new Handle('bottom-left', { 
-            cursor: 'sw-resize',
-            color: '#2196f3'
-        }));
-        this.addHandle('resize-se', new Handle('bottom-right', { 
+
+        // this.addHandle('delete', new Handle('bottom-left', { 
+        //     icon: '🗑️',
+        //     size: 15,
+        //     color: '#f44336'
+        // }));
+
+        this.addHandle('heightHandle', new Handle('bottom-right', { 
             cursor: 'se-resize',
             color: '#2196f3'
         }));
-
         // Action handles
         this.addHandle('move', new Handle('center', { 
             icon: '✥',
             size: 15,
             color: '#4caf50'
         }));
-        this.addHandle('rotate', new Handle('top', { 
-            icon: '⟳',
-            size: 15,
-            color: '#ff9800'
-        }));
-        this.addHandle('delete', new Handle('right', { 
-            icon: '🗑️',
-            size: 15,
-            color: '#f44336'
-        }));
+        // this.addHandle('clone', new Handle('top', { 
+        //     icon: '🐑',
+        //     size: 15,
+        //     color: '#afafe0'
+        // }));
+      
     }
 
     addHandle(id, handle) {
@@ -110,43 +105,31 @@ export default class HandleManager {
                 console.log("move");
                 break;
 
-            case 'resize-se':
+            case 'heightHandle':
                 this.itemObject.height =  this.startBounds.height + dy;
-                console.log("resize-se");
+                console.log("heightHandle");
                 break;
 
-            case 'resize-sw':
-                // this.itemObject.x = this.startBounds.x + dx;
-                // this.itemObject.width = Math.max(10, this.startBounds.width - dx);
-                // this.itemObject.height = Math.max(10, this.startBounds.height + dy);
-                console.log("resize-se");
-                break;
 
-            case 'resize-ne':
+            case 'widthHandle':
                 this.itemObject.width =  Math.max(10, this.startBounds.width + dx);
-                
                 console.log("resize-ne");
                 break;
 
-            case 'resize-nw':
-                // this.itemObject.x = this.startBounds.x + dx;
-                // this.itemObject.y = this.startBounds.y + dy;
-                // this.itemObject.width = Math.max(10, this.startBounds.width - dx);
-                // this.itemObject.height = Math.max(10, this.startBounds.height - dy);
-                console.log("resize-nw");
-                break;
+     
 
-            case 'rotate':
-                console.log("rotate");
-                break;
+            // case 'clone':
+            //     console.log("rotate");
+            //     break;
 
-            case 'delete':
-                // Handle deletion through a callback
-                // if (this.onDelete) {
-                //     this.onDelete();
-                // }
-                console.log("delete");
-                break;
+            // case 'delete':
+            //     debugger;
+            //     // Handle deletion through a callback
+            //     if (this.onDelete) {
+            //         this.onDelete();
+            //     }
+            //     console.log("delete");
+            //     break;
         }
 
         return true;

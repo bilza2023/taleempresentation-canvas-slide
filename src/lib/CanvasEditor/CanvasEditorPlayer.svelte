@@ -57,7 +57,7 @@
   
   function deleteSelectedItem() {
       if (selectedItem) {
-          const index = items.findIndex(item => item._id === selectedItem.itemObject.itemData._id);
+          const index = items.findIndex(item => item.uuid === selectedItem.itemObject.itemData.uuid);
           if (index !== -1) {
               items.splice(index, 1);
               items = [...items];
@@ -112,6 +112,10 @@
           selectedItem.drawHandles(ctx);
       }
   }
+
+  // function deleteItem(){
+  //   console.log("Deleting selected item");
+  // }
   </script>
   
   {#if items}

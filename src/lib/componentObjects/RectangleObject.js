@@ -11,12 +11,12 @@ export default class RectangleObject extends ComponentObject {
 draw(ctx, currentTime) {
   // Save the current context state
   ctx.save();
-
+// debugger;
   // Extract values
-  const x = getVal(currentTime, this.itemData.itemExtra.x);
-  const y = getVal(currentTime, this.itemData.itemExtra.y);
-  const width = getVal(currentTime, this.itemData.itemExtra.width);
-  const height = getVal(currentTime, this.itemData.itemExtra.height);
+  const x = getVal(currentTime, this.x);
+  const y = getVal(currentTime, this.y);
+  const width = getVal(currentTime, this.width);
+  const height = getVal(currentTime, this.height);
   const color = getVal(currentTime, this.itemData.itemExtra.color) || 'white';
   const filled = getVal(currentTime, this.itemData.itemExtra.filled) || true;
   const dash = getVal(currentTime, this.itemData.itemExtra.dash) || 0;
