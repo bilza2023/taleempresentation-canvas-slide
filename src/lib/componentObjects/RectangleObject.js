@@ -47,43 +47,6 @@ draw(ctx, currentTime) {
   ctx.restore();
 }
 
-width(){
-    return this.itemData.itemExtra.width.initialValue;
- }
- height(){
-    return this.itemData.itemExtra.height.initialValue;
- }
- getX(){
-    return this.itemData.itemExtra.x.initialValue;
- }
- 
- getY(){
-    return this.itemData.itemExtra.y.initialValue;
- }
 
- getLeft() {
-    return Math.min(this.getX(), this.getX() + this.width());
-}
 
-getRight() {
-    return Math.max(this.getX(), this.getX() + this.width());
-}
-
-getTop() {
-    return Math.min(this.getY(), this.getY() + this.height());
-}
-
-getBottom() {
-    return Math.max(this.getY(), this.getY() + this.height());
-}
-
-isHit(mouseX, mouseY) {
-    return (
-        mouseX >= this.getLeft() &&
-        mouseX <= this.getRight() &&
-        mouseY >= this.getTop() &&
-        mouseY <= this.getBottom()
-    );
-}
-    
 }//class

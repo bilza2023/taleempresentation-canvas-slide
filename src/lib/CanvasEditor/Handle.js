@@ -1,131 +1,59 @@
-
-
-
-export default class Handle{
-
-  constructor(){
-    this.handleWidth = 15;
-    this.handleHeight = 15;
-    this.handleColor ='red';
-    this.isDrag = false;
+// Handle.js
+export default class Handle {
+  constructor(position = 'center', options = {}) {
+      this.position = position; //center
+      this.size = options.size || 10;
+      this.color = options.color || '#1a73e8';
+      this.hoverColor = options.hoverColor || '#64b5f6';
+      this.isHovered = false;
+      this.cursor = options.cursor || 'pointer';
+      this.icon = options.icon || null;
   }
 
-  draw(ctx, x, y, width, height) {
-    // Draw dashed line border
-    ctx.save();
-    ctx.setLineDash([5, 5]);
-    ctx.strokeStyle = 'gray';
-    ctx.strokeRect(x, y, width, height);
-    ctx.restore();
-  
-    // Draw corner handles
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(x - this.handleWidth / 2, y - this.handleHeight / 2, this.handleWidth, this.handleHeight); // Top Left
-    ctx.fillRect(x + width - this.handleWidth / 2, y - this.handleHeight / 2, this.handleWidth, this.handleHeight); // Top Right
-    ctx.fillRect(x - this.handleWidth / 2, y + height - this.handleHeight / 2, this.handleWidth, this.handleHeight); // Bottom Left
-    ctx.fillRect(x + width - this.handleWidth / 2, y + height - this.handleHeight / 2, this.handleWidth, this.handleHeight); // Bottom Right
-  
-    // Draw side handles
-    ctx.fillStyle = 'orange';
-    ctx.fillRect(x + width / 2 - this.handleWidth / 2, y - this.handleHeight / 2, this.handleWidth, this.handleHeight); // Top
-    ctx.fillRect(x + width / 2 - this.handleWidth / 2, y + height - this.handleHeight / 2, this.handleWidth, this.handleHeight); // Bottom
-    ctx.fillRect(x - this.handleWidth / 2, y + height / 2 - this.handleHeight / 2, this.handleWidth, this.handleHeight); // Left
-    ctx.fillRect(x + width - this.handleWidth / 2, y + height / 2 - this.handleHeight / 2, this.handleWidth, this.handleHeight); // Right
+  getPosition(bounds) {
+      const { x, y, width, height } = bounds;
+      const positions = {
+          'top-left': { x, y },
+          'top-right': { x: x + width, y },
+          'bottom-left': { x, y: y + height },
+          'bottom-right': { x: x + width, y: y + height },
+          'top': { x: x + width/2, y },
+          'bottom': { x: x + width/2, y: y + height },
+          'left': { x, y: y + height/2 },
+          'right': { x: x + width, y: y + height/2 },
+          'center': { x: x + width/2, y: y + height/2 }
+      };
+      // get the correct position(field) from positions OBJ using this.position
+      return positions[this.position] || positions.center;
   }
 
-  isHit(ctx, mouseX, mouseY, itemX, itemY, itemWidth, itemHeight) {
-    this.isDrag = false;
-  
-    // Check top left handle
-    if (
-      mouseX >= itemX - this.handleWidth / 2 &&
-      mouseX <= itemX + this.handleWidth / 2 &&
-      mouseY >= itemY - this.handleHeight / 2 &&
-      mouseY <= itemY + this.handleHeight / 2
-    ) {
-      this.isDrag = true;
-      return 0; // Top left handle
-    }
-  
-    // Check top right handle
-    if (
-      mouseX >= itemX + itemWidth - this.handleWidth / 2 &&
-      mouseX <= itemX + itemWidth + this.handleWidth / 2 &&
-      mouseY >= itemY - this.handleHeight / 2 &&
-      mouseY <= itemY + this.handleHeight / 2
-    ) {
-      this.isDrag = true;
-      return 1; // Top right handle
-    }
-  
-    // Check bottom left handle
-    if (
-      mouseX >= itemX - this.handleWidth / 2 &&
-      mouseX <= itemX + this.handleWidth / 2 &&
-      mouseY >= itemY + itemHeight - this.handleHeight / 2 &&
-      mouseY <= itemY + itemHeight + this.handleHeight / 2
-    ) {
-      this.isDrag = true;
-      return 2; // Bottom left handle
-    }
-  
-    // Check bottom right handle
-    if (
-      mouseX >= itemX + itemWidth - this.handleWidth / 2 &&
-      mouseX <= itemX + itemWidth + this.handleWidth / 2 &&
-      mouseY >= itemY + itemHeight - this.handleHeight / 2 &&
-      mouseY <= itemY + itemHeight + this.handleHeight / 2
-    ) {
-      this.isDrag = true;
-      return 3; // Bottom right handle
-    }
-  
-    // Check top middle handle
-    if (
-      mouseX >= itemX + itemWidth / 2 - this.handleWidth / 2 &&
-      mouseX <= itemX + itemWidth / 2 + this.handleWidth / 2 &&
-      mouseY >= itemY - this.handleHeight / 2 &&
-      mouseY <= itemY + this.handleHeight / 2
-    ) {
-      this.isDrag = true;
-      return 4; // Top middle handle
-    }
-  
-    // Check bottom middle handle
-    if (
-      mouseX >= itemX + itemWidth / 2 - this.handleWidth / 2 &&
-      mouseX <= itemX + itemWidth / 2 + this.handleWidth / 2 &&
-      mouseY >= itemY + itemHeight - this.handleHeight / 2 &&
-      mouseY <= itemY + itemHeight + this.handleHeight / 2
-    ) {
-      this.isDrag = true;
-      return 5; // Bottom middle handle
-    }
-  
-    // Check left middle handle
-    if (
-      mouseX >= itemX - this.handleWidth / 2 &&
-      mouseX <= itemX + this.handleWidth / 2 &&
-      mouseY >= itemY + itemHeight / 2 - this.handleHeight / 2 &&
-      mouseY <= itemY + itemHeight / 2 + this.handleHeight / 2
-    ) {
-      this.isDrag = true;
-      return 6; // Left middle handle
-    }
-  
-    // Check right middle handle
-    if (
-      mouseX >= itemX + itemWidth - this.handleWidth / 2 &&
-      mouseX <= itemX + itemWidth + this.handleWidth / 2 &&
-      mouseY >= itemY + itemHeight / 2 - this.handleHeight / 2 &&
-      mouseY <= itemY + itemHeight / 2 + this.handleHeight / 2
-    ) {
-      this.isDrag = true;
-      return 7; // Right middle handle
-    }
-  
-    // If none of the handles were hit, return -1
-    this.isDrag = false;
-    return -1;
+  draw(ctx, bounds) {
+      const pos = this.getPosition(bounds);
+      const halfSize = this.size / 2;
+
+      ctx.save();
+      ctx.fillStyle = this.isHovered ? this.hoverColor : this.color;
+      ctx.fillRect(pos.x - halfSize, pos.y - halfSize, this.size, this.size);
+
+      if (this.icon) {
+          ctx.fillStyle = '#ffffff';
+          ctx.font = `${this.size * 0.8}px Arial`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(this.icon, pos.x, pos.y);
+      }
+
+      ctx.restore();
+  }
+
+  isHit(x, y, bounds) {
+      const pos = this.getPosition(bounds);
+      const halfSize = this.size / 2;
+      return (
+          x >= pos.x - halfSize &&
+          x <= pos.x + halfSize &&
+          y >= pos.y - halfSize &&
+          y <= pos.y + halfSize
+      );
   }
 }

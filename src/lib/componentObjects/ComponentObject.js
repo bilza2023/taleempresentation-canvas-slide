@@ -17,23 +17,6 @@ export default class ComponentObject {
       console.log("ComponentObject draw");
    }
 
-  get width() {
-       return this.itemData.itemExtra.width.initialValue;
-   }
-  set width(newWidth) {
-       this.itemData.itemExtra.width.initialValue = newWidth;
-   }
-
-   get height() {
-       return this.itemData.itemExtra.height.initialValue;
-   }
-   set height(newHeight) {
-       this.itemData.itemExtra.height.initialValue = newHeight;
-   }
-
-   getX() {
-       return this.itemData.itemExtra.x.initialValue;
-   }
    get x() {
        return this.itemData.itemExtra.x.initialValue;
    }
@@ -47,19 +30,36 @@ export default class ComponentObject {
        this.itemData.itemExtra.y.initialValue=newY;
    }
 
+  get width() {
+    return this.itemData.itemExtra.width.initialValue;
+}
+set width(newWidth) {
+    this.itemData.itemExtra.width.initialValue = newWidth;
+}
+
+get height() {
+    return this.itemData.itemExtra.height.initialValue;
+}
+set height(newHeight) {
+    this.itemData.itemExtra.height.initialValue = newHeight;
+}
+//getX and getY are depricated
    getY() {
        return this.itemData.itemExtra.y.initialValue;
    }
+   getX() {
+    return this.itemData.itemExtra.x.initialValue;
+}
 
    isHit(mouseX, mouseY) {
-       return (
-           mouseX >= this.getX() &&
-           mouseX <= this.getX() + this.width() &&
-           mouseY >= this.getY() &&
-           mouseY <= this.getY() + this.height()
-       );
-   }
-//////////////////////////////////////////////////////////////////////
+    return (
+        mouseX >= this.x &&
+        mouseX <= this.x + this.width &&
+        mouseY >= this.y &&
+        mouseY <= this.y + this.height
+    );
+}
+//////////////////////////////////////////////////////////////////////useful ?
  
    get command() {
      return this.itemData.itemExtra.command;
