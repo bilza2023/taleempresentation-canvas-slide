@@ -4,7 +4,7 @@
 import Rectangle from './Rectangle';
 // import ImageObject from './ImageObject';
 // import LineObject from './LineObject';
-// import CircleObject from './CircleObject';
+import Circle from './Circle';
 // import RayObject from './RayObject';
 // import EllipseObject from './EllipseObject';
 // import TextObject from './TextObject';
@@ -94,7 +94,7 @@ export default function itemToObject(item){
     break;
     
     case 'circle':
-    // selectedItem = new CircleObject(item);
+    selectedItem = new Circle(item);
     break;
 
     default:

@@ -6,7 +6,7 @@ export default class Circle extends ItemObject {
         super(itemData , fnList);
 }
 
-    draw(ctx, currentTime) {
+    draw(ctx) {
       // Save the current context state
       ctx.save();
   
@@ -50,31 +50,48 @@ export default class Circle extends ItemObject {
   }
   
 ////////////////////////////////////////////////////////////////////
-width(){
-    return this.itemData.itemExtra.radius * 2;
- }
- height(){
-    return this.itemData.itemExtra.radius * 2;
- }
- getX(){
-    return this.itemData.itemExtra.x;
- }
- 
- getY(){
-    return this.itemData.itemExtra.y;
- }
-////////////////////////////////////////////////////////////////////
-isHit(mouseX, mouseY) {
-    const centerX = this.getX();
-    const centerY = this.getY();
-    const radius = this.itemData.itemExtra.radius;
 
-    // Calculate the distance between the mouse click and the center of the circle
-    const distance = Math.sqrt(
-        Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
-    );
-
-    // Check if the distance is less than or equal to the radius
-    return distance <= radius;
+  // Position getters and setters
+boundingRectangleX() {
+    return this.itemData.itemExtra.x - this.itemData.itemExtra.radius;
 }
+
+boundingRectangleY() {
+    return this.itemData.itemExtra.y - this.itemData.itemExtra.radius;
+}
+get x() {
+    return this.itemData.itemExtra.x;
+}
+
+set x(newX) {
+    this.itemData.itemExtra.x = newX;
+}
+
+get y() {
+    return this.itemData.itemExtra.y;
+}
+
+set y(newY) {
+    this.itemData.itemExtra.y = newY;
+}
+
+// Dimension getters and setters
+get width() {
+    return this.itemData.itemExtra.radius * 2;
+}
+
+set width(newWidth) {
+    this.itemData.itemExtra.radius = newWidth;
+}
+
+get height() {
+    return this.itemData.itemExtra.radius * 2;
+}
+
+set height(newHeight) {
+    this.itemData.itemExtra.radius = newHeight;
+}
+
+////////////////////////////////////////////////////////////////////
+// 
 }//class

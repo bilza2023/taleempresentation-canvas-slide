@@ -36,7 +36,7 @@ export default class SelectedItem {
     }
 
     drawHandles(ctx) {
-        const bounds = this.getBounds();
+        const bounds = this.itemObject.getBounds();
 
         // Draw selection rectangle
         ctx.save();
@@ -65,7 +65,7 @@ export default class SelectedItem {
 
     mouseMove(x, y) {
         if (!this.activeHandle) {
-            const bounds = this.getBounds();
+            const bounds = this.itemObject.getBounds();
             this.handles.forEach(handle => {
                 handle.isHovered = handle.isHit(x, y, bounds);
             });

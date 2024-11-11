@@ -21,8 +21,8 @@ export default class ItemObject {
 
   getBounds() {
     return {
-        x: this.x,
-        y: this.y,
+        x: this.boundingRectangleX(),
+        y: this.boundingRectangleY(),
         width: this.width,
         height: this.height
     };
@@ -40,6 +40,14 @@ export default class ItemObject {
   }
 
   // Position getters and setters
+  boundingRectangleX() {
+      return this.itemData.itemExtra.x;
+  }
+
+ boundingRectangleY() {
+      return this.itemData.itemExtra.y;
+  }
+
   get x() {
       return this.itemData.itemExtra.x;
   }
