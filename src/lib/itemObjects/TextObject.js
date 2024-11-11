@@ -55,7 +55,6 @@ this._height =  ctx.measureText('W').width;
   boundingRectangleY() {
       return this.itemData.itemExtra.y;
   }
-
   get width() {
     return this._width;
   }
@@ -65,7 +64,6 @@ this._height =  ctx.measureText('W').width;
   get height() {
     return this._height;
   }
-
   set height(newHeight) {
       this.itemData.itemExtra.fontSize = newHeight;
   }

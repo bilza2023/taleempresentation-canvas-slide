@@ -3,9 +3,10 @@
 
 import Rectangle from './Rectangle';
 // import ImageObject from './ImageObject';
-// import LineObject from './LineObject';
 import Circle from './Circle';
-// import RayObject from './RayObject';
+import RayObject from './RayObject';
+// import LinesObject from './LinesObject';
+import LineObject from './LineObject';
 import EllipseObject from './EllipseObject';
 import TextObject from './TextObject';
 import TriangleObject from './TriangleObject';
@@ -18,7 +19,6 @@ import ParaObject from './ParaObject';
 // import IconObject from './IconObject';
 // import Image2Object from './Image2Object';
 // import PieChartObject from './PieChartObject';
-// import LinesObject from './LinesObject';
 
 
 export default function itemToObject(item){
@@ -71,10 +71,10 @@ export default function itemToObject(item){
     break;
 
     case 'ray':
-    // selectedItem = new RayObject(item);
+    selectedItem = new RayObject(item);
     break;
     case 'line':
-    // selectedItem = new LineObject(item);
+    selectedItem = new LineObject(item);
     break;
     
     case 'lines':
