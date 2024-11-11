@@ -6,7 +6,7 @@ import Rectangle from './Rectangle';
 // import LineObject from './LineObject';
 import Circle from './Circle';
 // import RayObject from './RayObject';
-// import EllipseObject from './EllipseObject';
+import EllipseObject from './EllipseObject';
 // import TextObject from './TextObject';
 // import TriangleObject from './TriangleObject';
 // import ParaObject from './ParaObject';
@@ -67,7 +67,7 @@ export default function itemToObject(item){
     break;
 
     case 'ellipse':
-    // selectedItem = new EllipseObject(item);
+    selectedItem = new EllipseObject(item);
     break;
 
     case 'ray':

@@ -92,9 +92,9 @@ return  addReqExtraFields(obj,"text","black")
 }
  function addEllipse( ){
   const obj = { 
-    "x":          200,
-    "y":          200,
-    "radiusX":    50,
+    "x":          100,
+    "y":          100,
+    "radiusX":    100,
     "radiusY":    100,
     "rotation":   0,
     "startAngle": 0,

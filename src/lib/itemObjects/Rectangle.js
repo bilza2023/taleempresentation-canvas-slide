@@ -7,7 +7,7 @@ export default class Rectangle extends ItemObject {
     }
 
 ////////////////////////////////////////////////////
-draw(ctx, currentTime) {
+draw(ctx) {
   // Save the current context state
   ctx.save();
 // debugger;
