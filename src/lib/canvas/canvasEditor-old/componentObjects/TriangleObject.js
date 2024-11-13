@@ -4,7 +4,7 @@ import DraggerHandle from '../handleObject/DraggerHandle';
 import AdderHandle from '../handleObject/AdderHandle';
 import ButtonHandle from '../handleObject/ButtonHandle';
 import getVal from "../../getVal";
-
+ 
 export default class TriangleObject extends ComponentObject {
     constructor(itemData , fnList) {
         super(itemData , fnList);

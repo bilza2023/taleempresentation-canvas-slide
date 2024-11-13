@@ -7,16 +7,7 @@ import getProp from '../../getProp';
 
 export default class LineObject extends ComponentObject {
     constructor(itemData=null , fnList={}) {
-      // // debugger;
-      // if(itemData ==null){
-      //     itemData = {
-      //         "x1": getProp(20),
-      //         "y1": getProp(10),
-      //         "x2": getProp(500),
-      //         "y2": getProp(200),
-      //         "lineWidth": getProp(2),              
-      //         };
-      // }
+    
         super(itemData , fnList);
 
         this.dialogueBox = [
