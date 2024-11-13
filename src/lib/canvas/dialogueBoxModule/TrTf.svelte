@@ -7,6 +7,7 @@ export let extra;
 
 <tr>
     <td class="border border-white p-1">
+     <!-- svelte-ignore a11y-label-has-associated-control -->
      <label class="text-pink-300 hover:cursor-pointer" >{title}</label>   
     </td>
 

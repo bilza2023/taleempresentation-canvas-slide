@@ -8,6 +8,89 @@ import { get } from 'svelte/store';
 export default class IconObject extends ItemObject {
     constructor(itemData , assets) {
         super(itemData , assets);
+        this.dialogueBox = [
+            {
+              componentName: 'TrPropText',
+              title: 'text',
+              props: {}
+            },
+            {
+              componentName: 'TrPropNumber',
+              title: 'x',
+              props: {}
+            },
+            {
+              componentName: 'TrPropNumber',
+              title: 'y',
+              props: {}
+            },
+            {
+              componentName: 'TrPropNumber',
+              title: 'fontSize',
+              props: {}
+            },
+            {
+              componentName: 'TrPropNumber',
+              title: 'iconSize',
+              props: {}
+            },
+            {
+              componentName: 'TrText',
+              title: 'fontFamily',
+              props: {}
+            },
+            {
+              componentName: 'TrTf',
+              title: 'showBg',
+              props: {}
+            },
+            {
+              componentName: 'TrTf',
+              title: 'iconOnTop',
+              props: {}
+            },
+            {
+              componentName: 'TrPropColor',
+              title: 'bgColor',
+              props: {}
+            },
+            {
+              componentName: 'TrNo',
+              title: 'iconErrorX',
+              props: {}
+            },
+            {
+              componentName: 'TrNo',
+              title: 'iconErrorY',
+              props: {}
+            },
+            
+            // CommonCommands
+            {
+              componentName: 'TrText',
+              title: 'name',
+              props: {}
+            },
+            {
+              componentName: 'TrPropColor',
+              title: 'color',
+              props: {}
+            },
+            {
+              componentName: 'TrNo',
+              title: 'showAt',
+              props: {}
+            },
+            {
+              componentName: 'TrPropNumber',
+              title: 'globalAlpha',
+              props: {
+                min: '0.0',
+                max: '1.0',
+                step: '0.1'
+              }
+            }
+          ];
     }
 
 ////////////////////////////////////////////////////////////
