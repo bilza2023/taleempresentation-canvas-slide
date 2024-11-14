@@ -6,10 +6,7 @@
 
     export let item;
     export let dialogueBox;
-$:{
-    item;
-    console.log("item", item);
-}
+
 </script>
 
 {#if item}
@@ -41,18 +38,18 @@ $:{
                             <!-- Number Input -->
                             <div class="border-b border-gray-700">
                                 <div class="border border-gray-700 px-2  text-[10px] text-yellow-200 text-left">{dialogueItem.title}</div>
-                                <div class="border border-gray-700 px-2 py-1">
+                                <div class="border border-gray-700 px-2 py-1 text-xs">
                                     <input 
                                         type="number" 
                                         bind:value={item.itemExtra[dialogueItem.title]} 
-                                        class="bg-gray-900 text-white text-sm p-1 rounded-md border border-gray-600 focus:ring-1 focus:ring-pink-500"
+                                        class="bg-gray-900 text-white text-sm p-1 rounded-md border border-gray-600 focus:ring-1 focus:ring-pink-500 text-xs"
                                     >
                                 </div>
                             </div>
                         {:else if dialogueItem.componentName === 'TrPropText' || dialogueItem.componentName === 'TrText'}
                             <!-- Text Input -->
                             <div class="border-b border-gray-700">
-                                <div class="border border-gray-700 px-2 py-1 text-xs text-gray-200">{dialogueItem.title}</div>
+                                <div class="border border-gray-700 px-2  text-[10px] text-yellow-200 text-left">{dialogueItem.title}</div>
                                 <div class="border border-gray-700 px-2 py-1">
                                     <input 
                                         type="text" 
@@ -64,7 +61,7 @@ $:{
                         {:else if dialogueItem.componentName === 'TrTextArea'}
                             <!-- Text Area -->
                             <div class="border-b border-gray-700">
-                                <div class="border border-gray-700 px-2 py-1 text-xs text-gray-200">{dialogueItem.title}</div>
+                                <div class="border border-gray-700 px-2  text-[10px] text-yellow-200 text-left">{dialogueItem.title}</div>
                                 <div class="border border-gray-700 px-2 py-1">
                                     <textarea 
                                         bind:value={item.itemExtra[dialogueItem.title]} 
@@ -75,7 +72,7 @@ $:{
                         {:else if dialogueItem.componentName === 'TrPropBoolean' || dialogueItem.componentName === 'TrTf'}
                             <!-- Boolean/Checkbox -->
                             <div class="border-b border-gray-700">
-                                <div class="border border-gray-700 px-2 py-1 text-xs text-pink-300 hover:cursor-pointer">
+                                <div class="border border-gray-700 px-2  text-[10px] text-yellow-200 text-left">
                                     <label>{dialogueItem.title}</label>
                                 </div>
                                 <div class="border border-gray-700 px-2 py-1">
@@ -89,7 +86,7 @@ $:{
                         {:else if dialogueItem.componentName === 'TrPropColor' || dialogueItem.componentName === 'TrColor'}
                             <!-- Color Input -->
                             <div class="border-b border-gray-700">
-                                <div class="border border-gray-700 px-2 py-1 text-xs text-gray-200">{dialogueItem.title}</div>
+                                <div class="border border-gray-700 px-2  text-[10px] text-yellow-200 text-left">{dialogueItem.title}</div>
                                 <div class="border border-gray-700 px-2 py-1">
                                     <input 
                                         type="color" 
