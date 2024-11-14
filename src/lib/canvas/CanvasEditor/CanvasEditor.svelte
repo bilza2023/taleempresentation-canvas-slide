@@ -47,14 +47,6 @@
         console.log("update");
     }
     
-    function deleteSelectedItem() {
-        if (selectedItemIndex !== -1) {
-            items.splice(selectedItemIndex, 1);
-            items = [...items];
-            selectedItemIndex = -1;
-        }
-    }
-    
     function eventMouseDown(e, ctx) {
         if (selectedItem) {
             const {x, y} = getMouseData(e);
@@ -119,12 +111,41 @@
             selected.drawHandles(ctx);
         }
     }
+
+    function clone() {
+    if (selectedItem) {
+        const clonedItem = JSON.parse(JSON.stringify(items[selectedItemIndex]));
+        // Remove _id to avoid duplicates
+        delete clonedItem._id;
+        // Add slight offset to make it visible that it's a clone
+        clonedItem.itemExtra.x = (clonedItem.itemExtra.x || 0) + 20;
+        clonedItem.itemExtra.y = (clonedItem.itemExtra.y || 0) + 20;
+        // Insert clone right after the selected item
+        items.splice(selectedItemIndex, 0, clonedItem);
+        items = [...items]; // Trigger reactivity
+    }
+}
+
+function deleteFn() {
+    if (selectedItemIndex !== -1) {
+        items.splice(selectedItemIndex, 1);
+        items = [...items]; // Trigger reactivity
+        selectedItemIndex = -1; // Reset selection
+        selectedItem = null; // Clear selected item
+    }
+}
+
+function logSlide(){
+    console.log("Slide" , items);
+}
+
     </script>
     
     {#if items}
         {#if showAddToolbar}
             <div class="flex  w-full p-0 m-0">
-                <AddToolbar icons={assets.icons} {addNewItem} />
+                <AddToolbar icons={assets.icons} {addNewItem} 
+                {clone} {deleteFn} {logSlide} />
             </div>
         {/if}
     
@@ -144,12 +165,13 @@
                 <div class=" bg-gray-900 text-yellow-900 text-sm">{`x: ${currentMouseX}, y: ${currentMouseY}`}</div>
             </div>
             <div class='w-3/12 text-center'>
-                {#if selectedItemIndex !== -1 && selectedItem}
+              
                     <SelectItemMenu 
                         bind:items={items}
                         {selectedItemIndex}
                         {setSelectedItemIndex}
                     />
+                {#if selectedItemIndex !== -1 && selectedItem}    
                     <CommandUi 
                     bind:item={items[selectedItemIndex]}
                     dialogueBox = {selectedItem.itemObject.dialogueBox}
