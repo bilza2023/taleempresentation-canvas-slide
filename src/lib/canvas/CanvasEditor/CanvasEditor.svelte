@@ -14,12 +14,9 @@
     export let slideExtra;
     export let assets;
     export let showAddToolbar = true;
-//--very important    
+    //--very important    
     let selectedItem = null;
-// $:{
-//     selectedItem;
-//     debugger;
-// }    
+   
     
     let currentMouseX = 0;
     let currentMouseY = 0;
@@ -66,8 +63,10 @@
     }
     
     function eventMouseMove(e, ctx) {
+        const {x, y} = getMouseData(e);
+        currentMouseX = x.toFixed(0);
+        currentMouseY = y.toFixed(0);
         if (selectedItem) {
-            const {x, y} = getMouseData(e);
             selectedItem.mouseMove(x, y);
         }
     }
@@ -75,6 +74,7 @@
     function eventMouseUp() {
         if (selectedItem) {
             selectedItem.mouseUp();
+            items = [...items]; // this is to redraw after move or widen/heighten
         }
     }
     
@@ -141,7 +141,7 @@
                     {eventDblClick}
                     {eventMouseMove}
                 />
-                <div>{`x: ${currentMouseX}, y: ${currentMouseY}`}</div>
+                <div class=" bg-gray-900 text-yellow-900 text-sm">{`x: ${currentMouseX}, y: ${currentMouseY}`}</div>
             </div>
             <div class='w-3/12 text-center'>
                 {#if selectedItemIndex !== -1 && selectedItem}
