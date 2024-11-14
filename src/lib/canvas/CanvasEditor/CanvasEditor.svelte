@@ -8,7 +8,9 @@
     import getMouseData from "./getMouseData";
     import SelectItemMenu from "./SelectItemMenu.svelte";
     import CommandUi from '../dialogueBoxModule/CommandUi.svelte';
-    
+    import CanvasCommand from "../dialogueBoxModule/CanvasCommand.svelte";
+
+
     export let items;
     export let slideData;
     export let slideExtra;
@@ -18,6 +20,7 @@
     let selectedItem = null;
    
     
+    let showCanvasFlag = false;
     let currentMouseX = 0;
     let currentMouseY = 0;
     let selectedItemIndex = -1; // Instead of storing the full object, just store the index
@@ -112,7 +115,10 @@
         }
     }
 
-    function clone() {
+function showCanvas(){
+    showCanvasFlag = !showCanvasFlag;
+}    
+function clone() {
     if (selectedItem) {
         const clonedItem = JSON.parse(JSON.stringify(items[selectedItemIndex]));
         // Remove _id to avoid duplicates
@@ -137,6 +143,7 @@ function deleteFn() {
 
 function logSlide(){
     console.log("Slide" , items);
+    console.log("slideExtra" , slideExtra);
 }
 
     </script>
@@ -145,7 +152,7 @@ function logSlide(){
         {#if showAddToolbar}
             <div class="flex  w-full p-0 m-0">
                 <AddToolbar icons={assets.icons} {addNewItem} 
-                {clone} {deleteFn} {logSlide} />
+                {clone} {deleteFn} {logSlide} {showCanvas} />
             </div>
         {/if}
     
@@ -166,17 +173,23 @@ function logSlide(){
             </div>
             <div class='w-3/12 text-center'>
               
-                    <SelectItemMenu 
-                        bind:items={items}
-                        {selectedItemIndex}
-                        {setSelectedItemIndex}
-                    />
-                {#if selectedItemIndex !== -1 && selectedItem}    
-                    <CommandUi 
-                    bind:item={items[selectedItemIndex]}
-                    dialogueBox = {selectedItem.itemObject.dialogueBox}
-                    />
-                {/if}
+                    
+                    {#if showCanvasFlag}
+                   <CanvasCommand extra={slideExtra} />
+                    {:else}
+                                    <SelectItemMenu 
+                                        bind:items={items}
+                                        {selectedItemIndex}
+                                        {setSelectedItemIndex}
+                                    />
+                                    
+                                {#if selectedItemIndex !== -1 && selectedItem}    
+                                <CommandUi 
+                                bind:item={items[selectedItemIndex]}
+                                dialogueBox = {selectedItem.itemObject.dialogueBox}
+                                />
+                                {/if}
+                    {/if}
             </div>
         </div>
     {/if}

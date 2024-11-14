@@ -7,6 +7,7 @@
     export let clone=()=>{};
     export let deleteFn=()=>{};
     export let logSlide=()=>{};
+    export let showCanvas=()=>{};
 
     import { addEllipse,addCircle,addBezier,addRect,addAngleSymbol,addDot,addGrid,addPolygon,addTri,addLines,addLine,addRay,addRepeatDot,addRepeatText,addPara,addText,addSprite,addSysImage,addImage,addIcon,addImage2,addPieChart} from "./addFunctions";
 
@@ -36,8 +37,9 @@ export let addNewItem;
             
 <div class='flex border-2 border-gray-500 rounded-md'>
 <SmallBtnToolbar clk={clone} icon={icons.SHEEP} title="Clone" />
-<SmallBtnToolbar clk={deleteFn} icon={icons.WASTEBASKET} title="Delete" />
+<SmallBtnToolbar clk={showCanvas} icon={icons.CANVAS} title="Canvas" />
 <SmallBtnToolbar clk={logSlide} icon={icons.PRINTER} title="Log Slide" />
+<SmallBtnToolbar clk={deleteFn} icon={icons.WASTEBASKET} title="Delete" />
 </div>
 
 </div>
