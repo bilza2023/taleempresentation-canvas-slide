@@ -6,10 +6,11 @@ export default class SelectedItem {
     constructor(itemObject) {
         
         this.itemObject = itemObject;
+        // They are all Handle related stuff. nothing in handle except draw and isHit
         this.handles = [];
         this.selectedHandle = null;
-
         this.isDrag = false;
+
         this.startPositionX = 0 ; // this is to store x position when mouse move
         this.startPositionY = 0 ; // this is to store y position when mouse move
         this.initializeHandles();
@@ -18,8 +19,8 @@ export default class SelectedItem {
     initializeHandles() {
         
         const move =  new Handle(
-            () => this.itemObject.boundingRectangleX() + (this.itemObject.width / 2),
-            () => this.itemObject.boundingRectangleY() + (this.itemObject.height / 2),
+            () => (this.itemObject.boundingRectangleX() + (this.itemObject.width / 2))-10,
+            () => (this.itemObject.boundingRectangleY() + (this.itemObject.height / 2))-10,
             
             '✥','green');
 
@@ -67,15 +68,12 @@ export default class SelectedItem {
 
     mouseMove(x, y) {
 
-          const dx = x - this.startPositionX;
-          const dy = y - this.startPositionY;
+        //   const dx = x - this.startPositionX;
+        //   const dy = y - this.startPositionY;
 
         if(this.isDrag == true && this.selectedHandle == 'move'){
-            // debugger;
-            // this.itemObject.x = this.itemObject.x + dx;
-            // this.itemObject.y = this.itemObject.y + dy;
-            this.itemObject.x += 1;
-           
+            this.itemObject.x = x;
+            this.itemObject.y = y;
         }
 
         return true;

@@ -2,8 +2,8 @@ export default class Handle {
   constructor(xFn, yFn, pointer='pointer', color='#1a73e8') {
     this.x = xFn;
     this.y = yFn;
-    this.selected = false;
-    this.size = 15;
+    // this.selected = false;
+    this.size = 20;
     this.color = color;
     this.hoverColor = '#64b5f6';
     this.isHovered = false;
@@ -30,7 +30,7 @@ export default class Handle {
   isHit(x, y) {
     if (x >= this.x() && x <= this.x() + this.size && 
         y >= this.y() && y <= this.y() + this.size) { 
-      this.selected = true;
+      // this.selected = true;
       console.log("selected");
       return true;
     } else {
