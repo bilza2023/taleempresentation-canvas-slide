@@ -39,6 +39,8 @@
         items = [...items];
         // Select the newly added item
         selectedItemIndex = 0;
+        // very important or else the handles will not work
+        selectedItem = new SelectedItem(getSelectedItemObject());
     }
     
     function update() {
