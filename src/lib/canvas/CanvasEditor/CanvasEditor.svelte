@@ -140,7 +140,7 @@
                 />
                 <div>{`x: ${currentMouseX}, y: ${currentMouseY}`}</div>
             </div>
-            <!-- <div class='w-3/12 text-center'>
+            <div class='w-3/12 text-center'>
                 {#if selectedItemIndex !== -1}
                     <SelectItemMenu 
                         bind:items={items}
@@ -152,6 +152,6 @@
                     dialogueBox = {getSelectedItemObject().dialogueBox}
                     />
                 {/if}
-            </div> -->
+            </div>
         </div>
     {/if}
