@@ -123,13 +123,13 @@
     
     {#if items}
         {#if showAddToolbar}
-            <div class="flex justify-center w-full p-0 m-0">
+            <div class="flex  w-full p-0 m-0">
                 <AddToolbar icons={assets.icons} {addNewItem} />
             </div>
         {/if}
     
-        <div class="flex w-full p-0 m-0 bg-stone-900 text-white p-2 min-h-screen">
-            <div class=''>
+        <div class="flex w-full p-0 m-0 bg-stone-900 text-white p-2  gap-1">
+            <div class='mx-1'>
                 <CanvasPlayer
                     {slideData}
                     {items}

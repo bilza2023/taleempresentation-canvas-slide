@@ -8,110 +8,101 @@
     export let dialogueBox;
 $:{
     item;
-    console.log("item" ,item);
+    console.log("item", item);
 }
-
 </script>
 
 {#if item}
-    <div class="">
-        <div class="overflow-x-auto">
-            <table class="min-w-full table-auto border-collapse border border-gray-600 bg-gray-700 rounded-lg">
-                <tbody>
+<div class="">
+        <div class="flex flex-col overflow-y-auto max-h-[70vh] rounded-lg shadow mx-2 my-2" >
+       
                     <!-- Special Command Components -->
-                    {#if item.itemExtra.command === 'sprite'} 
-                        <tr>
-                            <td><SpriteDD bind:extra={item.itemExtra}/></td>
-                        </tr>
+                    <!-- {#if item.itemExtra.command === 'sprite'} 
+                        <div>
+                            <div><SpriteDD bind:extra={item.itemExtra}/></div>
+                        </div>
                     {/if}
 
                     {#if item.itemExtra.command === 'icon'} 
-                        <tr>
-                            <td><IconDD bind:extra={item.itemExtra}/></td>
-                        </tr>
+                        <div>
+                            <div><IconDD bind:extra={item.itemExtra}/></div>
+                        </div>
                     {/if}
 
                     {#if item.itemExtra.command === 'lines'} 
-                        <tr>
-                            <td><LinesDD bind:extra={item.itemExtra}/></td>
-                        </tr>
-                    {/if}
+                        <div>
+                            <div><LinesDD bind:extra={item.itemExtra}/></div>
+                        </div>
+                    {/if} -->
 
                     <!-- Dynamic Component Rows -->
                     {#each dialogueBox as dialogueItem}
                         {#if dialogueItem.componentName === 'TrPropNumber' || dialogueItem.componentName === 'TrNo'}
                             <!-- Number Input -->
-                            <tr class="border-b border-gray-600">
-                                <td class="border border-white p-1">{dialogueItem.title}</td>
-                                <td class="border border-white p-1">
+                            <div class="border-b border-gray-700">
+                                <div class="border border-gray-700 px-2  text-[10px] text-yellow-200 text-left">{dialogueItem.title}</div>
+                                <div class="border border-gray-700 px-2 py-1">
                                     <input 
                                         type="number" 
                                         bind:value={item.itemExtra[dialogueItem.title]} 
-                                        class="bg-gray-900 text-white p-1"
+                                        class="bg-gray-900 text-white text-sm p-1 rounded-md border border-gray-600 focus:ring-1 focus:ring-pink-500"
                                     >
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         {:else if dialogueItem.componentName === 'TrPropText' || dialogueItem.componentName === 'TrText'}
                             <!-- Text Input -->
-                            <tr class="border-b border-gray-600">
-                                <td class="border border-white p-1">{dialogueItem.title}</td>
-                                <td class="border border-white p-1">
+                            <div class="border-b border-gray-700">
+                                <div class="border border-gray-700 px-2 py-1 text-xs text-gray-200">{dialogueItem.title}</div>
+                                <div class="border border-gray-700 px-2 py-1">
                                     <input 
                                         type="text" 
                                         bind:value={item.itemExtra[dialogueItem.title]} 
-                                        class="bg-gray-900 text-white p-1"
+                                        class="bg-gray-900 text-white text-sm p-1 rounded-md border border-gray-600 focus:ring-1 focus:ring-pink-500"
                                     >
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         {:else if dialogueItem.componentName === 'TrTextArea'}
                             <!-- Text Area -->
-                            <tr class="border-b border-gray-600">
-                                <td class="border border-white p-1">{dialogueItem.title}</td>
-                                <td class="border border-white p-1">
+                            <div class="border-b border-gray-700">
+                                <div class="border border-gray-700 px-2 py-1 text-xs text-gray-200">{dialogueItem.title}</div>
+                                <div class="border border-gray-700 px-2 py-1">
                                     <textarea 
                                         bind:value={item.itemExtra[dialogueItem.title]} 
-                                        class="bg-gray-900 text-white p-1"
+                                        class="bg-gray-900 text-white text-sm p-1 rounded-md border border-gray-600 focus:ring-1 focus:ring-pink-500"
                                     ></textarea>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         {:else if dialogueItem.componentName === 'TrPropBoolean' || dialogueItem.componentName === 'TrTf'}
                             <!-- Boolean/Checkbox -->
-                            <tr class="border-b border-gray-600">
-                                <td class="border border-white p-1">
-                                    <!-- svelte-ignore a11y-label-has-associated-control -->
-                                    <label class="text-pink-300 hover:cursor-pointer">
-                                        {dialogueItem.title}
-                                    </label>
-                                </td>
-                                <td class="border border-white p-1">
+                            <div class="border-b border-gray-700">
+                                <div class="border border-gray-700 px-2 py-1 text-xs text-pink-300 hover:cursor-pointer">
+                                    <label>{dialogueItem.title}</label>
+                                </div>
+                                <div class="border border-gray-700 px-2 py-1">
                                     <input 
                                         type="checkbox" 
                                         bind:checked={item.itemExtra[dialogueItem.title]} 
-                                        class="bg-gray-900 text-white p-1"
+                                        class="bg-gray-900 text-white rounded-md border border-gray-600 focus:ring-1 focus:ring-pink-500"
                                     >
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         {:else if dialogueItem.componentName === 'TrPropColor' || dialogueItem.componentName === 'TrColor'}
                             <!-- Color Input -->
-                            <tr class="border-b border-gray-600">
-                                <td class="border border-white p-1">{dialogueItem.title}</td>
-                                <td class="border border-white p-1">
+                            <div class="border-b border-gray-700">
+                                <div class="border border-gray-700 px-2 py-1 text-xs text-gray-200">{dialogueItem.title}</div>
+                                <div class="border border-gray-700 px-2 py-1">
                                     <input 
                                         type="color" 
                                         bind:value={item.itemExtra[dialogueItem.title]} 
-                                        class="bg-gray-900 text-white p-1"
+                                        class="bg-gray-900 text-white rounded-md border border-gray-600 p-1 focus:ring-1 focus:ring-pink-500"
                                     >
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         {/if}
-
-
-                        
                     {/each}
-                </tbody>
-            </table>
+            
         </div>
-    </div>
+        </div>
 {:else}
     <h6 class="text-sm text-gray-400">No item selected</h6>
 {/if}

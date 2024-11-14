@@ -22,7 +22,7 @@ onMount(async()=>{
 //--also send slideArray
 </script>
 
-<div class="w-full bg-gray-700 text-white p-2 min-h-screen ">
+<div class="w-full bg-gray-700 text-white py-2 px-1 min-h-screen ">
 
 {#if slides && assets}
   <CanvasEditor
