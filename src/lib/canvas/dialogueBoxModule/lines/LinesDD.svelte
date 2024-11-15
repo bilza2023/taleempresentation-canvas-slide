@@ -155,37 +155,34 @@ break;
         }
     }
 </script>
-
-<div class="flex flex-col w-full">
-    <table class="border-collapse border-2 border-white">
-        <tr>
-            <td class="border border-white p-1">Shapes</td>
-            <td class="border border-white p-1">
-                <select class="bg-gray-900 text-white p-1" on:change={handleSheetChange}>
-                    <option value="arrowLeft">Arrow Left</option>
-                    <option value="arrowRight">Arrow Right</option>
-                    <option value="arrowUp">Arrow Up</option>
-                    <option value="arrowDown">Arrow Down</option>
-                    <option value="pentagon">Pentagon</option>
-                    <option value="hexagon">Hexagon</option>
-                    <option value="equilateralTriangle">Equilateral Triangle</option>
-                    <option value="rightTriangle">Right Triangle</option>
-                    <option value="isoscelesUp">Isosceles Triangle (Up)</option>
-                    <option value="isoscelesDown">Isosceles Triangle (Down)</option>
-                    <option value="rightTriangleLeft">Right-Angled Triangle (Left)</option>
-                    <option value="rightTriangleRight">Right-Angled Triangle (Right)</option>
-                    <option value="scaleneTriangle">Scalene Triangle</option>
-                    <option value="sword">Sword</option>
-                    <option value="shield">Shield</option>
-
-                    <option value="star">Star</option>
-                    <option value="heart">Heart</option>
-                    <option value="lightning">Lightning Bolt</option>
-                    <option value="crown">Crown</option>
-
-                    
-                </select>
-            </td>
-        </tr>
-    </table>
+<div class="flex flex-col w-full space-y-2">
+    <div class="border-b border-gray-700">
+        <div class="px-2 text-[10px] text-yellow-200 text-left">Shapes</div>
+        <div class="border border-gray-700 px-2 py-1">
+            <select
+                class="bg-gray-900 text-yellow-200 text-[10px] rounded w-full focus:outline-none focus:ring focus:ring-yellow-400"
+                on:change={handleSheetChange}
+            >
+                <option value="arrowLeft">Arrow Left</option>
+                <option value="arrowRight">Arrow Right</option>
+                <option value="arrowUp">Arrow Up</option>
+                <option value="arrowDown">Arrow Down</option>
+                <option value="pentagon">Pentagon</option>
+                <option value="hexagon">Hexagon</option>
+                <option value="equilateralTriangle">Equilateral Triangle</option>
+                <option value="rightTriangle">Right Triangle</option>
+                <option value="isoscelesUp">Isosceles Triangle (Up)</option>
+                <option value="isoscelesDown">Isosceles Triangle (Down)</option>
+                <option value="rightTriangleLeft">Right-Angled Triangle (Left)</option>
+                <option value="rightTriangleRight">Right-Angled Triangle (Right)</option>
+                <option value="scaleneTriangle">Scalene Triangle</option>
+                <option value="sword">Sword</option>
+                <option value="shield">Shield</option>
+                <option value="star">Star</option>
+                <option value="heart">Heart</option>
+                <option value="lightning">Lightning Bolt</option>
+                <option value="crown">Crown</option>
+            </select>
+        </div>
+    </div>
 </div>

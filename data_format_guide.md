@@ -14,8 +14,7 @@ interface Slide {
   soundFileType?: string;// Audio file type (default: "opus")
   template?: string;     // Template identifier
   items: Item[];        // Slide content items
-  slideExtra: KVPair[]; // Additional slide metadata
-  extra: any;          // Custom slide data
+  slideExtra: any; // Additional slide metadata
 }
 ```
 

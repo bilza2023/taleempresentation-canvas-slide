@@ -5,6 +5,10 @@
   import InputCheckbox from './InputCheckbox.svelte';
   import InputColor from './InputColor.svelte';
 
+import SpriteDD from "./sprite/SpriteDD.svelte";
+import IconDD from "./icon/IconDD.svelte";
+import LinesDD from "./lines/LinesDD.svelte";
+
   export let item;
   export let dialogueBox;
   export let redraw;
@@ -24,6 +28,29 @@
 
 {#if item}
   <div class="flex flex-col overflow-y-auto max-h-[70vh] rounded-lg shadow mx-2 my-2">
+
+
+  <!-- Special Command Components -->
+                    {#if item.itemExtra.command === 'sprite'} 
+                        <div>
+                            <div><SpriteDD bind:extra={item.itemExtra}/></div>
+                        </div>
+                    {/if}
+
+                    {#if item.itemExtra.command === 'icon'} 
+                        <div>
+                            <div><IconDD bind:extra={item.itemExtra}/></div>
+                        </div>
+                    {/if}
+
+                    {#if item.itemExtra.command === 'lines'} 
+                        <div>
+                            <div><LinesDD bind:extra={item.itemExtra}/></div>
+                        </div>
+                    {/if}
+
+
+
     {#each dialogueBox as dialogueItem}
       {#if componentMap[dialogueItem.componentName]}
         <div class="border-b border-gray-700">

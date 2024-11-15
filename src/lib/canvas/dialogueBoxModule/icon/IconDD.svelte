@@ -570,13 +570,17 @@ let icons = [
         }
     </script>
     
-    <select class="bg-gray-400 p-1 m-0" on:change={handleChange}>
-      {#each icons as icon}
-        <option value={icon.value}
-        class="bg-gray-600 p-1 "
-        >{icon.value} {icon.label}</option>
-      {/each}
-    </select>
-    
-    <!-- <p>Selected icon: {extra.icon}</p> -->
+    <select
+    class="bg-gray-900 text-yellow-200 text-[10px] rounded w-full p-1 focus:outline-none focus:ring focus:ring-yellow-400"
+    on:change={handleChange}
+>
+    {#each icons as icon}
+        <option
+            value={icon.value}
+            class="bg-gray-800 text-yellow-200 text-[10px] p-1"
+        >
+            {icon.value} {icon.label}
+        </option>
+    {/each}
+</select>
       
