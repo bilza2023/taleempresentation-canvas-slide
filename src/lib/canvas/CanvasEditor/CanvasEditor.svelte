@@ -27,7 +27,7 @@
     let interval = null;
     
     onMount(async () => {
-        interval = setInterval(update, 20);
+
     });
     
     onDestroy(async () => {
@@ -46,9 +46,6 @@
         selectedItem = new SelectedItem(getSelectedItemObject());
     }
     
-    function update() {
-        console.log("update");
-    }
     
     function eventMouseDown(e, ctx) {
         if (selectedItem) {
@@ -145,7 +142,9 @@ function logSlide(){
     console.log("Slide" , items);
     console.log("slideExtra" , slideExtra);
 }
-
+function redraw(){
+    items = [...items]; // Trigger reactivity
+}
     </script>
     
     {#if items}
@@ -187,6 +186,7 @@ function logSlide(){
                                 <CommandUi 
                                 bind:item={items[selectedItemIndex]}
                                 dialogueBox = {selectedItem.itemObject.dialogueBox}
+                                {redraw}
                                 />
                                 {/if}
                     {/if}

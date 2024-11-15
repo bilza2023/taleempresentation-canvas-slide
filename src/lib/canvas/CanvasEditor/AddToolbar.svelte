@@ -21,7 +21,7 @@ export let addNewItem;
 <SmallBtnToolbar clk={()=>addNewItem(addCircle)} icon={icons.CIRCLE} title="Circle" />
 <SmallBtnToolbar clk={()=>addNewItem(addEllipse)} icon={icons.ELLIPSE} title="Ellipse" />
 <SmallBtnToolbar clk={()=>addNewItem(addText)} icon={icons.TEXT} title="Text" />
-<SmallBtnToolbar clk={()=>addNewItem(addPara)} icon={icons.TEMPLATE} title="Para" />
+<SmallBtnToolbar clk={()=>addNewItem(addPara)} icon={icons.TEMPLATE} title="List" />
 <SmallBtnToolbar clk={()=>addNewItem(addLine)} icon={icons.LINE} title="Line" />
 <SmallBtnToolbar clk={()=>addNewItem(addTri)} icon={icons.TRIANGE} title="Tri" />
 <SmallBtnToolbar clk={()=>addNewItem(addRay)} icon={icons.SUNRISE} title="Ray" />

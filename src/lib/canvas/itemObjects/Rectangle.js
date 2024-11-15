@@ -113,7 +113,7 @@ draw(ctx) {
   const width = this.width;
   const height = this.height;
   const color = this.itemData.itemExtra.color ?? 'white';
-  const filled =this.itemData.itemExtra.filled ?? true;
+  const filled =this.itemData.itemExtra.filled;
   const dash = this.itemData.itemExtra.dash ?? 0;
   const gap =  this.itemData.itemExtra.gap ?? 0;
   const lineWidth =  this.itemData.itemExtra.lineWidth ?? 1;
@@ -129,7 +129,8 @@ draw(ctx) {
   } else {
       ctx.setLineDash([dash, gap]);
   }
-
+  console.log("filled",filled);
+  
   if (filled) {
       ctx.fillStyle = color;
       ctx.fillRect(x, y, width, height);
