@@ -1,100 +1,80 @@
 <script>
 
  import { onMount } from "svelte";  
- import CanvasPlayer from "../../lib/canvasPlayer/CanvasPlayer.svelte";
+ import CanvasPlayer from "../../lib/canvas/CanvasPlayer/CanvasPlayer.svelte";
  import loadAssets from "../assets/loadAssets";
- import getNewItem from "./getNewItem";
- import {slide as slideData} from "../../lib/demoSlides/canvasSlide";
+ import AppToolbar from "./AppToolbar.svelte";
+ import {Slide}  from "../../lib/canvas/samples/2.js";
   
- import Toolbar from "./Toolbar.svelte";
-
- let currentTime = 0;
  let slide =null;
- let items =null;
  let assets = null;
  
  
 onMount(async()=>{
- 
+//  debugger;
   assets = await loadAssets();
-  slide = slideData[0]; 
-  items = slide.items; 
+  slide = Slide; 
 });
 
-/**
- * 
- * @param newItemExtraFn
- * newItemExtraFn is a function that is passed as argument ... it return the item.itemExtra obj.
- */
-function addNewItem(newItemExtraFn) {
-  // debugger;
-  const newItemExtra = newItemExtraFn();
-  const newItem = getNewItem(); // get an item for which we already have item.itemExtra
-  newItem.itemExtra = newItemExtra;    
-  items.unshift(newItem);      
-  items =  [...items];
 
-}
-function postDraw(ctx) {
-  ctx.fillStyle = 'red';
-  ctx.font = '60px Arial';
-  ctx.textBaseline = 'top';
-  ctx.globalAlpha = 1;
+// function postDraw(ctx) {
+//   ctx.fillStyle = 'red';
+//   ctx.font = '60px Arial';
+//   ctx.textBaseline = 'top';
+//   ctx.globalAlpha = 1;
 
-  // Draw the text
-  ctx.fillText("This is a Warning..!", 100, 100);
-}
-function preDraw() {
-  // console.log("postDraw");
-}
-function eventMouseMove() {
-  console.log("eventMouseMove");
-}
-function eventMouseUp() {
-  console.log("eventMouseUp");
-}
-function eventMouseDown() {
-  console.log("eventMouseDown");
-}
+//   // Draw the text
+//   ctx.fillText("This is a Warning..!", 100, 100);
+// }
+// function preDraw() {
+//   // console.log("postDraw");
+// }
+// function eventMouseMove() {
+//   console.log("eventMouseMove");
+// }
+// function eventMouseUp() {
+//   console.log("eventMouseUp");
+// }
+// function eventMouseDown() {
+//   console.log("eventMouseDown");
+// }
 
+async function importFile(event) {
+  
+  const file = event.target.files[0];
+  if (file) {
+    try {
+      const text = await file.text();
+      // Remove any export/import statements and get the object
+      const cleanedText = text.replace(/export\s+const\s+\w+\s*=\s*/, '');
+      // Using Function constructor to safely evaluate the JS object
+      const slideData = (new Function(`return ${cleanedText}`))();
+      // debugger;
+      // const slideData = JSON.parse(cleanedText);
+      slide = slideData;
+      // console.log("slide", slide);
+    } catch (error) {
+      console.error('Error loading JS file:', error);
+      alert('Error loading file. Please ensure it is a valid JS file with a slide object.');
+    }
+  }
+}
 
 </script>
-<!-- 
-slide should have
-items={slide.items}        
-slideData={slide.data}
-slideExtra={slide.slideExtra} 
--->
 
 <!-- svelte-ignore missing-declaration -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class=" h-full w-full bg-gray-800 text-white p-2 m-0" >
 {#if slide && assets}
 
-<div class="flex justify-center px-4 py-0">
-  <Toolbar icons={assets.icons} {addNewItem} />
+<AppToolbar 
+  {importFile} 
+/>
 
-</div>
-
-<CanvasPlayer
- 
-{currentTime} 
-      
-  {items}        
-  slideData={slide.data}
+<CanvasPlayer 
+  items ={slide.items}        
   slideExtra={slide.slideExtra} 
-
   {assets}
-
-  {preDraw}
-  {postDraw}
-
-  {eventMouseMove}
-  {eventMouseUp}
-  {eventMouseDown}
-
-  setPulse={()=>{}}
-
 />
 
 {/if}
