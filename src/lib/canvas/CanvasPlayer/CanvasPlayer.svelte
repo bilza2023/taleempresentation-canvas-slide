@@ -17,13 +17,11 @@
   
   import { onMount, onDestroy } from "svelte";
   import DrawLib from "./drawLib";
-  import itemToObject from "../itemObjects/itemToObject";
   import { ctxStore } from '../store';
-    // Common props
-    export let items = []; // Optional for editor mode
+
     export let slideExtra = {};
     export let assets;
-    export let itemObjects = []; // Can be passed directly in editor mode
+    export let itemObjects = []; // must be passed directly
 
     export let preDraw = () => {};   // Default empty function
     export let postDraw = () => {};  // Default empty function
@@ -53,22 +51,7 @@
     let drawLib;
     let interval;
     let isInitialized = false;
-    const fnList = {}; //there is no need for it it should be removed BUt itemToObject(item, fnList, assets.spriteImages) needs it and that needs to be checked 
-  
-    function updateItemObjects(){
-      itemObjects = [];
-        for (let i = 0; i < items.length; i++) {
-          const item = items[i];
-          const itemObj = itemToObject(item,assets);
-          if (itemObj) {
-            itemObjects.push(itemObj);
-          }
-        }
-    }
-    $: {
-      items;
-      updateItemObjects();
-    }
+   
   
     function drawBackground() {
       if(!slideExtra.bgGlobalAlpha) {
@@ -129,7 +112,7 @@
       // const scale = canvas.width / canvas.getBoundingClientRect().width;
       drawLib = new DrawLib(canvas, ctx);//just used twice we can remove drawLib if we want
       isInitialized = true;
-      updateItemObjects();
+      // updateItemObjects();
       interval = setInterval(gameLoop, 20);
       return true;
     }

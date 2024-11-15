@@ -9,7 +9,7 @@
     import SelectItemMenu from "./SelectItemMenu.svelte";
     import CommandUi from '../dialogueBoxModule/CommandUi.svelte';
     import CanvasCommand from "../dialogueBoxModule/CanvasCommand.svelte";
-
+    import itemsToitemObjects from '../itemObjects/itemsToitemObjects';
 
     export let items;
     export let slideExtra;
@@ -17,9 +17,15 @@
 
     export let assets;
     export let showAddToolbar = true;
+
+    let itemObjects = null;
     //--very important    
     let selectedItem = null;
-   
+
+$:{
+items;
+itemObjects = itemsToitemObjects(items,assets);
+}
     
     let showCanvasFlag = false;
     let currentMouseX = 0;
@@ -176,7 +182,7 @@ function redraw(){
         <div class="flex w-full p-0 m-0 bg-stone-900 text-white p-2  gap-1">
             <div class='mx-1'>
                 <CanvasPlayer
-                    {items}
+                    {itemObjects}
                     {slideExtra}
                     {assets}
                     {postDraw}
