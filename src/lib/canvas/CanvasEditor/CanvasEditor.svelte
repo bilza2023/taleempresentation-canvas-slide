@@ -138,10 +138,27 @@ function deleteFn() {
     }
 }
 
-function logSlide(){
-    console.log("Slide" , items);
-    console.log("slideExtra" , slideExtra);
+// function logSlide(){
+//     console.log("Slide" , items);
+//     console.log("slideExtra" , slideExtra);
+// }
+
+function logSlide() {
+    // Convert array to JSON string
+    const jsonString = JSON.stringify(items, null, 2);
+    // Create a blob with the JSON data
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    // Create a temporary anchor element
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'slide.json';
+    // Trigger download
+    a.click();
+    // Clean up the URL object
+    URL.revokeObjectURL(url);
 }
+
 function redraw(){
     items = [...items]; // Trigger reactivity
 }

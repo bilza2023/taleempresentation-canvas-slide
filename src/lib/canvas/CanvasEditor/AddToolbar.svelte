@@ -38,7 +38,7 @@ export let addNewItem;
 <div class='flex border-2 border-gray-500 rounded-md'>
 <SmallBtnToolbar clk={clone} icon={icons.SHEEP} title="Clone" />
 <SmallBtnToolbar clk={showCanvas} icon={icons.CANVAS} title="Canvas" />
-<SmallBtnToolbar clk={logSlide} icon={icons.PRINTER} title="Log Slide" />
+<SmallBtnToolbar clk={logSlide} icon={icons.PRINTER} title="Download" />
 <SmallBtnToolbar clk={deleteFn} icon={icons.WASTEBASKET} title="Delete" />
 </div>
 
