@@ -1,6 +1,10 @@
 
 import Handle from './Handle.js';
 
+/**
+ * what if SelectedItem has all the items and when ever selectedItemIndex !==  null, it creates a itemObject out of that index and use it  . when it gets mouse move etc it only acts if the index is not null;
+ * There should be no external checking in CanvasEditor for is null?
+ */
 export default class SelectedItem {
     constructor(itemObject) {
         this.itemObject = itemObject;

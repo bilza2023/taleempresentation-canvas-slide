@@ -93,7 +93,7 @@
       }
     }
       ///////////////////////////////////////////
-      function clear(backgroundColor='gray') {
+  function clear(backgroundColor='gray') {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = backgroundColor; 
     ctx.fillRect(0, 0, canvas.width, canvas.height); 
