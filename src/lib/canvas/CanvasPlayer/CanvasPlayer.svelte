@@ -15,10 +15,12 @@
   
   import { onMount, onDestroy } from "svelte";
   import { ctxStore } from '../store';
+  import itemsToitemObjects from '../itemObjects/itemsToitemObjects';
 
     export let slideExtra = {};
+    export let items;
     export let assets;
-    export let itemObjects = []; // must be passed directly
+ let itemObjects = []; // must be passed directly
 
     export let preDraw = () => {};   // Default empty function
     export let postDraw = () => {};  // Default empty function
@@ -29,6 +31,11 @@
     export let eventClick = () => {};  
     export let eventDblClick = () => {};  
     // export let eventKeyDown = () => {};  
+
+    $:{
+items;
+itemObjects = itemsToitemObjects(items,assets);
+}    
     function handleMouseMove(event) {
       eventMouseMove(event, ctx);
   }
