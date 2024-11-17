@@ -5,6 +5,7 @@
     let fileNameToSave='slide-1';
 
 function saveSlide(){
+   debugger;
     const jsonString = `export const Slide = ${JSON.stringify(slide, null, 2)}`;
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);

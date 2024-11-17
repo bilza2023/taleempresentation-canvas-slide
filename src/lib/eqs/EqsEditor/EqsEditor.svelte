@@ -5,35 +5,24 @@
 //@ts-nocheck
 import Toolbar from './editor/Toolbar.svelte';
 import Titlebar from './editor/Titlebar.svelte';
-
 import EqPart from './EqPart/EqPart.svelte';
-
 import SP from './SPPart/SP.svelte';
 import FSSPToolBar from './FSSPToolBar.svelte';
-
-
 import getNewItem from './getNewItem.js';
 import { onMount } from 'svelte';
-import {itemsStore} from "./store";
-
 ////////////////////////////////////////////////////////
+export let items=[];
 export let startTime=0;
 export let endTime=10;
-export let items=[];
 export let currentTime=0;
 export let uiState= [];
 ////////////////////////////////////////////////////////
 
 $:{
-  itemsStore.set(items);
-}
-$:{
-  if (uiState.length !== $itemsStore.length) {
-    uiState = $itemsStore.map((_, index) => uiState[index] || { spVisibility: false });
+  if (uiState.length !== items.length) {
+    uiState = items.map((_, index) => uiState[index] || { spVisibility: false });
   }
 }
-
-////////////////////////////////////////////////////////
 
 function toggleSP(index){
 uiState[index].spVisibility = !uiState[index].spVisibility  
@@ -91,14 +80,6 @@ let runningTime = startTime;
  endTime = items[items.length-1].extra.endTime;
  items = [...items];
 }
-//--we do not need step since in play mode we have to re-set it again 
-onMount(async ()=>{
-for (let i = 0; i < items.length; i++) {
-  const item = items[i];
-  item.itemExtra.step = i;
-}
-
-});
 
 </script>
 
@@ -108,16 +89,16 @@ for (let i = 0; i < items.length; i++) {
 
   <Titlebar />
 
-  {#each $itemsStore  as item, i}
+  {#each items  as item, i}
   
     <EqPart  bind:item={item} {i} {currentTime} {addEq} {delEq} {moveUpEq} {moveDownEq} {setEqType}  {toggleSP}  />
 
 
 <!-- Side Panel -->
-          {#if uiState[i].spVisibility}
-          <FSSPToolBar  {i}  />
-          <SP  {i} />
-          {/if}
+          <!-- {#if uiState[i].spVisibility} -->
+          <FSSPToolBar  {item}  />
+          <SP  {item} />
+          <!-- {/if} -->
        
   {/each}
 

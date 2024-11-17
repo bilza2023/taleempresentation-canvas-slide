@@ -1,41 +1,18 @@
 <script>
   //@ts-nocheck
-  import {itemsStore} from "./store";
   
-  export let i;
+  export let item;
   
   const addTable = () => {
     const tblData = { code: `[["",""],["",""]]`, type: 'table' };
+    item.sp = [...item.itemExtra.sp, tblData];
     
-    $itemsStore = $itemsStore.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          itemExtra: {
-            ...item.itemExtra,
-            sp: [...item.itemExtra.sp, tblData]
-          }
-        };
-      }
-      return item;
-    });
   }
   
   const addTableCode = () => {
     const tblData = { code: `[["",""],["",""]]`, type: 'tableCode' };
     
-    $itemsStore = $itemsStore.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          itemExtra: {
-            ...item.itemExtra,
-            sp: [...item.itemExtra.sp, tblData]
-          }
-        };
-      }
-      return item;
-    });
+   
   }
   
   function addTxtCodeImg(textOrCode = "text") {
@@ -52,19 +29,8 @@
     if (textOrCode == "heading") {
       newItem = { code: "", type: 'heading' };
     }
-  //  debugger;
-    $itemsStore = $itemsStore.map((item, index) => {
-      if (index === i) {
-        return {
-          ...item,
-          itemExtra: {
-            ...item.itemExtra,
-            sp: [...item.itemExtra.sp, newItem]
-          }
-        };
-      }
-      return item;
-    });
+    item.sp = [...item.itemExtra.sp, newItem];
+  
   }
   </script>
   

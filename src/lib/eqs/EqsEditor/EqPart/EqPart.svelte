@@ -29,7 +29,7 @@ item.showAt = currentTime; // remember showAt is not in itemExtra
  
  <div class="flex justify-centre   w-full p-0 m-1 gap-1 rounded-md ">
  
-    <div class="bg-stone-700 w-1/12 p-0 m-0 rounded-md">{i+1}</div>
+    <div class="bg-stone-700 w-1/12 p-0 m-0 rounded-md">{i}</div>
   
     <div  class="flex flex-col bg-stone-700 w-1/12 p-0 m-0 rounded-md" >
     <input bind:value={item.itemExtra.startTime} class="text-xs bg-gray-800 text-white"/>
