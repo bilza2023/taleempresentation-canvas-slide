@@ -18,7 +18,7 @@ $:{
 //    console.log("pulse",pulse);
    for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    if (pulse >= item.extra.startTime && pulse < item.extra.endTime) {
+    if (pulse >= item.itemExtra.startTime && pulse < item.itemExtra.endTime) {
        currentItem = item;
 //    console.log("currentItem",currentItem);
      }
@@ -35,8 +35,8 @@ $:{
  
 
         <div class='w-full  rounded-md m-1 p-1 bg-stone-600 text-center'>
-        {#if  currentItem.extra.sp.length > 0 }    
-                {#each currentItem.extra.sp as eq}    
+        {#if  currentItem.itemExtra.length > 0 }    
+                {#each currentItem.itemExtra as eq}    
                          <ImgCodeTxt {eq} />        
 
                 {/each}

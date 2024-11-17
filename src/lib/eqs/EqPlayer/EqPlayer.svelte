@@ -1,33 +1,33 @@
-
 <script>
-        import EqPanel from './EqPanel.svelte';
-        import SidePanel from './sp/SidePanel.svelte';
+/**
+ * 17-Nov-2024 
+This is Just a go-through component just for currentTime to change items.
+- There should not be currentTime inside any Player since the Player has to do nothing with time , another layer/function should edit the data and player should just play it.
+- the player will have setCurrentTime (old set pulse) to set time at run time (in player)
+- Editor will need currentTime (from sound file) to sync animation with it.
+- Acrually player and editor both need currentTime but in player it does not go to player-core where as in editor it can go a bit deep ??
+- do not move currentTime to store since i do not want to share in across.
+*/  
+import {onMount} from 'svelte';
+import EqPlayerCore from './EqPlayerCore.svelte';
+import {itemsStore} from "./store";
       
-        export let startTime;
-        export let endTime;
-        export let items = []; // Ensure this is passed or initialized properly
-        export let pulse = 0; // Initialize pulse to ensure updates happen
-      
-        // Update pulse value based on external or internal logic
-        function setPulse(newPulse) {
-          pulse = newPulse;
-          console.log("Pulse updated to:", pulse); // Debugging pulse update
-        }
-      </script>
-      
-      <div class="bg-gray-800 w-full text-white min-h-screen p-0 m-0">
-        <div class="flex px-2 rounded-md bg-gray-900">
-      
-          <!-- Main content with EqPanel -->
-          <div class="w-8/12 min-h-screen max-h-screen p-2 m-0 overflow-x-auto">
-            <EqPanel {items} {pulse} {setPulse} />
-          </div>
-      
-          <!-- Side Panel (optional) -->
-          <div class="w-4/12 min-h-screen p-2 m-0 mt-2 bg-yellow-950 text-yellow-300b">
-            <SidePanel {items} {pulse} />
-          </div>
-      
-        </div>
-      </div>
-      
+        export let items = []; 
+        export let slideExtra = []; 
+        export let currentTime = 0;
+
+onMount(async () => {
+  itemsStore.set(items);
+  // console.log("itemsStore" , $itemsStore);
+});
+
+
+</script>
+
+<EqPlayerCore   
+
+  {items}
+  {slideExtra}
+  {currentTime}
+
+/>      
