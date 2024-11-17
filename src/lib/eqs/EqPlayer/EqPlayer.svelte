@@ -8,7 +8,6 @@ This is Just a go-through component just for currentTime to change items.
 - Acrually player and editor both need currentTime but in player it does not go to player-core where as in editor it can go a bit deep ??
 - do not move currentTime to store since i do not want to share in across.
 */  
-import {onMount} from 'svelte';
 import EqPlayerCore from './EqPlayerCore.svelte';
 import {itemsStore} from "./store";
       
@@ -16,12 +15,10 @@ import {itemsStore} from "./store";
         export let slideExtra = []; 
         export let currentTime = 0;
 
-onMount(async () => {
+$:{
+  items;
   itemsStore.set(items);
-  // console.log("itemsStore" , $itemsStore);
-});
-
-
+}        
 </script>
 
 <EqPlayerCore   

@@ -19,7 +19,7 @@
         <div class="flex px-2 rounded-md bg-gray-900">
           <!-- Main content with EqPanel -->
           <div class="w-8/12 min-h-screen max-h-screen p-2 m-0 overflow-x-auto">
-            <EqPanel {items} {pulse} {setPulse} />
+            <EqPanel  {pulse} {setPulse} />
           </div>
       
           <!-- Side Panel (optional) -->
