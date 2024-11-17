@@ -1,5 +1,8 @@
 
 <script>
+    /**
+    *   17-Nov-2024 This code was orginally create in Oct-2023
+    */
 //@ts-nocheck
 import EqTypeCode from './EqTypeCode.svelte';
 import EqTypeText from './EqTypeText.svelte';
@@ -17,7 +20,10 @@ export let setEqType;
 export let toggleSP; 
 // export let status;
 function addTime(){
+// remove this line later    
 item.itemExtra.startTime = currentTime;
+//lets also add showAt which is more in line with the app (we use showAt for display-selected) 
+item.showAt = currentTime; // remember showAt is not in itemExtra
 }
 </script> 
  

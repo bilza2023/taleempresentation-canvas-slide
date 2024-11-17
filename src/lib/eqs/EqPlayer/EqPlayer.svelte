@@ -14,17 +14,20 @@ import {itemsStore} from "./store";
         export let items = []; 
         export let slideExtra = []; 
         export let currentTime = 0;
+        export let setPulse = 0;
 
 $:{
+  //--no more items beyond this point-- however if the items change as loading a new file. the we can react to it...
   items;
   itemsStore.set(items);
-}        
+  // console.log("items ::::::===>>>>>>>>>",items);
+}     
+
 </script>
 
 <EqPlayerCore   
 
-  {items}
   {slideExtra}
   {currentTime}
-
+  {setPulse}
 />      

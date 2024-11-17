@@ -1,32 +1,35 @@
 
 <script>
-import EqPlayer from "../../lib/eqs/EqPlayer/EqPlayer.svelte";
-import {Slide} from "./Slide";
 
 import {onMount} from 'svelte';
-
-//---> currentTime is in page.svelte since we will use slides in presentation.
+import EqPlayer from "../../lib/eqs/EqPlayer/EqPlayer.svelte";
+//Slide is like default_slide we start with this then edit and save
+import {Slide} from "./Slide";
+import AppPlayerToolbar from "./AppPlayerToolbar.svelte";
+//---> currentTime is in +page.svelte since we will use slides in presentation.
 
 let currentTime = 0;
-let items = Slide.items;
+let slide;
 
 onMount(async () => {
+        slide = Slide;
+
         setInterval( ()=>{
                 currentTime += 1;
-        }, 5000);
+        }, 1000);
 });
-
-$:{
-        currentTime;
-        items[currentTime].itemExtra.selected = true;
-}
-
+function setPulse(val){
+ currentTime = val;
+}   
 </script>
-{#if Slide}
+
+<AppPlayerToolbar bind:slide={slide}  {currentTime} />
+
+
+{#if slide}
         <EqPlayer  
-                {items}  
+                items={ slide.items}  
                 {currentTime}
+                {setPulse}
         />
 {/if}
-
-{currentTime}

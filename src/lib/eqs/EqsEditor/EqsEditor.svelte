@@ -16,22 +16,27 @@ import getNewItem from './getNewItem.js';
 import { onMount } from 'svelte';
 import {itemsStore} from "./store";
 
-onMount(async () => {
-    itemsStore.set(items);
-    console.log("itemsStore" , $itemsStore);
-});
 ////////////////////////////////////////////////////////
 export let startTime=0;
 export let endTime=10;
 export let items=[];
 export let currentTime=0;
+export let uiState= [];
 ////////////////////////////////////////////////////////
-function redraw(){ items = [...items];}
+
+$:{
+  itemsStore.set(items);
+}
+$:{
+  if (uiState.length !== $itemsStore.length) {
+    uiState = $itemsStore.map((_, index) => uiState[index] || { spVisibility: false });
+  }
+}
+
+////////////////////////////////////////////////////////
+
 function toggleSP(index){
-//  debugger;
- items[index].itemExtra.spVisibility = !items[index].itemExtra.spVisibility; 
- items[index].itemExtra.fsVisibility = false; 
-  
+uiState[index].spVisibility = !uiState[index].spVisibility  
 }
 
 
@@ -60,15 +65,11 @@ function delEq(index) {
   
 }
 function openAllSP(){
-  for (let i = 0; i < items.length; i++) {
-    items[i].extra.spVisibility = true; 
-  }
+  uiState = uiState.map((state) => ({ ...state, spVisibility: true }));
     
 } 
 function closeAllSP(){
-  for (let i = 0; i < items.length; i++) {
-    items[i].extra.spVisibility = false; 
-  }
+  uiState = uiState.map((state) => ({ ...state, spVisibility: false }));
     
 }
 function addEq(i) {
@@ -90,27 +91,21 @@ let runningTime = startTime;
  endTime = items[items.length-1].extra.endTime;
  items = [...items];
 }
+//--we do not need step since in play mode we have to re-set it again 
 onMount(async ()=>{
 for (let i = 0; i < items.length; i++) {
   const item = items[i];
   item.itemExtra.step = i;
-  item.itemExtra.fsVisibility = false;
-  item.itemExtra.spVisibility = false;
-    if (!Array.isArray(item.itemExtra.fs)){
-    // debugger;
-      item.itemExtra.fs = [];
-    }
 }
 
 });
 
 </script>
-<div class="bg-gray-800 w-full  text-white min-h-screen px-0 m-0">
 
-<Toolbar  {addEq}  {closeAllSP} {openAllSP} {addFakeTimings}/>
+<div class="bg-gray-800 w-full  text-white min-h-screen p-4 m-0">
 
-<div class="w-full m-4 px-2">
-   
+<Toolbar  {addEq}  {closeAllSP} {openAllSP} {addFakeTimings} {currentTime}/>
+
   <Titlebar />
 
   {#each $itemsStore  as item, i}
@@ -118,15 +113,14 @@ for (let i = 0; i < items.length; i++) {
     <EqPart  bind:item={item} {i} {currentTime} {addEq} {delEq} {moveUpEq} {moveDownEq} {setEqType}  {toggleSP}  />
 
 
-  <FSSPToolBar  {i}  />
-
-
-    <!-- {#if item.itemExtra.spVisibility} -->
-    <SP  {i} />
-    <!-- {/if} -->
+<!-- Side Panel -->
+          {#if uiState[i].spVisibility}
+          <FSSPToolBar  {i}  />
+          <SP  {i} />
+          {/if}
        
   {/each}
-</div>
+
 
 <br>
 <br>

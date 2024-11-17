@@ -1,21 +1,10 @@
 <script>
-   import AppToolbar from "./AppToolbar.svelte";
-  import {CanvasEditor}  from "$lib";
-  import {onMount} from "svelte";
-  import {Slide} from "../../lib/canvas/samples/demo";
-  import {slide as NewSlide} from "./slide.js";
-  import loadAssets from "../assets/loadAssets";
-  
-  let slide = null;
-  let showAddToolbar = true;
-  let assets = null;
-  
-  let fileNameToSave = 'slide';
+    export let slide;
 
-  function createNewSlide(){
-    slide = NewSlide;
-  }
-  function saveSlide(){
+    export let createNewSlide=()=>{};
+    let fileNameToSave='slide-1';
+
+function saveSlide(){
     const jsonString = `export const Slide = ${JSON.stringify(slide, null, 2)}`;
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -25,6 +14,7 @@
     a.click();
     URL.revokeObjectURL(url);
   }
+
   async function importFile(event) {
   
     const file = event.target.files[0];
@@ -45,29 +35,26 @@
       }
     }
   }
-
-  onMount(async()=>{
-    assets = await loadAssets(); 
-    slide = Slide;
-  });
-
-</script>
-
-<AppToolbar 
-  {createNewSlide} 
-  {importFile} 
-  {saveSlide} 
-  bind:fileNameToSave 
-/>
-
-
-<div class="w-full bg-gray-700 text-white py-2 px-1 min-h-screen ">
-  {#if slide && assets}
-    <CanvasEditor
-     bind:items = {slide.items}
-     bind:slideExtra = {slide.slideExtra}
-     {assets}
-     {showAddToolbar}
+  </script>
+  
+  <div class="flex p-0 m-0 bg-gray-900 text-white gap-2 py-1">
+    <button class="text-[10px]" on:click={createNewSlide}>New 📰</button>
+  
+    <!-- Add file input button -->
+    <label class="text-[10px] ml-2 cursor-pointer">
+      Import 📂
+      <input 
+        type="file" 
+        accept=".js"
+        on:change={importFile}
+        class="hidden"
+      />
+    </label>
+    <button class="text-[10px]" on:click={saveSlide}>Save 💾</button>
+    <input 
+      class="text-[10px] p-0 text-white bg-gray-600 rounded-md text-center" 
+      type="text" 
+      bind:value={fileNameToSave} 
     />
-  {/if}
-</div>
+  </div>
+  

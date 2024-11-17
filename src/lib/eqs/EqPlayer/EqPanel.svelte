@@ -1,47 +1,24 @@
 <script>
-  import {itemsStore} from "./store";
-  import { afterUpdate, onMount } from 'svelte';
+  // edited on 17-Nov-2024
+  import { itemsStore } from "./store";
   import CodeTxt from './CodeTxt.svelte';
   
-  export let pulse;
+  export let currentTime;
   export let setPulse;
-  
-  let focusedDivId = null;
-  let prevFocusedDivId = null;
-  
-  // Reactive statement for handling focus
+
+  // Reactive statement to update selected states
   $: {
-    // Reset focus if pulse is invalid
-    focusedDivId = null;
-    console.log("items", $itemsStore);
-
-    if (pulse != null && $itemsStore?.length > 0) {
-      for (let i = 0; i < $itemsStore.length; i++) {
-        const item = $itemsStore[i];
-        if (item.itemExtra?.startTime != null && item.itemExtra?.endTime != null) {
-          if (pulse >= parseInt(item.itemExtra.startTime) && pulse < parseInt(item.itemExtra.endTime) ) {
-            prevFocusedDivId = focusedDivId;
-            focusedDivId = i;
-            break; // Exit loop once we find the matching item
-          }
-        }
-      }
-    }
+    currentTime;
+    // Create a new array with updated selected states
+    const updatedItems = $itemsStore.map(item => ({
+      ...item,
+      selected: currentTime >= item.itemExtra.startTime && 
+                currentTime < item.itemExtra.endTime
+    }));
+    
+    // Update the store with the new array
+    itemsStore.set(updatedItems);
   }
-  
-  // Handle scrolling after updates
-  afterUpdate(() => {
-    if (focusedDivId !== null && focusedDivId !== prevFocusedDivId) {
-      const focusedElement = document.getElementById(`item-${focusedDivId}`);
-      if (focusedElement) {
-        focusedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }
-  });
-
-  onMount(async () => {
-
-  });
 </script>
   
 <div class="flex flex-col space-y-2 w-full">
@@ -51,12 +28,11 @@
       on:click={() => setPulse(item.itemExtra.startTime)}
     >
       <div class="m-1 p-1 rounded-2xl text-sm bg-stone-600">
-        {item.itemExtra.step + 1}
+        {index + 1}
       </div>
       
       <div
-        id="item-{index}"
-        class={item.itemExtra.selected === true ? 'focused w-full text-center' : 'nonFocused w-full text-center' }
+        class={item.selected ? 'focused w-full text-center' : 'nonFocused w-full text-center'}
       >
         <CodeTxt eq={item} />
       </div>
@@ -64,7 +40,7 @@
   {/each}
 </div>
 
-<div class="h-32"></div> <!-- Spacer for scrolling -->
+<div class="h-32"></div>
 
 <style>
 .focused {

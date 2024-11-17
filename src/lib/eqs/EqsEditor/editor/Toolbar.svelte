@@ -5,6 +5,7 @@ export let addEq;
 export let closeAllSP;
 export let openAllSP;
 export let addFakeTimings;
+export let currentTime;
 
 </script>
 
@@ -27,5 +28,9 @@ on:click={closeAllSP}
 on:click={addFakeTimings}
 >💡 Fake Timings</button>
 &nbsp;
+
+<div  class="bg-green-900 p-1   rounded-md text-lg">
+    💡 Current Time : {currentTime} &nbsp;</div>
+
 
 </div>

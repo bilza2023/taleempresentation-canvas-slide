@@ -2,13 +2,15 @@
 //@ts-nocheck
 import {onMount} from 'svelte';
 import ImgCodeTxt from "./ImgCodeTxt.svelte";
+import {itemsStore} from "./store";
 
-export let items;
+
+// export let items;
 export let pulse;
 
 let currentItem;
 onMount(()=>{
-        currentItem = items[0];
+        // currentItem = items[0];
         // debugger;
         // console.log("currentItem" , currentItem);
 });
