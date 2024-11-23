@@ -2,18 +2,16 @@
 
 
 export default function getNewItem(){
-let item = { name:"" , content : "" ,  extra:{}};
-item.extra ={
-      step :0, 
-      startTime : 0, 
-      endTime : 0, 
-      fsStartTime : 0, 
-      fsEndTime :0, 
-      code : "", 
-      type : "code", //new addition 
-      sp : [],        
-      fs : []
-    } 
+let item = { name:"" , content : "" , 
+  itemExtra :{
+          step :0, 
+          startTime : 0, 
+          endTime : 0, 
+          code : "", 
+          type : "code", //new addition 
+          sp : []        
+    }
+  }; 
 return item;
 }
 // spVisibility : true,  add later

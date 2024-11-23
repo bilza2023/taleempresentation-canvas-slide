@@ -9,11 +9,10 @@ export let moveUpEq;
 export let moveDownEq;
 export let setEqType;
 export let delEq;
-export let toggleSP;
 </script>
 
 
-<div class="flex justify-start bg-stone-500 w-full p-1 m-1 mb-3 gap-1">
+<div class="flex justify-center bg-stone-500 w-4/12 p-1 m-1 mb-3 gap-1 rounded-md">
 
 <button on:click={()=>addEq(i)} class="bg-green-900 text-white p-1 text-xs rounded-md">Add</button>
 
@@ -39,6 +38,8 @@ on:click={()=>setEqType(i,'hdg')}>{Icons.BOOK}</button>
 
 
 <button on:click={()=>delEq(i)} class="bg-red-900 text-white p-1 text-xs rounded-md">Del</button>
+
+
 </div>
 
 

@@ -12,32 +12,46 @@ export let items;
 export let currentTime=0;
 //////////////////////////////////////////
 function setEqType(i,typ) {
-  items[i].extra.type = typ;
+  items = items.map((item, index) =>
+    index === i
+      ? { ...item, itemExtra: { ...item.itemExtra, type: typ } }
+      : item
+  );
  
 }
 function moveUpEq(index) {
   if (index > 0) {
     const eqToMove = items[index];
-    items.splice(index, 1);
-    items.splice(index - 1, 0, eqToMove);
+    items = [
+      ...items.slice(0, index - 1),
+      eqToMove,
+      items[index - 1],
+      ...items.slice(index + 1),
+    ];
   }
- 
 }
+
 function moveDownEq(index) {
   if (index < items.length - 1) {
     const eqToMove = items[index];
-    items.splice(index, 1);
-    items.splice(index + 1, 0, eqToMove);
+    items = [
+      ...items.slice(0, index),
+      items[index + 1],
+      eqToMove,
+      ...items.slice(index + 2),
+    ];
   }
-  
-}
-function delEq(index) {
-  items.splice(index, 1);
-  
 }
 
+
+function delEq(index) {
+  items = [...items.slice(0, index), ...items.slice(index + 1)];
+}
+
+
 function addEq(i) {
-   items.splice(i+1, 0, getNewItem());
+  const newItem = getNewItem();
+  items = [...items.slice(0, i + 1), newItem, ...items.slice(i + 1)];
 }
 
 //////////////////////////////////////////
@@ -61,7 +75,15 @@ function addEq(i) {
 
   <div class="flex flex-col gap-2 my-1 p-1 ">
     {#each items  as item, i}
-    <Row   {i} bind:item={item} {currentTime}  {addEq} {delEq} {moveUpEq} {moveDownEq} {setEqType}  />
+
+    <Row   {i} bind:item={item} 
+    {currentTime}  
+    {addEq} {delEq}
+     {moveUpEq} 
+    {moveDownEq}
+     {setEqType}  
+    />
+
     {/each}
   </div>
     
