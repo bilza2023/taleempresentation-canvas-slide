@@ -5,7 +5,7 @@
 <script>
 import {onMount} from "svelte"    
 import EqEditor from "../../lib/eqs/EqsEditor/EqsEditor.svelte";
-import {Slide} from "./Slide";
+import {Slide} from "../../lib/eqs/testData/baseEqSlide.js";
 import AppEditorToolbar from "./AppEditorToolbar.svelte";
 //--we need this currentTime since we edit this using sound and the slide player will play it HERE in Editor we need currentTime so that we can sync our activty on slide with time.
 let currentTime = 0;

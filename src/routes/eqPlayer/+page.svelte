@@ -6,7 +6,7 @@
 import {onMount} from 'svelte';
 import EqPlayer from "../../lib/eqs/EqPlayer/EqPlayer.svelte";
 //Slide is like default_slide we start with this then edit and save
-import {Slide} from "./Slide";
+import {Slide} from "../../lib/eqs/testData/baseEqSlide.js";
 import AppPlayerToolbar from "./AppPlayerToolbar.svelte";
 //---> currentTime is in +page.svelte since we will use slides in presentation.
 
