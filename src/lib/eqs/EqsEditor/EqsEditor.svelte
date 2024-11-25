@@ -1,6 +1,7 @@
 <svelt:head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
 </svelt:head>
+
 <script>
 //@ts-nocheck
 import TopToolbar from './TopToolbar.svelte';
@@ -49,7 +50,7 @@ function delEq(index) {
 }
 
 
-function addEq(i) {
+function addEq(i=0) {
   const newItem = getNewItem();
   items = [...items.slice(0, i + 1), newItem, ...items.slice(i + 1)];
 }
@@ -59,7 +60,7 @@ function addEq(i) {
 
 <div class="bg-gray-800 w-full  text-white min-h-screen p-4 m-0 ">
 
-  <TopToolbar />
+  <TopToolbar add={addEq}/>
   <!-- title bar -->
   <div class="flex w-full bg-stone-700  justify-center text-lg rounded-md  ">
     <!-- <div class="w-1/12  text-center">Step</div> -->
@@ -76,12 +77,15 @@ function addEq(i) {
   <div class="flex flex-col gap-2 my-1 p-1 ">
     {#each items  as item, i}
 
-    <Row   {i} bind:item={item} 
+    <Row   
     {currentTime}  
-    {addEq} {delEq}
-     {moveUpEq} 
+    {i} 
+    bind:item={item} 
+    {addEq} 
+    {delEq}
+    {moveUpEq} 
     {moveDownEq}
-     {setEqType}  
+    {setEqType}  
     />
 
     {/each}

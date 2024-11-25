@@ -54,6 +54,10 @@
 <div class='flex justify-center gap-1 bg-green-950 p-2 rounded-md'>
   <div class="bg-stone-950 text-white rounded-xl m-1 p-1 text-xs">Side Panel</div>
   
+
+  <button on:click={() => addTxtCodeImg("heading")} 
+    class="bg-orange-600 text-white p-1 text-xs rounded-md">Heading</button>
+    
   <button on:click={() => addTxtCodeImg("text")} 
     class="bg-green-700 text-white p-1 text-xs rounded-md">Text</button>
   
@@ -62,9 +66,6 @@
   
   <button on:click={() => addTxtCodeImg("image")} 
     class="bg-green-600 text-white p-1 text-xs rounded-md">Image</button>
-  
-  <button on:click={() => addTxtCodeImg("heading")} 
-    class="bg-orange-600 text-white p-1 text-xs rounded-md">Heading</button>
   
   <button on:click={() => addTable()} 
     class="bg-green-900 text-white p-1 text-xs rounded-md">Table</button>

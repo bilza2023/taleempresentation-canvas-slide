@@ -1,37 +1,52 @@
+<svelt:head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+</svelt:head>
+
 <script>
   //@ts-nocheck
- import Toolbar from "./ToolBar.svelte";
- import CodeTxt from "./CodeTxt.svelte";
- import VerticalBtns from "./VerticalBtns.svelte";
- import Table from "./Table.svelte";
- import TableCode from "./TableCode.svelte";
+  import Toolbar from "./ToolBar.svelte";
+  import CodeTxt from "./CodeTxt.svelte";
+  import VerticalBtns from "./VerticalBtns.svelte";
+  import Table from "./Table.svelte";
+  import TableCode from "./TableCode.svelte";
 
- export let item;
+  export let item;
 
   function moveUp(j) {
     if (j <= 0) return;
     
-    const spToMove = item.itemExtra.sp[j];
-    item.itemExtra.sp.splice(j, 1);
-    item.itemExtra.sp.splice(j - 1, 0, spToMove);
+    // Create a new array to trigger reactivity
+    item.itemExtra.sp = [
+      ...item.itemExtra.sp.slice(0, j-1),
+      item.itemExtra.sp[j],
+      item.itemExtra.sp[j-1],
+      ...item.itemExtra.sp.slice(j+1)
+    ];
   }
   
   function moveDown(j) {
     if (j === item.itemExtra.sp.length - 1) return;
     
-    const spToMove = item.itemExtra.sp[j];
-    item.itemExtra.sp.splice(j, 1);
-    item.itemExtra.sp.splice(j + 1, 0, spToMove);
+    // Create a new array to trigger reactivity
+    item.itemExtra.sp = [
+      ...item.itemExtra.sp.slice(0, j),
+      item.itemExtra.sp[j+1],
+      item.itemExtra.sp[j],
+      ...item.itemExtra.sp.slice(j+2)
+    ];
   }
   
   function del(j) {
-    item.itemExtra.sp.splice(j, 1);
+    // Create a new array to trigger reactivity
+    item.itemExtra.sp = [
+      ...item.itemExtra.sp.slice(0, j),
+      ...item.itemExtra.sp.slice(j+1)
+    ];
   }
   
   function updateTableData(j, data) {
     item.itemExtra.sp[j].code = data;
   }
-
 </script>
 
 <Toolbar bind:item={item} />
