@@ -11,6 +11,8 @@ import getNewItem from "./getNewItem";
 
 export let items;
 export let currentTime=0;
+
+let timingsError = false;
 //////////////////////////////////////////
 function setEqType(i,typ) {
   items = items.map((item, index) =>
@@ -55,10 +57,33 @@ function addEq(i=0) {
   items = [...items.slice(0, i + 1), newItem, ...items.slice(i + 1)];
 }
 
+function updateTimings() {
+  // debugger;
+  timingsError = false;
+    if (items.length === 0) return false;
+    
+    items[0].itemExtra.startTime = 0;
+
+    for (let i = 1; i < items.length; i++) {
+        items[i-1].itemExtra.endTime = items[i].itemExtra.startTime;
+    }
+
+    for (let i = 0; i < items.length - 1; i++) {
+      if (items[i].itemExtra.startTime >= items[i + 1].itemExtra.startTime) {
+          timingsError = true;
+      }
+  }
+
+   items = [...items];
+}
 //////////////////////////////////////////
 </script>
 
 <div class="bg-gray-800 w-full  text-white min-h-screen p-4 m-0 ">
+
+{#if timingsError}
+<h1 class="w-full text-center bg-orange-400 rounded-md px-2 text-lg">Timings Error</h1>
+{/if}
 
   <TopToolbar add={addEq}/>
   <!-- title bar -->
@@ -77,7 +102,8 @@ function addEq(i=0) {
   <div class="flex flex-col gap-2 my-1 p-1 ">
     {#each items  as item, i}
 
-    <Row   
+    <Row
+    {updateTimings}   
     {currentTime}  
     {i} 
     bind:item={item} 

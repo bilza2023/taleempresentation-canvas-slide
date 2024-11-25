@@ -6,6 +6,7 @@
 
     export let currentTime = 0 ;
     export let item;
+    export let updateTimings;
     export let i;
    
     export let addEq; 
@@ -25,7 +26,7 @@
    
     
     <div class="w-1/12 bg-gray-600 text-center rounded-md border-2 border-gray-400">
-    <AddTime bind:item={item} {currentTime}/>
+    <AddTime bind:item={item} {currentTime} {updateTimings}/>
     </div>
 
 

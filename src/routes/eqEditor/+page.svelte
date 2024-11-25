@@ -31,8 +31,9 @@ function start(){
 
 {#if slide}
 <EqEditor  
-items={slide.items}  
+bind:items={slide.items}  
 {currentTime}
+bind:slideExtra={slide.slideExtra}
 />
 {/if}
 
