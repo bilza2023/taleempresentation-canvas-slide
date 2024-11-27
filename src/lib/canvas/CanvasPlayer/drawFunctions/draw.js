@@ -11,15 +11,22 @@ import lines from "./lines";
 import pieChart from "./pieChart";
 import ray from "./ray";
 import para from "./para";
+import text from "./text";
+import sprite from "./sprite";
 
 
-export default function draw(ctx , itemData) {
+export default function draw(ctx , itemData,assets) {
 
 switch ( itemData.itemExtra.command ) {
 
-    case 'angle':
+    case 'sprite':
+        sprite(ctx,itemData,assets)
+    break;
+   
+    case 'angleSymbol':
         angle(ctx,itemData)
     break;
+
     case 'image':
         image(ctx,itemData)
     break;
@@ -34,8 +41,12 @@ switch ( itemData.itemExtra.command ) {
     case 'para':
         para(ctx,itemData)
     break;
+   
+    case 'text':
+        text(ctx,itemData)
+    break;
   
-    case 'pieChart':
+    case 'piechart':
         pieChart(ctx,itemData)
     break;
  
@@ -69,6 +80,5 @@ switch ( itemData.itemExtra.command ) {
 
     break;
 }
-
-
 }
+//////////////////////////////////////////////////

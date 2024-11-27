@@ -1,9 +1,7 @@
 
 
-
-
-
 export default function angle(ctx,item){
+    
     const startAngle = item.itemExtra.startAngle * (Math.PI / 180);
     const endAngle = item.itemExtra.endAngle * (Math.PI / 180);
     const x = item.itemExtra.x;

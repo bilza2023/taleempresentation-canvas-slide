@@ -2,7 +2,7 @@
    import AppToolbar from "./AppToolbar.svelte";
   import {CanvasEditor}  from "$lib";
   import {onMount} from "svelte";
-  import {Slide} from "../../lib/canvas/samples/demo";
+  import {Slide} from "../../lib/canvas/samples/blank";
   import {slide as NewSlide} from "./slide.js";
   import loadAssets from "../assets/loadAssets";
   

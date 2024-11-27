@@ -8,7 +8,7 @@
     export let deleteFn=()=>{};
     export let showCanvas=()=>{};
 
-    import { addEllipse,addCircle,addBezier,addRect,addAngleSymbol,addDot,addGrid,addPolygon,addTri,addLines,addLine,addRay,addRepeatDot,addRepeatText,addPara,addText,addSprite,addSysImage,addImage,addIcon,addImage2,addPieChart} from "./addFunctions";
+    import { addEllipse,addCircle,addBezier,addRect,addAngleSymbol,addDot,addPolygon,addTri,addLines,addLine,addRay,addPara,addText,addSprite,addImage,addIcon,addPieChart} from "./addFunctions";
 
 export let addNewItem;
 

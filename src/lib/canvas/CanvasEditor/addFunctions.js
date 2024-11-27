@@ -209,20 +209,6 @@ return  addReqExtraFields(obj,"para","red");
           return  addReqExtraFields(obj,"icon","red") 
   }
   
-  function addGrid( ){ //one grid allowed
-  //   if(gridCommandExists()){
-  //   toast.push("Grid already exists");
-  //   return;
-  //   }
-  //   const obj ={
-  //             "cellWidth": 50,
-  //             "cellHeight": 50,
-  //             "lineWidth": 1,
-  //             "lineColor": "green"
-  //         };
-  //         return  addReqExtraFields(obj,"grid","red") 
-  }
-  
   function addPolygon( ){
     const obj ={
       "points": [100,100,150,200,10,100],
@@ -262,40 +248,29 @@ return  addReqExtraFields(obj,"para","red");
     return  addReqExtraFields(obj,"ray","yellow") 
   }
 
-  function addRepeatDot( ){
-    const obj ={
-      "numberOfDots": 5,
-      "initialX": 100,
-      "initialY": 100,
-      "xFactor": 30,
-      "yFactor": 0,
-      "width": 5,
-    };
-    return  addReqExtraFields(obj,"repeatDot","yellow") 
-  }
-  function addRepeatText( ){
-    const obj ={
-      "textArray":  "1,2,3,4",
-      "initialX":   100,
-      "initialY":   100,
-      "xFactor":    30,
-      "yFactor":    0,
-      "font":       "20px Arial"
-    };
-    return  addReqExtraFields(obj,"repeatText","red"); 
-  }
-  
-  function addSysImage( ){
-    const obj ={
-      "src": "system_images/gen/wood.jpg",
-      "x": 1,
-      "y": 1,
-      "width":  5,
-      "height": 4,
-    };
-  return  addReqExtraFields(obj,"sysImage") ;
-  }
-  
+  // function addRepeatDot( ){
+  //   const obj ={
+  //     "numberOfDots": 5,
+  //     "initialX": 100,
+  //     "initialY": 100,
+  //     "xFactor": 30,
+  //     "yFactor": 0,
+  //     "width": 5,
+  //   };
+  //   return  addReqExtraFields(obj,"repeatDot","yellow") 
+  // }
+  // function addRepeatText( ){
+  //   const obj ={
+  //     "textArray":  "1,2,3,4",
+  //     "initialX":   100,
+  //     "initialY":   100,
+  //     "xFactor":    30,
+  //     "yFactor":    0,
+  //     "font":       "20px Arial"
+  //   };
+  //   return  addReqExtraFields(obj,"repeatText","red"); 
+  // }
+   
  function addImage(){
 // const img = new Image();
 // img.src = 'https://taleem-media.blr1.cdn.digitaloceanspaces.com/bucket/wood.jpg';
@@ -314,28 +289,7 @@ return  addReqExtraFields(obj,"para","red");
       // };
     
   }
- function addImage2(){
 
-            const obj ={
-              "src": '',
-              "image": null,
-//--source              
-              "sx": 0,
-              "sy": 0,
-              "sw": 100,
-              "sh": 50,
-//--destination 
-              "dx": 10,
-              "dy": 10,
-              "width":  100,
-              "height": 50,
-
-              "ext": 'jpg',
-            };
-  return  addReqExtraFields(obj,"image2");
-      // };
-    
-  }
   function addSprite( ){
     // debugger;
     const obj ={
@@ -361,20 +315,17 @@ export {
                 addRect,
                 addAngleSymbol,
                 addDot,
-                addGrid,
                 addPolygon,
                 addTri,
                 addLines,
                 addLine,
                 addRay,
-                addRepeatDot,
-                addRepeatText,
+                // addRepeatDot,
+                // addRepeatText,
                 addPara,
                 addText,
                 addSprite,
-                addSysImage,
                 addImage,
                 addIcon,
-                addImage2,
                 addPieChart
  }

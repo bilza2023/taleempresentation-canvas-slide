@@ -162,7 +162,7 @@ function redraw(){
     <div class="flex w-full p-0 m-0 bg-stone-900 text-white p-2  gap-1">
         <div class='mx-1'>
             <CanvasPlayer
-                {itemObjects}
+                {items}
                 {slideExtra}
                 {assets}
                 {postDraw}

@@ -61,7 +61,6 @@ import LinesDD from "./lines/LinesDD.svelte";
             <svelte:component
               this={componentMap[dialogueItem.componentName]}
               bind:value={item.itemExtra[dialogueItem.title]}
-              on:input={redraw}
             />
           </div>
         </div>

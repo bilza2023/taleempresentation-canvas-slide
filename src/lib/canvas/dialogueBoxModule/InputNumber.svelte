@@ -1,13 +1,11 @@
 <!-- InputNumber.svelte -->
 <script>
   export let value;
-  export let redraw; // Add this
 
   $: valueWithoutDecimal = value ? Math.trunc(value) : value;
 
   function handleInput(e) {
       value = e.target.value;
-      if (redraw) redraw();
   }
 </script>
 

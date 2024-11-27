@@ -2,10 +2,10 @@
   /**   
    * 7-Nov-2024 --Final
    * ==========
-    - CanvasPlayer.svelte is for  display on the canvas and thats all.
+    - CanvasPlayer.svelte is for  drawing "items" on the canvas and thats all.
     -  **do not add any functinality into it**.
-    - All it does is draw itemObjects and thats all.
-    - We can also feed it itemObjects in preDraw and postDraw functions since they also get ctx as argement.
+    - All it does is draw "items" and thats all.
+    - We can also feed it "items" in preDraw and postDraw functions since they also get ctx as argement.
     - We also have some hooks like onMount and onDestroy to setup and teardown canvas and interval.
     - it does not concern its self with the selectedItem and drawing handles for the selectedItem since that functionality should be seperate.
     - it has gameLoop -- why ??? i checked chat-gpt it is good for smooth animation.mouse tracking is not here.
@@ -15,14 +15,11 @@
   
   import { onMount, onDestroy } from "svelte";
   import { ctxStore } from '../store';
-  import itemsToitemObjects from '../itemObjects/itemsToitemObjects';
-
   import draw from './drawFunctions/draw';
 
     export let slideExtra = {};
     export let items;
     export let assets;
- let itemObjects = []; // must be passed directly
 
     export let preDraw = () => {};   // Default empty function
     export let postDraw = () => {};  // Default empty function
@@ -32,12 +29,15 @@
     export let eventMouseUp = () => {};  
     export let eventClick = () => {};  
     export let eventDblClick = () => {};  
-    // export let eventKeyDown = () => {};  
+    // export let eventKeyDown = () => {}; 
+     
+    let canvas;
+    let ctx;
+    let interval;
+    let isInitialized = false;
+   
 
-    $:{
-items;
-itemObjects = itemsToitemObjects(items,assets);
-}    
+  
     function handleMouseMove(event) {
       eventMouseMove(event, ctx);
   }
@@ -50,12 +50,6 @@ itemObjects = itemsToitemObjects(items,assets);
     function handleDbClick(event) {
       eventDblClick(event, ctx);
   }
-
-    let canvas;
-    let ctx;
-    let interval;
-    let isInitialized = false;
-   
   
     function drawBackground() {
       if(!slideExtra.bgGlobalAlpha) {
@@ -86,17 +80,16 @@ itemObjects = itemsToitemObjects(items,assets);
   
     function gameLoop() {
       try {
-        if (!itemObjects) return;
+        if (!items) return;
         
         drawBackground();
   
-        for (let i = 0; i < itemObjects.length; i++) {
-          const item = itemObjects[i];
+        for (let i = 0; i < items.length; i++) {
+          const item = items[i];
         
-            preDraw(ctx);   
-            // item.draw(ctx);
-            draw(ctx,item.itemData);
-            postDraw(ctx);   
+            preDraw(ctx,assets);   
+            draw(ctx,item,assets);
+            postDraw(ctx,assets);   
         }
   
       } catch (error) {
