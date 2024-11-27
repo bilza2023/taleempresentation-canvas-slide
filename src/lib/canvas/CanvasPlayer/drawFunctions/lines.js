@@ -4,7 +4,7 @@
 
 
 export default function lines(ctx,item){
-
+// debugger;
     const x = item.itemExtra.x;
     const y = item.itemExtra.y;
     const width = item.itemExtra.width;

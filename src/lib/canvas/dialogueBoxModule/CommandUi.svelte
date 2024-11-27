@@ -16,6 +16,7 @@ import LinesDD from "./lines/LinesDD.svelte";
   const componentMap = {
     TrPropNumber: InputNumber,
     TrNo: InputNumber,
+    InputNumber: InputNumber,
     TrPropText: InputText,
     TrText: InputText,
     TrTextArea: InputTextArea,

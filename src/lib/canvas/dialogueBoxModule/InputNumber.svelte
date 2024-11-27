@@ -5,7 +5,7 @@
   $: valueWithoutDecimal = value ? Math.trunc(value) : value;
 
   function handleInput(e) {
-      value = e.target.value;
+      value = parseInt(e.target.value);
   }
 </script>
 

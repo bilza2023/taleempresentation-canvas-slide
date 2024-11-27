@@ -131,50 +131,6 @@ export default class RayObject extends ItemObject {
         ctx.stroke();
     }
 
-    draw(ctx) {
-        // Save the current context state
-        ctx.save();
-        
-        // Extract values
-        const {x0, y0, x1, y1, lineWidth = 2, arrowWidth = 8, arrowHeight = 12, 
-               startArrow = true, endArrow = true, color = 'black', 
-               dash = 0, gap = 0, globalAlpha = 1} = this.itemData.itemExtra;
-
-        // Set properties
-        ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = color;
-        ctx.fillStyle = color;
-        ctx.globalAlpha = globalAlpha;
-
-        // Set line dash pattern
-        if (dash === 0 && gap === 0) {
-            ctx.setLineDash([]);
-        } else {
-            ctx.setLineDash([dash, gap]);
-        }
-
-        // Draw the line
-        ctx.beginPath();
-        ctx.moveTo(x0, y0);
-        ctx.lineTo(x1, y1);
-        ctx.stroke();
-
-        // Clear line dash for arrows
-        ctx.setLineDash([]);
-
-        // Draw start arrow if requested
-        if (startArrow) {
-            this.drawArrowHead(ctx, x1, y1, x0, y0, arrowWidth, arrowHeight);
-        }
-
-        // Draw end arrow if requested
-        if (endArrow) {
-            this.drawArrowHead(ctx, x0, y0, x1, y1, arrowWidth, arrowHeight);
-        }
-
-        // Restore the context state
-        ctx.restore();
-    }
 
     // Use the same bounding rectangle and getter/setter methods as LineObject
     boundingRectangleX() {

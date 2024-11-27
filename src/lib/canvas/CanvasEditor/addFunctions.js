@@ -304,9 +304,6 @@ return  addReqExtraFields(obj,"para","red");
   return  addReqExtraFields(obj,"sprite","red"); 
   }
   ////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////
 
 export {   
                 addEllipse,
@@ -320,8 +317,6 @@ export {
                 addLines,
                 addLine,
                 addRay,
-                // addRepeatDot,
-                // addRepeatText,
                 addPara,
                 addText,
                 addSprite,
