@@ -2,8 +2,9 @@
     //@ts-nocheck
 
     import { SmallBtnToolbar } from "sveltetools_bils/src/cmp"; 
-    export let icons;
-    
+    import Icons  from "../icons"; 
+    // export let icons;
+    let icons = Icons;
     export let clone=()=>{};
     export let deleteFn=()=>{};
     export let showCanvas=()=>{};

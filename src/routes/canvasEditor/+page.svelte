@@ -47,6 +47,7 @@
   }
 
   onMount(async()=>{
+    debugger;
     assets = await loadAssets(); 
     slide = Slide;
   });

@@ -15,8 +15,6 @@
 
     export let items;
     export let slideExtra;
-    export let logSlide;
-
     export let assets;
     export let showAddToolbar = true;
 
@@ -143,7 +141,8 @@ function deleteFn() {
 }
 
 function logSlideLocal(){
-    logSlide(items, slideExtra);
+    console.log("items", items);
+    console.log("slideExtra", slideExtra);
 }
 
 function redraw(){
