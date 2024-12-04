@@ -5,6 +5,7 @@ import EqPlayer from "../../lib/eqs/EqPlayer/EqPlayer.svelte";
 // import {Slide} from "../../lib/eqs/testData/baseEqSlide.js";
 import StartStopToolbar from "./StartStopToolbar.svelte";
 
+// import {loadAssets} from "$lib";
 
 let currentTime = 0;
 let slide;

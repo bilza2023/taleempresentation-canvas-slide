@@ -2,7 +2,7 @@
 
  import { onMount } from "svelte";  
  import CanvasPlayer from "../../lib/canvas/CanvasPlayer/CanvasPlayer.svelte";
- import loadAssets from "../assets/loadAssets";
+ import {loadAssets} from "$lib";
  import AppToolbar from "./AppToolbar.svelte";
  import {Slide}  from "../../lib/canvas/samples/demo";
   

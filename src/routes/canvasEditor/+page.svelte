@@ -10,7 +10,7 @@
 
   import {SlideObject} from "$lib";
 
-  import loadAssets from "../../lib/assets/loadAssets";
+  import {loadAssets} from "$lib";
   let slide = null;
   let showAddToolbar = true;
   let assets = null;
