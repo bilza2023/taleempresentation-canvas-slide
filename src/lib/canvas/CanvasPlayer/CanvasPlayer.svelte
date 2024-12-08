@@ -16,6 +16,9 @@
   import { onMount, onDestroy } from "svelte";
   import { ctxStore } from '../store';
   import draw from './drawFunctions/draw';
+ 
+  import ItemsMap from "../staticItems/ItemsMap";
+
 
     export let slideExtra = {};
     export let items;
@@ -88,7 +91,9 @@
           const item = items[i];
         
             preDraw(ctx,assets);   
-            draw(ctx,item,assets);
+            const Obj = ItemsMap.get('text');
+            // draw(ctx,item,assets);
+            Obj.draw(ctx,item.itemExtra,assets);
             postDraw(ctx,assets);   
         }
   

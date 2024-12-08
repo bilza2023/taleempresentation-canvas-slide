@@ -1,7 +1,7 @@
 import uuid from "../uuid";
 
 export default class CanvasItemsDefaultItemExtras {
-  static text() {
+  static text() { 
     return {
       uuid: uuid(),
       text: "Add text..",
@@ -12,7 +12,6 @@ export default class CanvasItemsDefaultItemExtras {
       fontFamily: "Arial",
       font: "30px Arial",
       color: "black",
-      showAt: 0,
       globalAlpha: 1
     };
   }

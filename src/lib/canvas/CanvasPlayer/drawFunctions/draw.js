@@ -1,84 +1,48 @@
+import sprite from "./sprite";
 import angle from "./angle";
+import image from "./image";
+import line from "./line";
+import lines from "./lines";
+import para from "./para";
+import text from "./text";
+import pieChart from "./pieChart";
+import ray from "./ray";
+import triangle from "./triangle";
 import rect from "./rect";
 import icon from "./icon";
 import circle from "./circle";
 import dot from "./dot";
 import ellipse from "./ellipse";
-import triangle from "./triangle";
-import image from "./image";
-import line from "./line";
-import lines from "./lines";
-import pieChart from "./pieChart";
-import ray from "./ray";
-import para from "./para";
-import text from "./text";
-import sprite from "./sprite";
 
+// Object Mapping Technique
+const drawHandlers = {
+  sprite: sprite,
+  angleSymbol: angle,
+  image: image,
+  line: line,
+  lines: lines,
+  para: para,
+  text: text,
+  piechart: pieChart,
+  ray: ray,
+  triangle: triangle,
+  rect: rect,
+  icon: icon,
+  circle: circle,
+  dot: dot,
+  ellipse: ellipse
+};
 
-export default function draw(ctx , itemData,assets) {
-
-switch ( itemData.itemExtra.command ) {
-
-    case 'sprite':
-        sprite(ctx,itemData,assets)
-    break;
-   
-    case 'angleSymbol':
-        angle(ctx,itemData)
-    break;
-
-    case 'image':
-        image(ctx,itemData)
-    break;
-    case 'line':
-        line(ctx,itemData)
-    break;
-
-    case 'lines':
-        lines(ctx,itemData)
-    break;
+// Export the main draw function
+export default function draw(ctx, itemData, assets) {
+  // Find the appropriate handler based on the command
+  const handler = drawHandlers[itemData.itemExtra.type];
   
-    case 'para':
-        para(ctx,itemData)
-    break;
-   
-    case 'text':
-        text(ctx,itemData)
-    break;
-  
-    case 'piechart':
-        pieChart(ctx,itemData)
-    break;
- 
-    case 'ray':
-        ray(ctx,itemData)
-    break;
-
-    case 'triangle':
-        triangle(ctx,itemData)
-    break;
-
-    case 'rect':
-        rect(ctx,itemData)
-    break;
-   
-    case 'icon':
-        icon(ctx,itemData)
-    break;
-  
-    case 'circle':
-        circle(ctx,itemData)
-    break;
-    case 'dot':
-        dot(ctx,itemData)
-    break;
-    case 'ellipse':
-        ellipse(ctx,itemData)
-    break;
-
-    default:
-
-    break;
+  if (handler) {
+    // If the specific handler exists, call it
+    handler(ctx, itemData, assets);
+  } else {
+    // Optional: Add fallback or error handling
+    console.warn(`No draw handler found for command: ${itemData.itemExtra.type}`);
+  }
 }
-}
-//////////////////////////////////////////////////
