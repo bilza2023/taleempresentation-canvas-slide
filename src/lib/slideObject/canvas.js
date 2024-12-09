@@ -33,7 +33,7 @@ export default class Canvas {
             canvasHeight : 360,
             cellHeight : 25,
             cellWidth : 25,
-            bgImg : 'system_images/bg_images/white_mat.jpg',
+            bgImg : 'system_images/bg_images/black_mat.jpg',
             bgGlobalAlpha : 1,
             xFactor : 0,
             yFactor : 0,
@@ -52,6 +52,23 @@ export default class Canvas {
             items : [],
             slideExtra,
         }
+    }
+    static getItemExtra(){
+        return {
+            backgroundColor: '#efebb8',
+            canvasWidth : 1000,
+            canvasHeight : 360,
+            cellHeight : 25,
+            cellWidth : 25,
+            bgImg : 'system_images/bg_images/black_mat.jpg',
+            bgGlobalAlpha : 1,
+            xFactor : 0,
+            yFactor : 0,
+            ///////////////////
+            showGrid : false,
+            gridLineWidth : 1,
+            gridLineColor : 'gray'
+        };
     }
 
 
