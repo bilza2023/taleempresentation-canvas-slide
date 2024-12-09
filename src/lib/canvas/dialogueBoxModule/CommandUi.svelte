@@ -11,7 +11,6 @@ import LinesDD from "./lines/LinesDD.svelte";
 
   export let item;
   export let dialogueBox;
-  export let redraw;
 
   const componentMap = {
     TrPropNumber: InputNumber,

@@ -1,20 +1,15 @@
-import getNewSlide from "./getNewSlide";
-import getNewItem from "./getNewItem";
+
 import canvasHealth from "../canvas/canvasHealth/canvasHealth";
 import ItemsMap from '../canvas/staticItems/ItemsMap';
 import {Slide} from "../canvas/samples/demoSlide";
+import uuid from "../uuid";
+
+
 export default class Canvas {
 
     // static ItemsMap = ItemsMap;
     static ItemsMap = Object.freeze(new Map(ItemsMap));
-    static newSlide() {
-        // the getNewSlide is same for all slides except the `canvas` word.user can also use this driectly but we do not want it to expose it to them.
-        return getNewSlide('canvas');
-    }
-
-    static newItem() {
-        return getNewItem();
-    }
+    
 
     static checkHealth(slide, fix = false) {
         return canvasHealth(slide, fix);
@@ -27,4 +22,39 @@ export default class Canvas {
     static getDemoSlide(){
         return Slide;
     }
+    /**
+     * 9-Dec-2024 the reason we need seperate newSlide for canvas and are not using the SlideObject.newSlide is that we also have to add the slideExtra of the canvas slide. The difference between 2 slide types is not only the slide.type but also slide.slideExtra.
+     * 
+     */
+    static newSlide() {
+        const slideExtra = {
+            backgroundColor: '#efebb8',
+            canvasWidth : 1000,
+            canvasHeight : 360,
+            cellHeight : 25,
+            cellWidth : 25,
+            bgImg : 'system_images/bg_images/white_mat.jpg',
+            bgGlobalAlpha : 1,
+            xFactor : 0,
+            yFactor : 0,
+            ///////////////////
+            showGrid : false,
+            gridLineWidth : 1,
+            gridLineColor : 'gray'
+        }
+        return {
+            uuid : uuid(),
+            version : 'basic',
+            startTime : 0,
+            endTime : 10,
+            type : 'canvas', // canvas is fixed here 
+            template : '',
+            items : [],
+            slideExtra,
+        }
+    }
+
+
+
+
 }

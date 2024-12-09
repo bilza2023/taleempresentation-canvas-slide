@@ -23,6 +23,7 @@
 
 > We also have `template` fields inside our slide. using template name we can write functions to edit the slide data (for example change css / styles / theme etc). But this too is on top of this level we just have template field just like we have showAt field but we do nothing for them. 
 
+`very important ==> The difference between 2 slide types is not only the slide.type but also slide.slideExtra`
 
 An interesting fact is that all the fields in a slide other than `items` array of objects and `slideExtra` belong to the app and are not relevant here.
  

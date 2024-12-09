@@ -20,7 +20,7 @@
 >
     {#each items as item, index}
         <option class="bg-stone-700 text-gray-300" value={index}>
-            {item.itemExtra.name}
+            {item.name}
         </option>
     {/each}
 </select>

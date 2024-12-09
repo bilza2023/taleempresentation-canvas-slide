@@ -13,7 +13,7 @@
   let fileNameToSave = 'slide';
 
   function createNewSlide(){
-    slide = NewSlide;
+    slide = SlideObject.Canvas.newSlide();
   }
   function saveSlide(){
     const jsonString = `export const Slide = ${JSON.stringify(slide, null, 2)}`;

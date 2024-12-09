@@ -6,12 +6,12 @@
     import {CanvasPlayer} from "../../index";
     import SelectedItem from "./SelectedItem";
     import AddToolbar from "./AddToolbar.svelte";
-    import getNewItem from "./getNewItem";
     import getMouseData from "./getMouseData";
     import SelectItemMenu from "./SelectItemMenu.svelte";
     import CommandUi from '../dialogueBoxModule/CommandUi.svelte';
     import CanvasCommand from "../dialogueBoxModule/CanvasCommand.svelte";
     import itemsToitemObjects from './editObjects/itemsToitemObjects';
+    import {SlideObject} from "$lib";
 
     export let items;
     export let slideExtra;
@@ -37,9 +37,8 @@ onDestroy(async () => {
 });
     
 function addNewItem(newItemExtra) {
-    
-    const newItem = getNewItem();
-    newItem.itemExtra = newItemExtra;
+    const newItem = SlideObject.newItem(newItemExtra) ;
+    // newItem.itemExtra = newItemExtra;
     items.unshift(newItem);
     items = [...items];
     // Select the newly added item
