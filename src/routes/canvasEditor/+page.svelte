@@ -15,6 +15,7 @@
   function createNewSlide(){
     slide = SlideObject.Canvas.newSlide();
   }
+  
   function saveSlide(){
     const jsonString = `export const Slide = ${JSON.stringify(slide, null, 2)}`;
     const blob = new Blob([jsonString], { type: 'application/json' });

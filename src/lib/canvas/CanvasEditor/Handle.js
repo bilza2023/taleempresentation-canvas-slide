@@ -32,7 +32,7 @@ export default class Handle {
     if (x >= this.x() && x <= this.x() + this.size && 
         y >= this.y() && y <= this.y() + this.size) { 
       // this.selected = true;
-      console.log("selected");
+      // console.log("selected");
       return true;
     } else {
       // this.selected = false;  

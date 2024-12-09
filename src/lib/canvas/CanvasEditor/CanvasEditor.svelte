@@ -1,6 +1,7 @@
 <script>
     import {selectedItemIndexStore} from "../store";
-    
+    import uuid from '../../uuid';
+
     import { onMount, onDestroy } from "svelte";
     import itemToObject from "./editObjects/itemToObject";
     import {CanvasPlayer} from "../../index";
@@ -37,7 +38,11 @@ onDestroy(async () => {
 });
     
 function addNewItem(newItemExtra) {
-    const newItem = SlideObject.newItem(newItemExtra) ;
+
+    const firstSegment = uuid().split('-')[0];
+    const name = newItemExtra.type + '_' +firstSegment  ;
+
+    const newItem = SlideObject.newItem(newItemExtra,name) ;
     // newItem.itemExtra = newItemExtra;
     items.unshift(newItem);
     items = [...items];
@@ -79,9 +84,10 @@ async function checkHit(e, ctx) {
     for (let i = 0; i < items.length; i++) {
         const itemObject = itemToObject(items[i], assets);
         if (itemObject && itemObject.isHit(x, y, ctx)) {
-            selectedItemIndexStore.set(i);
+            // selectedItemIndexStore.set(i);
+            setSelectedItemIndex(i);
             // now we use selectedItemIndex to create a new selectionedItem object
-            selectedItem = new SelectedItem(getSelectedItemObject());
+            // selectedItem = new SelectedItem(getSelectedItemObject());
             return;
         }
     }
@@ -98,6 +104,7 @@ function getSelectedItemObject() {
 
 function setSelectedItemIndex(index) {
     selectedItemIndexStore.set(index);
+    selectedItem = new SelectedItem(getSelectedItemObject());
 }
 
 function postDraw(ctx) {
@@ -142,9 +149,7 @@ function logSlideLocal(){
     console.log("slideExtra", slideExtra);
 }
 
-function redraw(){
-    items = [...items]; // Trigger reactivity
-}
+
 </script>
 
 {#if items}
@@ -197,7 +202,7 @@ function redraw(){
                     <CommandUi 
                         bind:item={items[$selectedItemIndexStore]}
                         dialogueBox={selectedItem.itemObject.dialogueBox}
-                        {redraw}
+                      
                     />
                 {/if}
             {/if}

@@ -43,9 +43,17 @@ export default class SelectedItem {
         ctx.save();
         ctx.strokeStyle = '#1a73e8';
         ctx.setLineDash([5, 5]);
+        // debugger; //joggar
+        // if (this.itemObject.itemData.itemExtra.type == 'text' || this.itemObject.itemData.itemExtra.type == 'list' ){
+        //     let text = this.itemObject.itemData.itemExtra.text.split('\n')[0];
+        //     // console.log("list");
+        //     this.itemObject._width = ctx.measureText(text).width;
+        //     this.itemObject._height = ctx.measureText('W').width;
+        // }
         ctx.strokeRect(
             this.itemObject.boundingRectangleX(),
             this.itemObject.boundingRectangleY(),
+        
             this.itemObject.width,
             this.itemObject.height
         );
@@ -64,19 +72,19 @@ export default class SelectedItem {
         // Check each handle
         if (this.handles[0].isHit(x, y)) {
             this.selectedHandle = 'move';
-            console.log("selectedHandle==>move");
+            // console.log("selectedHandle==>move");
             return true;
         }
 
         if (this.handles[1].isHit(x, y)) {
             this.selectedHandle = 'widen';
-            console.log("selectedHandle==>widen");
+            // console.log("selectedHandle==>widen");
             return true;
         }
 
         if (this.handles[2].isHit(x, y)) { // Fixed: checking handles[2] instead of handles[1]
             this.selectedHandle = 'heighten'; // Fixed: correct name
-            console.log("selectedHandle==>heighten");
+            // console.log("selectedHandle==>heighten");
             return true;
         }
 
