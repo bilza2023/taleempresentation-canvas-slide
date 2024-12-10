@@ -5,6 +5,7 @@
     import InputTextArea from './InputTextArea.svelte';
     import InputCheckbox from './InputCheckbox.svelte';
     import InputColor from './InputColor.svelte';
+    import FontFamilyDD from './FontFamilyDD.svelte';
   
 //   import SpriteDD from "./sprite/SpriteDD.svelte";
 //   import IconDD from "./icon/IconDD.svelte";
@@ -20,6 +21,7 @@
       Text      : InputText,
       Boolean   : InputCheckbox,
       Color     : InputColor,
+      FontFamily: FontFamilyDD,
       
     };
   </script>

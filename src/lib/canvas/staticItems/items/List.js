@@ -9,22 +9,43 @@ export default class List {
     return {
       uuid: uuid(),
       type: 'list',
+
+      x: 100,
+      y: 100,
       text: `Hello 
 Hello
 Hello`,
-      x: 100,
-      y: 100,
-      font: "20px Arial",
+   
       fontSize: 20,
       fontFamily: "Arial",
+
       lineHeightOffset: 10,
       xOffset: 25,
+
       color: "blue",
       globalAlpha: 1
     };
   }
 
+  static dialogueBox(){
+
+    let dialogueBox = [];
+ 
+  dialogueBox.push({name:'x', type:'Number',config:{min:0,max:1000,step:1} });
+  dialogueBox.push({name:'y', type:'Number',config:{min:0,max:1000,step:1} });
+
+  dialogueBox.push({name:'text', type:'TextArea',    config:{min:0,max:1000,step:1} });
+  dialogueBox.push({name:'fontSize', type:'Number',config:{min:0, max:200,step:1} });
+  dialogueBox.push({name:'fontFamily', type:'FontFamily',   config:{} });
   
+  dialogueBox.push({name:'lineHeightOffset', type:'Number',config:{min:0, max:100,step:1} });
+  dialogueBox.push({name:'xOffset', type:'Number',config:{min:0, max:100,step:1} });
+
+  dialogueBox.push({name:'color', type:'Color',     config:{} });
+  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
+
+  return dialogueBox;
+}
   static draw(ctx, itemExtra) {
     
     ctx.save();

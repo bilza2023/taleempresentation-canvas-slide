@@ -9,17 +9,40 @@ export default class Line {
     return {
       uuid: uuid(),
       type: 'line',
+
       x1: 100,
       y1: 100,
       x2: 300,
       y2: 300,
+
       lineWidth: 1,
+      dash     : 0,
+      gap      : 0,
+
       color: "red",
       globalAlpha: 1
     };
   }
 
+  static dialogueBox(){
+
+    let dialogueBox = [];
+ 
+  dialogueBox.push({name:'x1', type:'Number',config:{min:0,max:1000,step:1} });
+  dialogueBox.push({name:'y1', type:'Number',config:{min:0,max:1000,step:1} });
+  dialogueBox.push({name:'x2', type:'Number',config:{min:0,max:1000,step:1} });
+  dialogueBox.push({name:'y2', type:'Number',config:{min:0,max:1000,step:1} });
+
+  dialogueBox.push({name:'lineWidth', type:'Number',config:{min:0,max:1000,step:1} });
+
+  dialogueBox.push({name:'dash', type:'Number',     config:{min:0,max:1000,step:1} });
+  dialogueBox.push({name:'gap', type:'Number',      config:{min:0,max:1000,step:1} });
+
+  dialogueBox.push({name:'color', type:'Color',     config:{} });
+  dialogueBox.push({name:'globalAlpha', type:'Float',config:{min:0,max:1,step:0.01} });
   
+return dialogueBox;
+}
   static draw(ctx, itemExtra) {
     // Save the current context state
     ctx.save();
