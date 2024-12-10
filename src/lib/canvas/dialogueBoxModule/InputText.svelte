@@ -4,11 +4,9 @@
   const dispatch = createEventDispatcher();
   
   export let value;
-  export let redraw;
 
   function handleInput(e) {
       value = e.target.value;
-      if (redraw) redraw();
   }
 </script>
 

@@ -28,9 +28,12 @@
     let interval = null;
 
 $:{
-items;
-// debugger;
-itemObjects = itemsToitemObjects(items,assets);
+
+if (items.length > 0){
+    itemObjects = itemsToitemObjects(items,assets);
+}else {
+    selectedItemIndexStore.set(-1); 
+}
 }
     
 onDestroy(async () => {

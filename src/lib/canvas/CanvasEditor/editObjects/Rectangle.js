@@ -6,17 +6,17 @@ export default class Rectangle extends ItemObject {
         super(itemData , assets);
         this.dialogueBox = [
             {
-              componentName: 'TrPropNumber',
+              componentName: 'Number',
               title: 'x',
               props: {}
             },
             {
-              componentName: 'TrPropNumber',
+              componentName: 'Number',
               title: 'y',
               props: {}
             },
             {
-              componentName: 'TrPropNumber',
+              componentName: 'Number',
               title: 'width',
               props: {
                 min: '1',
@@ -24,7 +24,7 @@ export default class Rectangle extends ItemObject {
               }
             },
             {
-              componentName: 'TrPropNumber',
+              componentName: 'Number',
               title: 'height',
               props: {
                 min: '1',
@@ -32,70 +32,37 @@ export default class Rectangle extends ItemObject {
               }
             },
             {
-              componentName: 'TrPropNumber',
+              componentName: 'Number',
               title: 'lineWidth',
               props: {}
             },
             {
-              componentName: 'TrPropBoolean',
+              componentName: 'Tf',
               title: 'filled',
               props: {}
             },
-            //CommonCommands
+           
             {
-              componentName: 'TrText',
-              title: 'name',
-              props: {}
-            },
-            {
-              componentName: 'TrPropColor',
+              componentName: 'Color',
               title: 'color',
               props: {}
             },
+            
             {
-              componentName: 'TrNo',
-              title: 'showAt',
-              props: {}
-            },
-            {
-              componentName: 'TrPropNumber',
+              componentName: 'Number',
               title: 'globalAlpha',
-              props: {
-                min: '0.0',
-                max: '1.0',
-                step: '0.1'
+              props: {min: '0.0',max: '1.0',step: '0.1'
               }
             },
             //gap-dash
             {
-              componentName: 'TrPropNumber',
+              componentName: 'Number',
               title: 'dash',
               props: {}
             },
             {
-              componentName: 'TrPropNumber',
+              componentName: 'Number',
               title: 'gap',
-              props: {}
-            },
-          //shadow
-            {
-              componentName: 'TrNo',
-              title: 'shadowOffsetX',
-              props: {}
-            },
-            {
-              componentName: 'TrNo',
-              title: 'shadowOffsetY',
-              props: {}
-            },
-            {
-              componentName: 'TrNo',
-              title: 'shadowBlur',
-              props: {}
-            },
-            {
-              componentName: 'TrColor',
-              title: 'shadowColor',
               props: {}
             },
         

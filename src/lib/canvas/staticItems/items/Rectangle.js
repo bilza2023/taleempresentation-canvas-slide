@@ -13,6 +13,8 @@ export default class Rectangle {
       height: 100,
       filled: true,
       lineWidth: 1,
+      dash: 0,
+      gap: 0,
       color: "red",
       globalAlpha: 1
     };
