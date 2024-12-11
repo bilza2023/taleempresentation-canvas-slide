@@ -4,6 +4,7 @@
  import CanvasPlayer from "../../lib/canvas/CanvasPlayer/CanvasPlayer.svelte";
  import {loadAssets} from "$lib";
  import AppToolbar from "./AppToolbar.svelte";
+//  import {Slide} from "./slide.js";
  import {SlideObject} from "$lib";
 
  
@@ -13,7 +14,9 @@
  
 onMount(async()=>{
   assets = await loadAssets(); 
+
     slide = SlideObject.Canvas.demoSlide();
+    // slide = Slide; // this is the local slide.js 
 });
 
 

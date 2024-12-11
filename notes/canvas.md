@@ -1,4 +1,4 @@
- [Important Technical Concepts](important-technical-concepts.md) , [Canvas Items Fields](canvas-items-fields.md) 
+ [Important Technical Concepts](important-technical-concepts.md) , [Canvas Items Fields](canvas-items-fields.md) , [How Canvas Works](how-canvas-works.md)
 
 # Canvas Slide / App
 
@@ -20,6 +20,32 @@ Incase of canvas module it is:
 
     3: ItemMap object exported from Slide object which export all the canvas items in form of a map and their keys are item.itemExtra.type.
 
+## Usage CanvasPlayer 
+
+```javascript
+
+<CanvasPlayer 
+  items ={slide.items}        
+  slideExtra={slide.slideExtra} 
+  {assets}
+/>
+```
+
+## Usage CanvasEditor
+
+```javascript
+
+<div class="w-full bg-gray-700 text-white py-2 px-1 min-h-screen ">
+  {#if slide && assets}
+    <CanvasEditor
+     bind:items = {slide.items}
+     bind:slideExtra = {slide.slideExtra}
+     {assets}
+     {showAddToolbar}
+    />
+  {/if}
+</div>
+```
 
 ### What can break the canvas app 
 

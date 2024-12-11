@@ -1,4 +1,4 @@
-
+ 
 
 
 export default function getNewItem(){
@@ -14,5 +14,3 @@ let item = { name:"" , content : "" ,
   }; 
 return item;
 }
-// spVisibility : true,  add later
-// fsVisibility : false,

@@ -7,10 +7,8 @@ import uuid from "../uuid";
 
 export default class Canvas {
 
-    // static ItemsMap = ItemsMap;
     static ItemsMap = Object.freeze(new Map(ItemsMap));
     
-
     static checkHealth(slide, fix = false) {
         return canvasHealth(slide, fix);
     }
