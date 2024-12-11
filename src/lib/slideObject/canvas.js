@@ -13,18 +13,14 @@ export default class Canvas {
         return canvasHealth(slide, fix);
     }
 
-    static itemsList() {
-        return Array.from(ItemsMap.keys());
-    }
-
-    static demoSlide(){
+    static getDemoSlide(){
         return Slide;
     }
     /**
      * 9-Dec-2024 the reason we need seperate newSlide for canvas and are not using the SlideObject.newSlide is that we also have to add the slideExtra of the canvas slide. The difference between 2 slide types is not only the slide.type but also slide.slideExtra.
      * 
      */
-    static newSlide() {
+    static getNewSlide() {
         const slideExtra = Canvas.getSlideExtra();
         return {
             uuid: uuid(),

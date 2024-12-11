@@ -11,29 +11,8 @@ import EqsEditor from "./eqs/EqsEditor/EqsEditor.svelte";
 import loadAssets from "./assets/loadAssets";
 import SlideObject from "./slideObject/slideObject";
 
-const availableSlideTypes = [ 'canvas', 'Eqs'];
 
-const availableEqsItems = ['hdg' , 'code', 'txt' ];
-const availableEqsSpItems = ['code' , 'text', 'img' , 'heading' , 'table' , 'tableCode' ];
 
-const availableCanvasItems = [
-    "text",
-    "line",
-    "lines",
-    "rect",
-    "para",
-    "ellipse",
-    "piechart",
-    "circle",
-    "angleSymbol",
-    "dot",
-    "icon",
-    "polygon",
-    "triangle",
-    "ray",
-    "image",
-    "sprite"
-];
 
 export {
     CanvasPlayer,
@@ -42,12 +21,6 @@ export {
     EqPlayer,
     EqsEditor,
 
-    availableCanvasItems,
-    availableEqsItems,
-    availableEqsSpItems,
-
-    availableSlideTypes,
-    
     SlideObject,
     loadAssets,
 

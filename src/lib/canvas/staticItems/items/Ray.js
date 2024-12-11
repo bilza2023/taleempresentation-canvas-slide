@@ -84,7 +84,6 @@ return dialogueBox;
   // }
 
   static draw(ctx, itemExtra) {
-    debugger;
     // Save the current context state
     ctx.save();
     // Extract values

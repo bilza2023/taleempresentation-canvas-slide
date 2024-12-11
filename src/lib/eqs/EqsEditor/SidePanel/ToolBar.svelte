@@ -1,51 +1,16 @@
 <script>
   //@ts-nocheck
+  import {SlideObject} from "../../../index";
   export let item;
-  
-  const addTable = () => {
-    const tblData = { code: `[["",""],["",""]]`, type: 'table' };
-    
-    item = {
-      ...item,
-      itemExtra: {
-        ...item.itemExtra,
-        sp: [...item.itemExtra.sp, tblData]
-      }
-    };
-  }
-  
-  const addTableCode = () => {
-    const tblData = { code: `[["",""],["",""]]`, type: 'tableCode' };
-    
-    item = {
-      ...item,
-      itemExtra: {
-        ...item.itemExtra,
-        sp: [...item.itemExtra.sp, tblData]
-      }
-    };
-  }
-  
-  function addTxtCodeImg(textOrCode = "text") {
-    let newItem;
-    if (textOrCode == "code") {
-      newItem = { code: "", type: 'code' };
-    }
-    if (textOrCode == "text") {
-      newItem = { code: "", type: 'text' };
-    }
-    if (textOrCode == "image") {
-      newItem = { code: "wood", type: 'image' };
-    }
-    if (textOrCode == "heading") {
-      newItem = { code: "", type: 'heading' };
-    }
+
+  function getEqsSpItem(type){
+    const spItem = SlideObject.Eqs.getEqsSpItem(type);
 
     item = {
       ...item,
       itemExtra: {
         ...item.itemExtra,
-        sp: [...item.itemExtra.sp, newItem]
+        sp: [...item.itemExtra.sp, spItem]
       }
     };
   }
@@ -55,21 +20,21 @@
   <div class="bg-stone-950 text-white rounded-xl m-1 p-1 text-xs">Side Panel</div>
   
 
-  <button on:click={() => addTxtCodeImg("heading")} 
+  <button on:click={() => getEqsSpItem("heading")} 
     class="bg-orange-600 text-white p-1 text-xs rounded-md">Heading</button>
     
-  <button on:click={() => addTxtCodeImg("text")} 
+  <button on:click={() => getEqsSpItem("text")} 
     class="bg-green-700 text-white p-1 text-xs rounded-md">Text</button>
   
-  <button on:click={() => addTxtCodeImg("code")} 
+  <button on:click={() => getEqsSpItem("code")} 
     class="bg-yellow-600 text-white p-1 text-xs rounded-md">Code</button>
   
-  <button on:click={() => addTxtCodeImg("image")} 
+  <button on:click={() => getEqsSpItem("img")} 
     class="bg-green-600 text-white p-1 text-xs rounded-md">Image</button>
   
-  <button on:click={() => addTable()} 
+  <button on:click={() => getEqsSpItem('table')} 
     class="bg-green-900 text-white p-1 text-xs rounded-md">Table</button>
   
-  <button on:click={() => addTableCode()} 
+  <button on:click={() => getEqsSpItem('tableCode')} 
     class="bg-red-900 text-white p-1 text-xs rounded-md">Code Table</button>
 </div>

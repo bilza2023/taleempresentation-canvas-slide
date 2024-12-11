@@ -6,12 +6,14 @@
 //@ts-nocheck
 import TopToolbar from './TopToolbar.svelte';
 import Row from './Row.svelte';
-import getNewItem from "./getNewItem";
+import {SlideObject} from "../../index";
 
-
+// export let just items and currentTime which is required for Editor only
 export let items;
 export let currentTime=0;
+// export let slideExtra; // slideExtra is not used in Eqs but it is available 
 
+// the only local variable
 let timingsError = false;
 //////////////////////////////////////////
 function setEqType(i,typ) {
@@ -46,14 +48,13 @@ function moveDownEq(index) {
   }
 }
 
-
 function delEq(index) {
   items = [...items.slice(0, index), ...items.slice(index + 1)];
 }
 
 
 function addEq(i=0) {
-  const newItem = getNewItem();
+  const newItem = SlideObject.Eqs.getNewItem();
   items = [...items.slice(0, i + 1), newItem, ...items.slice(i + 1)];
 }
 
