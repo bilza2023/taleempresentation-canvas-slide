@@ -7,21 +7,22 @@
     import InputColor from './InputColor.svelte';
     import FontFamilyDD from './FontFamilyDD.svelte';
   
-//   import SpriteDD from "./sprite/SpriteDD.svelte";
-//   import IconDD from "./icon/IconDD.svelte";
-//   import LinesDD from "./lines/LinesDD.svelte";
+  import SpriteDD from "./sprite/SpriteDD.svelte";
+  import IconDD from "./icon/IconDD.svelte";
+  import LinesDD from "./lines/LinesDD.svelte";
   
     export let item;
     export let dialogueBox;
   
     const componentMap = {
-      Number    : InputNumber,
-      Float     : InputFloat,
-      TextArea  : InputTextArea,
-      Text      : InputText,
-      Boolean   : InputCheckbox,
-      Color     : InputColor,
-      FontFamily: FontFamilyDD,
+
+      Number     :  InputNumber,
+      Float      :  InputFloat,
+      TextArea   :  InputTextArea,
+      Text       :  InputText,
+      Boolean    :  InputCheckbox,
+      Color      :  InputColor,
+      FontFamily :  FontFamilyDD,
       
     };
   </script>
@@ -50,7 +51,7 @@
      
      
       <!-- Special Command Components -->
-      <!-- {#if item.itemExtra.type === 'sprite'} 
+      {#if item.itemExtra.type === 'sprite'} 
         <div>
           <div><SpriteDD bind:extra={item.itemExtra}/></div>
         </div>
@@ -66,8 +67,9 @@
         <div>
           <div><LinesDD bind:extra={item.itemExtra}/></div>
         </div>
-      {/if} -->
+      {/if}
   
+      <!-- ///////////////////////////////////////////////////// -->
       <div class="border-b border-gray-700">
         {#each dialogueBox as dialogueItem}
           {#if componentMap[dialogueItem.type]}

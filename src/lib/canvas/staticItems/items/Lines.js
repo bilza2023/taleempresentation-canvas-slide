@@ -45,7 +45,7 @@ export default class Lines {
   dialogueBox.push({name:'bgColor', type:'Color',      config:{min:0,max:1000,step:1} });
   dialogueBox.push({name:'width', type:'Number',      config:{min:0,max:1000,step:1} });
   dialogueBox.push({name:'height', type:'Number',      config:{min:0,max:1000,step:1} });
-  dialogueBox.push({name:'lines', type:'TextArea',      config:{min:0,max:1000,step:1} });
+  // dialogueBox.push({name:'lines', type:'TextArea',      config:{min:0,max:1000,step:1} });
 
 
   dialogueBox.push({name:'color', type:'Color',     config:{} });
@@ -62,8 +62,8 @@ return dialogueBox;
     const color = itemExtra.color;
     const fillBg = itemExtra.fillBg;
     const bgColor = itemExtra.bgColor;
-    // const gap = itemExtra.gap;
-    // const dash = itemExtra.dash;
+  
+    
     const lines = itemExtra.lines;
 
     const percentToPixel = (percent, dimension) => Math.round((percent / 100) * dimension);

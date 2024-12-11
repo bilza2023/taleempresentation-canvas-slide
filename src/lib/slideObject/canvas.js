@@ -19,7 +19,7 @@ export default class Canvas {
         return Array.from(ItemsMap.keys());
     }
 
-    static getDemoSlide(){
+    static demoSlide(){
         return Slide;
     }
     /**

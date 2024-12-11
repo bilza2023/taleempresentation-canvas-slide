@@ -49,8 +49,8 @@
 
   onMount(async()=>{
     assets = await loadAssets(); 
-    slide = SlideObject.Canvas.getDemoSlide();
-    console.log("SlideObject.Canvas.getAllItemsExtras()",SlideObject.Canvas.getAllItemsExtras());
+    slide = SlideObject.Canvas.newSlide();
+    // console.log("SlideObject.Canvas.getAllItemsExtras()",SlideObject.Canvas.getAllItemsExtras());
   });
 
 </script>
