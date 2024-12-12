@@ -13,7 +13,7 @@
     import DialogueBox from '../dialogueBox/DialogueBox.svelte';
     import CanvasCommand from "../dialogueBox/CanvasCommand.svelte";
     import itemsToitemObjects from './editObjects/itemsToitemObjects';
-    import {SlideObject} from "$lib";
+    import {SlideObject} from "../../index";
 
     export let items;
     export let slideExtra;
