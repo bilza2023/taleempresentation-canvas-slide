@@ -51,7 +51,7 @@ function addNewItem(newItemExtra) {
     const firstSegment = uuid().split('-')[0];
     const name = newItemExtra.type + '_' +firstSegment  ;
 
-    const newItem = SlideObject.newItem(newItemExtra,name) ;
+    const newItem = SlideObject.getNewItem(newItemExtra,name) ;
     // newItem.itemExtra = newItemExtra;
     items.unshift(newItem);
     items = [...items];
