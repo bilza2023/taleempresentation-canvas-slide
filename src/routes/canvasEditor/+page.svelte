@@ -1,11 +1,10 @@
 <script>
-   import AppToolbar from "./AppToolbar.svelte";
-  import {CanvasEditor}  from "$lib/slides";
+   
+  import AppToolbar from "./AppToolbar.svelte";
+  import {SlideObject}  from "$lib";
   import {onMount} from "svelte";
 
-  import {SlideObject} from "$lib/slides";
-
-  import {loadAssets} from "$lib/slides";
+const CanvasEditor = SlideObject.CanvasEditor;
   let slide = null;
   let showAddToolbar = true;
   let assets = null;
@@ -48,7 +47,7 @@
   }
 
   onMount(async()=>{
-    assets = await loadAssets(); 
+    assets = await SlideObject.loadAssets(); 
     slide = SlideObject.Canvas.getDemoSlide();
   });
 

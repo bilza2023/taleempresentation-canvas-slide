@@ -4,7 +4,8 @@
 
     import { onMount, onDestroy } from "svelte";
     import itemToObject from "./editObjects/itemToObject";
-    import {CanvasPlayer} from "../../index";
+    //-- we are picking up canvas player directy not  using index.js
+    import CanvasPlayer from "../CanvasPlayer/CanvasPlayer.svelte";
     import SelectedItem from "./SelectedItem";
     import AddToolbar from "./AddToolbar.svelte";
     import getMouseData from "./getMouseData";
@@ -13,7 +14,7 @@
     import DialogueBox from '../dialogueBox/DialogueBox.svelte';
     import CanvasCommand from "../dialogueBox/CanvasCommand.svelte";
     import itemsToitemObjects from './editObjects/itemsToitemObjects';
-    import {SlideObject} from "../../index";
+    import SlideObject from "../../index";
 
     export let items;
     export let slideExtra;

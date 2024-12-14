@@ -3,7 +3,7 @@
     import audioData from "./audioData.js";
     // import {Slide} from "./slide.js";
     import {onMount} from "svelte";
-    import {SlideObject} from '../../lib/slides/index.js';
+    import SlideObject from '$lib/slides';
     
     let slides;
     let showToolbar=true;

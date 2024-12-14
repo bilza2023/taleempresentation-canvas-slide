@@ -1,20 +1,19 @@
 
 import SlideRegistry  from './SlideRegistry';
 const registry = SlideRegistry.getInstance();
-
-import {CanvasPlayer,CanvasEditor , EqsEditor , EqPlayer} from "../../slides";
+import SlideObject from "$lib/slides";
 
 
 export default function registerSlideTypes(){
 const CanvasSlideModule ={
     type: 'canvas',
-    PlayerComponent: CanvasPlayer,
-    EditorComponent: CanvasEditor
+    PlayerComponent: SlideObject.CanvasPlayer,
+    EditorComponent: SlideObject.CanvasEditor
 };
 const EquationSlideModule ={
     type: 'Eqs',
-    PlayerComponent: EqPlayer,
-    EditorComponent: EqsEditor
+    PlayerComponent: SlideObject.EqPlayer,
+    EditorComponent: SlideObject.EqsEditor
 };
 
 
