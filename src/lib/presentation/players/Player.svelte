@@ -7,7 +7,7 @@
   let assets = null;
     ////////////////////====Slides Registration///////
     //--very important -- will break the library
-    import registerSlideTypes from "../code/slideRegistery/registerSlideTypes";
+    import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
     registerSlideTypes();
 
     /////////////////////////////////////////

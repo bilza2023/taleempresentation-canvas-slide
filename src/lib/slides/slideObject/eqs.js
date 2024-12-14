@@ -1,13 +1,16 @@
 
 import SlideObject from "./slideObject";
 // import eqsHealth  from "../eqs/eqsHealth";
-
+import {Slide} from "../eqs/samples/demoSlide";
 export default class Eqs{
 
 static availableEqsSpItems(){ // item img in old slides so dont change to image
     return ['code' , 'text', 'img' , 'heading' , 'table' , 'tableCode' ];
 }    
 
+static getDemoSlide(){
+    return Slide;
+}
 static getEqsSpItem(type){
     if (! Eqs.availableEqsSpItems().includes(type)) {
         throw new Error(`Invalid item type: ${type}`);

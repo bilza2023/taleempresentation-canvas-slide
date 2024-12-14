@@ -1,6 +1,6 @@
 import Canvas from "./canvas";
 import Eqs from "./eqs";
-import upgrade2Basic from "./upgrade2Basic";
+// import upgrade2Basic from "./upgrade2Basic";
 import uuid from "../uuid";
 
 export default class SlideObject {
@@ -8,9 +8,9 @@ export default class SlideObject {
     static Eqs = Eqs;
 
 
-    static upgrade2Basic(slides) {
-        return upgrade2Basic(slides);
-    }
+    // static upgrade2Basic(slides) {
+    //     return upgrade2Basic(slides);
+    // }
 
     static getNewItem( itemExtra = {} , name='',content='') {
         if (!name) {

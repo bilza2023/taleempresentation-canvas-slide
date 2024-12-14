@@ -2,9 +2,9 @@
 <script>
 import {onMount} from "svelte"    
 import {EqsEditor} from "$lib/slides";
-import {Slide} from "$lib/slides/eqs/testData/baseEqSlide.js";
+// import {Slide} from "$lib/slides/eqs/samples/demoSlide.js";
 import StartStopToolbar from "./StartStopToolbar.svelte";
-
+import {SlideObject} from "../../lib/index"
 // import {loadAssets} from "$lib";
 
 let currentTime = 0;
@@ -12,7 +12,7 @@ let slide;
 let interval;
 
 onMount(async () => {
-    slide = Slide;
+    slide = SlideObject.Eqs.getDemoSlide();
     
 });
 
