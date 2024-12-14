@@ -1,9 +1,8 @@
 <script>
     import Editor  from "../../lib/presentation/editor/Editor.svelte";
     import audioData from "./audioData.js";
-    // import {Slide} from "./slide.js";
     import {onMount} from "svelte";
-    import SlideObject from '$lib/slides';
+    import {SlideObject} from '$lib';
     
     let slides;
     let showToolbar=true;

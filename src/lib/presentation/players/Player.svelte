@@ -2,7 +2,7 @@
     import PlayerWithSound from "./PlayerWithSound.svelte";
     import PlayerNs from "./PlayerNs.svelte";
     import { onMount } from 'svelte';
-    import PresentationObject from "../../code/presentationObject/PresentationObject";
+    import PresentationObject from "../presentationObject/PresentationObject";
     
   let assets = null;
     ////////////////////====Slides Registration///////

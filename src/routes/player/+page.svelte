@@ -2,16 +2,17 @@
 <script>
     //@ts-nocheck 
     import Player from "../../lib/presentation/players/Player.svelte";
-    import SlideObject from "../../lib/slides/slideObject/slideObject";
     import {onMount} from "svelte";
-  
+
+    import SlideObject from '$lib/slides';
+   
 
     let slides=[];
     onMount(async()=>{
         // slides = await upgrade2Basic(Slides);
         const demoCanvasSlide = SlideObject.Canvas.getDemoSlide();
         const demoEqSlide = SlideObject.Eqs.getDemoSlide();
-        slides = [demoSlide ,demoEqSlide ];
+        slides = [demoCanvasSlide ,demoEqSlide ];
     });
     </script> 
     

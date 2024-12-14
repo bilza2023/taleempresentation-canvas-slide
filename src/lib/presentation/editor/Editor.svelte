@@ -3,7 +3,7 @@
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
   import LeftPanel from './LeftPanel.svelte';
-  import PresentationObject from "../../code/presentationObject/PresentationObject";
+  import PresentationObject from "../presentationObject/PresentationObject";
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../../code/sliderServices';
   import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
   import createNewSlide from "../../code/createNewSlide.js";
