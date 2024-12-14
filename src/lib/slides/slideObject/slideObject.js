@@ -43,16 +43,29 @@ export default class SlideObject {
       };
       
     }
+  
     static getNewSlide(type) {
         if (!this.availableSlideTypes().includes(type)) {
             throw new Error(`Invalid slide type: ${type}`);
         }
+        if(type === 'canvas'){
+            return Canvas.getNewSlide();
+        }
+        if(type === 'Eqs'){
+            let slide = SlideObject.getDefaultSlide();
+            slide.type = 'Eqs';
+            return slide;
+        }
+    }
+    //This has the fields required at slide level.
+    static getDefaultSlide() {
+    
         return {
             uuid : uuid(),
             version : 'basic',
             startTime : 0,
             endTime : 10,
-            type, 
+            type : '', 
             template : '',
             items : [],
             slideExtra : {},

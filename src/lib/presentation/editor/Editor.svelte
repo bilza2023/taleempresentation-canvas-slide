@@ -6,9 +6,9 @@
   import PresentationObject from "../presentationObject/PresentationObject";
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../../code/sliderServices';
   import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
-  import createNewSlide from "../../code/createNewSlide.js";
-  
-  // import upgrade2Basic from "../upgrade2Basic.js";
+  import StackPanel from './StackPanel.svelte';
+  // i am using this from main index.js not fron inside slides module
+  import {SlideObject} from "$lib";
 
   // Initialize slide types
   registerSlideTypes();
@@ -27,10 +27,15 @@
   let ready = false;
   let assets = null; //starts here 
 
-  // Reactive declarations
   $: currentSlide = slides?.[currentSlideIndex] || null;
-  $: isValidSlideIndex = currentSlideIndex >= 0 && currentSlideIndex < (slides?.length || 0);
 
+  $:{
+    if(slides.length > 0){
+      // debugger;
+    const startTime = slides[0].startTime;
+    console.log("startTime" , startTime);
+    }
+  }
   // Slide navigation
   function setCurrentSlideIndex(index) {
     if (index >= 0 && index < slides.length) {
@@ -43,7 +48,8 @@
   // Slide operations
   function handleAddNew(slideType) {
     try {
-      const newSlide = createNewSlide(slideType);
+      // debugger;
+      const newSlide = SlideObject.getNewSlide(slideType);
       slides = [...slides, newSlide];
       setCurrentSlideIndex(slides.length - 1);
       show = false;
@@ -141,11 +147,20 @@
     {#if slides?.length}
       {#if showSidePanel}
       <div class="flex flex-col w-1/12 bg-gray-600 p-1" style="border-right: 2px solid white;">
-          <LeftPanel
+          <!-- <LeftPanel
             bind:slides={slides}
             {setCurrentSlideIndex}
             {currentSlideIndex}
             onSelect={setCurrentSlideIndex}
+            onMoveDown={(index) => handleMoveSlide(index, 'down')}
+            onMoveUp={(index) => handleMoveSlide(index, 'up')}
+          /> -->
+          <!-- no binding since we do not chagne anything in stack comp -->
+          <StackPanel
+            stackItems={slides}
+            setSelectedIndex={setCurrentSlideIndex}
+            selectedItemIndex={currentSlideIndex}
+            displayKey={'type'}
             onMoveDown={(index) => handleMoveSlide(index, 'down')}
             onMoveUp={(index) => handleMoveSlide(index, 'up')}
           />

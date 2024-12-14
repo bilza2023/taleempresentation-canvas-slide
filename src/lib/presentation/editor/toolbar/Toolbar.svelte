@@ -23,7 +23,7 @@ export let currentTime=0;
 
 
 function shiftTime(slideIndex, newEndTime) {
-//  debugger;
+ debugger;
   if (slideIndex < 0 || slideIndex >= slides.length) {
     console.error("Invalid slide index");
     return;
