@@ -104,6 +104,11 @@ $:{ //this is only for loading images
             //very important line
             const Obj = SlideObject.Canvas.ItemsMap.get(item.itemExtra.type);
         
+            if(item.itemExtra.type == 'Eqs'){
+              console.log("Eqs",item);
+              debugger;
+            }
+
             Obj.draw(ctx,item.itemExtra,assets);
             postDraw(ctx,assets);   
         }

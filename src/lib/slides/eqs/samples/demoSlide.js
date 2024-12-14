@@ -1,5 +1,10 @@
 export const Slide = {
-  "type" : 'Eqs',
+  "uuid": "b1e8eb94-cbbd-4133-87ba-ccea71e3f5e3",
+  "version": "basic",
+  "startTime": 10,
+  "endTime": 20,
+  "type": "Eqs",
+  "template": "",
   "items": [
     {
       "name": "",

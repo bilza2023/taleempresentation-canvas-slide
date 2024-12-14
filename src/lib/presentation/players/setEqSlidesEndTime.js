@@ -3,8 +3,8 @@ export default async function setEqSlidesEndTime(slides) {
     slides.forEach(slide => {
       if (slide.type.toLowerCase() === "eqs") {
         if (slide.items && slide.items.length > 0) {
-          if (slide.items[0]?.extra) {
-            slide.items[0].extra.startTime = slide.startTime;
+          if (slide.items[0]?.itemExtra) {
+            slide.items[0].itemExtra.startTime = slide.startTime;
           }
           
           // Set endTime for each item based on next item's startTime
@@ -12,15 +12,15 @@ export default async function setEqSlidesEndTime(slides) {
             const currentItem = slide.items[i];
             const nextItem = slide.items[i + 1];
             
-            if (currentItem?.extra && nextItem?.extra) {
-              currentItem.extra.endTime = nextItem.extra.startTime;
+            if (currentItem?.itemExtra && nextItem?.itemExtra) {
+              currentItem.itemExtra.endTime = nextItem.itemExtra.startTime;
             }
           }
           
           // Set endTime for the last item to match slide's endTime
           const lastItem = slide.items[slide.items.length - 1];
-          if (lastItem?.extra) {
-            lastItem.extra.endTime = slide.endTime;
+          if (lastItem?.itemExtra) {
+            lastItem.itemExtra.endTime = slide.endTime;
           }
         }
       }
