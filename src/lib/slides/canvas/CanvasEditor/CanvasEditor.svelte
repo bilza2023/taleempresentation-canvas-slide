@@ -14,7 +14,7 @@
     import DialogueBox from '../dialogueBox/DialogueBox.svelte';
     import CanvasCommand from "../dialogueBox/CanvasCommand.svelte";
     import itemsToitemObjects from './editObjects/itemsToitemObjects';
-    import SlideObject from "../../index";
+    import {SlideObject} from "../../../index.js";
 
     export let items;
     export let slideExtra;

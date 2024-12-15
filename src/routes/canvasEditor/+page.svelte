@@ -1,50 +1,19 @@
 <script>
    
-  import AppToolbar from "./AppToolbar.svelte";
   import {SlideObject}  from "$lib";
+  import CanvasEditor from "../../lib/slides/canvas/CanvasEditor/CanvasEditor.svelte";
+  // import SaveLoadToolbar from "$lib/components/SaveLoadToolbar.svelte";
   import {onMount} from "svelte";
 
-const CanvasEditor = SlideObject.CanvasEditor;
   let slide = null;
   let showAddToolbar = true;
   let assets = null;
   
-  let fileNameToSave = 'slide';
 
   function createNewSlide(){
     slide = SlideObject.Canvas.getNewSlide();
   }
   
-  function saveSlide(){
-    const jsonString = `export const Slide = ${JSON.stringify(slide, null, 2)}`;
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${fileNameToSave}.js`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-  async function importFile(event) {
-  
-    const file = event.target.files[0];
-    if (file) {
-      try {
-        const text = await file.text();
-        // Remove any export/import statements and get the object
-        const cleanedText = text.replace(/export\s+const\s+\w+\s*=\s*/, '');
-        // Using Function constructor to safely evaluate the JS object
-        const slideData = (new Function(`return ${cleanedText}`))();
-        // debugger;
-        // const slideData = JSON.parse(cleanedText);
-        slide = slideData;
-        // console.log("slide", slide);
-      } catch (error) {
-        console.error('Error loading JS file:', error);
-        alert('Error loading file. Please ensure it is a valid JS file with a slide object.');
-      }
-    }
-  }
 
   onMount(async()=>{
     assets = await SlideObject.loadAssets(); 
@@ -53,13 +22,18 @@ const CanvasEditor = SlideObject.CanvasEditor;
 
 </script>
 
-<AppToolbar 
-  {createNewSlide} 
-  {importFile} 
-  {saveSlide} 
-  bind:fileNameToSave 
-/>
+{#if SlideObject}
 
+<!-- {#if slide}
+<SaveLoadToolbar 
+  bind:content={slide} 
+  fileName="presentation" 
+  fileExtension="js"
+  importAccept=".js"
+  regexReplaceFilter={/export\s+const\s+\w+\s*=\s*/}
+  PreTextToAdd='export const Slide'
+/>
+{/if} -->
 
 <div class="w-full bg-gray-700 text-white py-2 px-1 min-h-screen ">
   {#if slide && assets}
@@ -72,3 +46,6 @@ const CanvasEditor = SlideObject.CanvasEditor;
   {/if}
 </div>
 
+
+
+{/if}

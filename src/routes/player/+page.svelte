@@ -1,10 +1,10 @@
 
 <script>
     //@ts-nocheck 
+    import {SlideObject} from '$lib';
     import Player from "../../lib/presentation/players/Player.svelte";
     import {onMount} from "svelte";
 
-    import SlideObject from '$lib/slides';
    
 
     let slides=[];

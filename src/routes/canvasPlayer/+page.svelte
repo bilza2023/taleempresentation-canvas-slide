@@ -1,7 +1,7 @@
 <script>
 
  import { onMount } from "svelte";  
- import SlideObject from "$lib/slides";
+ import {SlideObject} from "$lib";
  import AppToolbar from "./AppToolbar.svelte";
 
 const CanvasPlayer = SlideObject.CanvasPlayer; 

@@ -1,14 +1,14 @@
 <script>
-  import { onMount } from 'svelte';
+  import {SlideObject} from "$lib";
+import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
-  import LeftPanel from './LeftPanel.svelte';
   import PresentationObject from "../presentationObject/PresentationObject";
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../../code/sliderServices';
   import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
   import StackPanel from './StackPanel.svelte';
   // i am using this from main index.js not fron inside slides module
-  import {SlideObject} from "$lib";
+
 
   // Initialize slide types
   registerSlideTypes();

@@ -5,10 +5,13 @@
   export let fileExtension = 'js';
   export let importAccept = '.js';
   export let regexReplaceFilter = /export\s+const\s+\w+\s*=\s*/;
+  export let PreTextToAdd = 'export const Content';
+  
 
   // Function to save content
   function saveFile() {
-    const jsonString = `export const Content = ${JSON.stringify(content, null, 2)}`;
+    // const jsonString = `export const Content = ${JSON.stringify(content, null, 2)}`;
+    const jsonString = `${PreTextToAdd} = ${JSON.stringify(content, null, 2)}`;
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

@@ -18,8 +18,7 @@
   //--draw functions are removed just here for final clean up.
   // import draw from './drawFunctions/draw';
  
-  import SlideObject from "../../slideObject/slideObject";
-  
+  import {SlideObject} from "$lib";
 
     export let slideExtra = {};
     export let items;

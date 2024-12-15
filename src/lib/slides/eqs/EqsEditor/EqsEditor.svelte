@@ -6,7 +6,7 @@
 //@ts-nocheck
 import TopToolbar from './TopToolbar.svelte';
 import Row from './Row.svelte';
-import SlideObject from "../../index";
+import {SlideObject} from "$lib";
 
 // export let just items and currentTime which is required for Editor only
 export let items;
