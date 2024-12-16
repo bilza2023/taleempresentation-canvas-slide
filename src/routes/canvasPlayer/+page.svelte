@@ -2,12 +2,16 @@
 
  import { onMount } from "svelte";  
  import {SlideObject} from "$lib";
- import AppToolbar from "./AppToolbar.svelte";
+ import ToolbarDiv from "../../lib/components/ToolbarDiv.svelte";
+ import OpenFileButton from "../../lib/components/OpenFileButton.svelte";
 
 const CanvasPlayer = SlideObject.CanvasPlayer; 
  let slide =null;
  let assets = null;
  
+ function callback(incomming){
+  slide = incomming;
+ }
  
 onMount(async()=>{
   assets = await SlideObject.loadAssets(); 
@@ -39,26 +43,6 @@ onMount(async()=>{
 //   console.log("eventMouseDown");
 // }
 
-async function importFile(event) {
-  
-  const file = event.target.files[0];
-  if (file) {
-    try {
-      const text = await file.text();
-      // Remove any export/import statements and get the object
-      const cleanedText = text.replace(/export\s+const\s+\w+\s*=\s*/, '');
-      // Using Function constructor to safely evaluate the JS object
-      const slideData = (new Function(`return ${cleanedText}`))();
-      // debugger;
-      // const slideData = JSON.parse(cleanedText);
-      slide = slideData;
-      // console.log("slide", slide);
-    } catch (error) {
-      console.error('Error loading JS file:', error);
-      alert('Error loading file. Please ensure it is a valid JS file with a slide object.');
-    }
-  }
-}
 
 </script>
 
@@ -67,9 +51,13 @@ async function importFile(event) {
 <div class=" h-full w-full bg-gray-800 text-white p-2 m-0" >
 {#if slide && assets}
 
-<AppToolbar 
-  {importFile} 
-/>
+<ToolbarDiv>
+  <OpenFileButton 
+    {callback}
+    importAccept=".js"
+    regexReplaceFilter={/export\s+const\s+\w+\s*=\s*/}
+  />
+  </ToolbarDiv>
 
 <CanvasPlayer 
   items ={slide.items}        
