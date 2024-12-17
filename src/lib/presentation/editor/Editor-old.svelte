@@ -1,6 +1,6 @@
 <script>
   import {SlideObject} from "$lib";
-  import { onMount } from 'svelte';
+import { onMount } from 'svelte';
   // import Toolbar from './toolbar/Toolbar.svelte';
   import TimeButtons from './toolbar/TimeButtons.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
@@ -13,7 +13,7 @@
   registerSlideTypes();
 
   // Props with defaults
-  export let slides = []; // Initialize slides as an empty array
+  export let slides;
   export let isBlob = false;
   export let showToolbar = true;
   export let audioData = '';
@@ -45,31 +45,29 @@
   }
 
   function setNewSlideTimings(newSlide) {
-    if (slides.length === 0) {
-      newSlide.startTime = 0; 
-      newSlide.endTime = 10; 
-    } else {
-      const lastSlide = slides[slides.length - 1];
-      newSlide.startTime = lastSlide.endTime;
-      newSlide.endTime = newSlide.startTime + 10;
-    }
+  if (slides.length === 0) {
+    newSlide.startTime = 0; 
+    newSlide.endTime = 10; 
+  } else {
+    const lastSlide = slides[slides.length - 1];
+    newSlide.startTime = lastSlide.endTime;
+    newSlide.endTime = newSlide.startTime + 10;
   }
+}
 
-  // Slide operations
+  
   function handleAddNew(slideType) {
-    try {
-      const newSlide = SlideObject.getNewSlide(slideType);
-      setNewSlideTimings(newSlide); 
+  try {
+    const newSlide = SlideObject.getNewSlide(slideType);
+    setNewSlideTimings(newSlide); 
 
-      slides = [...slides, newSlide];
-      setCurrentSlideIndex(slides.length - 1);
-      show = false;
-    } catch (error) {
-      console.error('Failed to add new slide:', error);
-      // Optionally trigger UI error notification
-    }
+    slides = [...slides, newSlide];
+    setCurrentSlideIndex(slides.length - 1);
+    show = false;
+  } catch (error) {
+    console.error('Failed to add new slide:', error);
   }
-
+}
   function handleMoveSlide(index, direction) {
     try {
       const updatedSlides = moveSlide(slides, index, direction);
@@ -151,8 +149,6 @@
   <div class='flex gap-4'>
     <button on:click={()=>showSidePanel = !showSidePanel}>showSidePanel</button>
     <button on:click={()=>handleAddNew('canvas')}>handleAddNew</button>
-    <button on:click={()=>currentSlideIndex += 1}>NextSlide</button>
-
   </div>
 
   <div class="flex justify-between bg-gray-700 m-0 p-0 items-center gap-1 pt-2 px-2">
@@ -175,13 +171,35 @@
     </div>
   </div>
 
-{/if}
+<!-- <TimeButtons />   --> 
+    <!-- <TimeButtons 
+      bind:slides
+      {currentSlideIndex}
+      bind:timingError={timingError}
+      bind:timingErrorMessage={timingErrorMessage}
+    /> -->
+
+    <!-- <Toolbar 
+      bind:show
+      bind:showSidePanel
+      bind:currentTime={currentTime}
+      {currentSlideIndex}
+      addNew={handleAddNew}
+      deleteSlide={handleDeleteSlide}
+      copySlide={handleCopySlide}
+      pasteSlide={handlePasteSlide}
+      cloneSlide={handleCloneSlide}
+      soundFile={audioData}
+      {isBlob}
+      {setCurrentSlideIndex}
+    /> -->
+  {/if}
 
   <div class="flex justify-start w-full">
     {#if slides?.length}
       {#if showSidePanel}
       <div class="flex flex-col w-1/12 bg-gray-600 p-1" style="border-right: 2px solid white;">
-<!--          
+         
           <StackPanel
             stackItems={slides}
             setSelectedIndex={setCurrentSlideIndex}
@@ -189,7 +207,7 @@
             displayKey={'type'}
             onMoveDown={(index) => handleMoveSlide(index, 'down')}
             onMoveUp={(index) => handleMoveSlide(index, 'up')}
-          /> -->
+          />
       </div>
       {/if}
 
@@ -207,4 +225,4 @@
       <h1>No Slides in the presentation</h1>
     {/if}
   </div>
-</div>
+</div> 
