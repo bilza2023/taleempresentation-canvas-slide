@@ -1,6 +1,7 @@
 {
-    "framework": "nextjs", 
-    "config": {
-      "nodeVersion": "18.x" 
+    "framework": "nextjs",
+    "functions": {
+      "nodeVersion": "18.x"
     }
   }
+  

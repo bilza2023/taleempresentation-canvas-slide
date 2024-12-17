@@ -1,6 +1,6 @@
 {
   "name": "taleempresentation-canvas-slide",
-  "version": "0.9.3",
+  "version": "0.5.0",
   "private": false,
   "author": "Bilal Tariq",
   "files": [
@@ -19,6 +19,9 @@
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write ."
   },
+  "engines": {
+  "node": "18.x"
+},
   "devDependencies": {
     "@skeletonlabs/skeleton": "^2.10.2",
     "@skeletonlabs/tw-plugin": "^0.4.0",
