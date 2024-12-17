@@ -7,9 +7,8 @@ import { onMount } from 'svelte';
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../../code/sliderServices';
   import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
   import StackPanel from './StackPanel.svelte';
-  // i am using this from main index.js not fron inside slides module
-
-
+  import TimingErrorDiv from "./TimingErrorDiv.svelte";
+ 
   // Initialize slide types
   registerSlideTypes();
 
@@ -27,15 +26,81 @@ import { onMount } from 'svelte';
   let ready = false;
   let assets = null; //starts here 
 
+  let timingError = false;
+  let timingErrorMessage = '';
+
   $: currentSlide = slides?.[currentSlideIndex] || null;
 
-  // $:{
-  //   if(slides.length > 0){
-  //     // debugger;
-  //   const startTime = slides[0].startTime;
-  //   console.log("startTime" , startTime);
-  //   }
-  // }
+  function checkTimingErrors() {
+  let timingError = false;
+  let timingErrorMessage = '';
+
+  if (!slides || slides.length === 0) {
+    timingError = true;
+    timingErrorMessage = "No slides found.";
+    return { timingError, timingErrorMessage };
+  }
+
+  // Check for missing start/end times
+  for (let i = 0; i < slides.length; i++) {
+    const slide = slides[i];
+    if (slide.startTime === undefined || slide.endTime === undefined) {
+      timingError = true;
+      timingErrorMessage = `Slide ${i + 1}: Missing startTime or endTime.`;
+      return { timingError, timingErrorMessage };
+    }
+  }
+
+  // Check first slide start time
+  if (slides[0].startTime !== 0) {
+    timingError = true;
+    timingErrorMessage = "First slide startTime must be 0.";
+    return { timingError, timingErrorMessage };
+  }
+
+  // Check slide order and minimum duration
+  for (let i = 1; i < slides.length; i++) {
+    const prevSlide = slides[i - 1];
+    const currentSlide = slides[i];
+
+    if (prevSlide.endTime !== currentSlide.startTime) {
+      timingError = true;
+      timingErrorMessage = `Gap between slides ${i - 1} and ${i}.`;
+      return { timingError, timingErrorMessage };
+    }
+
+    if (currentSlide.endTime - currentSlide.startTime < 2) {
+      timingError = true;
+      timingErrorMessage = `Slide ${i} duration is less than 2 seconds.`;
+      return { timingError, timingErrorMessage };
+    }
+  }
+
+  return { timingError, timingErrorMessage };
+}
+  function shiftTime(newEndTime) {
+
+  // Update the end time of the specified slide
+  slides[currentSlideIndex].endTime = newEndTime;
+
+  // Adjust subsequent slides
+  for (let i = currentSlideIndex + 1; i < slides.length; i++) {
+    const durationChange = slides[i].startTime - slides[i - 1].endTime;
+    
+    // Update start time and end time to maintain total duration
+    slides[i].startTime -= durationChange;
+    slides[i].endTime -= durationChange;
+
+    // Check for overlapping timings and correct if necessary
+    if (slides[i].startTime < slides[i - 1].endTime) {
+      slides[i].startTime = slides[i - 1].endTime;
+      slides[i].endTime = slides[i].startTime + (slides[i].endTime - slides[i].startTime);
+    }
+  }
+  checkTimingErrors(); //checkTimingErrors()checkTimingErrors() 
+}
+ 
+
   // Slide navigation
   function setCurrentSlideIndex(index) {
     if (index >= 0 && index < slides.length) {
@@ -58,7 +123,7 @@ import { onMount } from 'svelte';
     try {
       // debugger;
       const newSlide = SlideObject.getNewSlide(slideType);
-      setNewSlideTimings(newSlide);
+      setNewSlideTimings(newSlide); //setNewSlideTimings
       slides = [...slides, newSlide];
       setCurrentSlideIndex(slides.length - 1);
       show = false;
@@ -149,8 +214,15 @@ import { onMount } from 'svelte';
       soundFile={audioData}
       {isBlob}
       {setCurrentSlideIndex}
+      {shiftTime}
     />
   {/if}
+
+  
+  {#if timingError}
+  <TimingErrorDiv {timingErrorMessage}/>
+  {/if}
+
 
   <div class="flex justify-start w-full">
     {#if slides?.length}

@@ -15,6 +15,7 @@ export let copySlide;
 export let pasteSlide;
 export let cloneSlide;
 export let deleteSlide;
+export let shiftTime;
 
 
 export let soundFile=null;
@@ -22,32 +23,7 @@ export let currentTime=0;
 
 
 
-function shiftTime(slideIndex, newEndTime) {
- debugger;
-  if (slideIndex < 0 || slideIndex >= slides.length) {
-    console.error("Invalid slide index");
-    return;
-  }
 
-  // Update the end time of the specified slide
-  slides[slideIndex].endTime = newEndTime;
-
-  // Adjust subsequent slides
-  for (let i = slideIndex + 1; i < slides.length; i++) {
-    const durationChange = slides[i].startTime - slides[i - 1].endTime;
-    
-    // Update start time and end time to maintain total duration
-    slides[i].startTime -= durationChange;
-    slides[i].endTime -= durationChange;
-
-    // Check for overlapping timings and correct if necessary
-    if (slides[i].startTime < slides[i - 1].endTime) {
-      slides[i].startTime = slides[i - 1].endTime;
-      slides[i].endTime = slides[i].startTime + (slides[i].endTime - slides[i].startTime);
-    }
-  }
-//  console.log(slides); 
-}
 
 </script>
 
@@ -76,10 +52,13 @@ function shiftTime(slideIndex, newEndTime) {
     </div>
     
     <span class='text-xs'>End</span>
-    <input class='bg-gray-500 text-white p-0 m-0 rounded-md border-2 border-white text-center '  type="number" bind:value={slides[currentSlideIndex].endTime}
-      on:input={() => shiftTime(currentSlideIndex, slides[currentSlideIndex].endTime)}
-    >
+    <input class='bg-gray-500 text-white p-0 px-1 text-center m-0 rounded-md border-2 border-white text-center '  type="number" value={slides[currentSlideIndex].endTime}
+    on:input={(e) => shiftTime(+e.target.value)}
 
+    min=0
+    max=3600
+    >
+<!-- the + sign before +e.target.value consverts it into number-->
 <NavBtn2 title='Clone' icon={Icons.SHEEP}  clk={cloneSlide} />
 <NavBtn2 title='Copy' icon={Icons.COPY}  clk={copySlide} />
 <NavBtn2 title='Paste' icon='🖨️'  clk={pasteSlide} />
