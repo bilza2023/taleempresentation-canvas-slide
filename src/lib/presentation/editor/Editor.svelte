@@ -8,6 +8,8 @@ import { onMount } from 'svelte';
   import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
   import StackPanel from './StackPanel.svelte';
   import TimingErrorDiv from "./TimingErrorDiv.svelte";
+  import { fade } from 'svelte/transition';
+
  
   // Initialize slide types
   registerSlideTypes();
@@ -199,7 +201,9 @@ import { onMount } from 'svelte';
 </script>
 
 <div class="bg-gray-800 overflow-x-auto w-full text-white min-h-screen">
+
   {#if showToolbar}
+  <div transition:fade={{ duration: 600 ,delay: 400 }}>
     <Toolbar
       bind:slides
       bind:show
@@ -216,6 +220,7 @@ import { onMount } from 'svelte';
       {setCurrentSlideIndex}
       {shiftTime}
     />
+  </div>
   {/if}
 
   
@@ -228,15 +233,7 @@ import { onMount } from 'svelte';
     {#if slides?.length}
       {#if showSidePanel}
       <div class="flex flex-col w-1/12 bg-gray-600 p-1" style="border-right: 2px solid white;">
-          <!-- <LeftPanel
-            bind:slides={slides}
-            {setCurrentSlideIndex}
-            {currentSlideIndex}
-            onSelect={setCurrentSlideIndex}
-            onMoveDown={(index) => handleMoveSlide(index, 'down')}
-            onMoveUp={(index) => handleMoveSlide(index, 'up')}
-          /> -->
-          <!-- no binding since we do not chagne anything in stack comp -->
+         
           <StackPanel
             stackItems={slides}
             setSelectedIndex={setCurrentSlideIndex}

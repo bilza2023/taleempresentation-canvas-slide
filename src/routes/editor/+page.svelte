@@ -1,10 +1,9 @@
 <script>
-    //why import Editor directy ???? error -- 15-dec-2024
-    import {SlideObject} from '$lib';
+  import {SlideObject} from '$lib';
+  // 15-dec-2024 :why import Editor directy ???? is it error--> NO-18dec2024--
     import Editor  from "../../lib/presentation/editor/Editor.svelte";
     import audioData from "./audioData.js";
     import {onMount} from "svelte";
-
 
   import ToolbarDiv from "../../lib/components/ToolbarDiv.svelte";
   import OpenFileButton from "../../lib/components/OpenFileButton.svelte";
@@ -33,6 +32,7 @@ onMount(async()=>{
 </script>
 <ToolbarDiv>
   <CallbackButton callback={newPresentation} title='New ' icon='🎉'/>
+  <CallbackButton callback={()=>showToolbar=!showToolbar} title='Fold ' icon='🪜'/>
   
   <OpenFileButton 
     {callback}
