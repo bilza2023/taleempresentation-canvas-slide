@@ -1,8 +1,7 @@
 
 <script>
     //@ts-nocheck 
-    import {SlideObject} from '$lib';
-    import Player from "$lib";
+    import {Player ,SlideObject} from '$lib';
     import {onMount} from "svelte";
     import ToolbarDiv from "../../lib/components/ToolbarDiv.svelte";
     import OpenFileButton from "../../lib/components/OpenFileButton.svelte";
