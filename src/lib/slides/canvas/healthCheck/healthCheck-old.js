@@ -20,7 +20,7 @@ function checkSlideVersion(slide, fix, report) {
       if (fix) slide.version = "basic";
       report.warnings.push("Missing slide version");
     }
-  }
+}
   
   function checkSlideTiming(slide, fix, report) {
     // eslint-disable-next-line no-prototype-builtins
@@ -61,7 +61,7 @@ function checkSlideVersion(slide, fix, report) {
         return;
       }
   
-      const itemType = item.itemExtra.command;
+      const itemType = item.itemExtra.type;
       const templateFields = ITEM_TYPE_TEMPLATES[itemType];
   
       if (!templateFields) {

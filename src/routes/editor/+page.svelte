@@ -1,10 +1,10 @@
 <script>
-  import {SlideObject} from '$lib';
+  import {SlideObject,healthCheckCanvas} from '$lib';
   // 15-dec-2024 :why import Editor directy ???? is it error--> NO-18dec2024--
     import Editor  from "../../lib/presentation/editor/Editor.svelte";
     import audioData from "./audioData.js";
     import {onMount} from "svelte";
-
+  
   import ToolbarDiv from "../../lib/components/ToolbarDiv.svelte";
   import OpenFileButton from "../../lib/components/OpenFileButton.svelte";
   import CallbackButton from '../../lib/components/CallbackButton.svelte';
@@ -26,7 +26,10 @@
  }
 onMount(async()=>{
       const s = SlideObject.Canvas.getDemoSlide();
+      const report = await healthCheckCanvas(s);
+      console.log('report' , report);
       slides = [s];
+
 });
 
 </script>
