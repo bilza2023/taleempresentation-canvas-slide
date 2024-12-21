@@ -2,10 +2,9 @@ import loadAssets from "./assets/loadAssets";
 
 
 
-export default class PresentationObject{
+export default class Taleem{
 
 static loadAssets = loadAssets;    
 
 
-
-}//PresentationObject
+}

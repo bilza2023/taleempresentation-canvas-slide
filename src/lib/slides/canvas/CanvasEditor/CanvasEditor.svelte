@@ -1,6 +1,6 @@
 <script>
-    import {selectedItemIndexStore} from "../store";
     import uuid from '../../uuid';
+    import {selectedItemIndexStore} from "../store";
 
     import { onMount, onDestroy } from "svelte";
     import itemToObject from "./editObjects/itemToObject";

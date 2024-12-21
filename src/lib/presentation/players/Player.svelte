@@ -1,8 +1,10 @@
 <script>
+  // inside a module do not use index.js rather import files directly. out of a module dont allow other modules to import directly only through index.js
+  
     import PlayerWithSound from "./PlayerWithSound.svelte";
     import PlayerNs from "./PlayerNs.svelte";
     import { onMount } from 'svelte';
-    import PresentationObject from "../presentationObject/PresentationObject";
+    import Taleem from "../taleemObject/Taleem";
     
   let assets = null;
     ////////////////////====Slides Registration///////
@@ -18,7 +20,7 @@
     $: hasAudio = audioData !== undefined;
 /////////////////////////////////////////////////
   onMount(async()=>{
-       assets =  await PresentationObject.loadAssets();
+       assets =  await Taleem.loadAssets();
   }); 
   </script>
   

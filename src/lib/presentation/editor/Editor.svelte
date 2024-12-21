@@ -3,7 +3,7 @@
 import { onMount } from 'svelte';
   import Toolbar from './toolbar/Toolbar.svelte';
   import PresentationModeEditor from "./PresentationModeEditor.svelte";
-  import PresentationObject from "../presentationObject/PresentationObject";
+  import Taleem from "../taleemObject/Taleem";
   import {moveSlide,deleteSlide,copySlide,pasteSlide,cloneSlide} from '../../code/sliderServices';
   import registerSlideTypes from "../../code/slideRegistery/registerSlideTypes";
   import StackPanel from './StackPanel.svelte';
@@ -194,7 +194,7 @@ import { onMount } from 'svelte';
 
   onMount(async()=>{
     // assets injected with loadAssets functions nothing else required. just call the loadAssets function and on this layer of the app you get assets bundle. 
-    assets =  await PresentationObject.loadAssets();
+    assets =  await Taleem.loadAssets();
     slides = slides;
     ready = true;
   });

@@ -5,8 +5,12 @@
 
 <span style="color: red;">**21-Dec-2024 =>  At the moment we are at version 0.5.X which is just suitable for testing and playing but not suitable for serious projects. Also the complete code of the library is not uploaded yet. Docs and Help files are being written. Examples are being written and THE CODE IS NOT FINALLY TESTED. I am atleast 1 month away from releasing some stable version.**</span>
 
-taleem-presentation library is hosted at https://taleem.vercel.app/:<a href='https://taleem.vercel.app/'>
-<img src='./static/app-deployed-pic.png' alt='app-deployed-pic.png'>
+taleem-presentation library is hosted at https://taleem.vercel.app/:
+
+---
+
+<a href='https://taleem.vercel.app/'>
+<img src='https://taleem.vercel.app/app-deployed-pic.png' alt='app-deployed-pic.png'>
 </a>
 
 
@@ -54,14 +58,14 @@ npm install taleempresentation
 ## Hosted Editor
 
 <a href="https://taleem.vercel.app/editor">
-<img src='./static/editor.png' alt='editor.png'>
+<img src='https://taleem.vercel.app/editor.png' alt='editor.png'>
 </a>
 
 
 ## Hosted Player
 
 <a href="https://taleem.vercel.app/player">
-<img src='./static/player.png' alt='player.png'>
+<img src='https://taleem.vercel.app/player.png' alt='player.png'>
 </a>
 
 

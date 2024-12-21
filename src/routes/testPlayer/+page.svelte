@@ -1,8 +1,7 @@
 
 <script>
     //@ts-nocheck 
-    import {SlideObject} from '$lib';
-    import {Player} from "$lib";
+    import {SlideObject,Player} from '$lib';
     import {onMount} from "svelte";
     import {Slides} from "./presentation";
 
