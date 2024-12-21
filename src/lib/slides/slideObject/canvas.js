@@ -1,5 +1,5 @@
 
-import canvasHealth from "../canvas/canvasHealth/canvasHealth";
+// import canvasHealth from "../canvas/canvasHealth/canvasHealth";
 import ItemsMap from '../canvas/staticItems/ItemsMap';
 import {Slide} from "../canvas/samples/demoSlide";
 import uuid from "../uuid";
@@ -9,9 +9,9 @@ export default class Canvas {
 
     static ItemsMap = Object.freeze(new Map(ItemsMap));
     
-    static checkHealth(slide, fix = false) {
-        return canvasHealth(slide, fix);
-    }
+    // static checkHealth(slide, fix = false) {
+    //     return canvasHealth(slide, fix);
+    // }
 
     static getDemoSlide(){
         return Slide;
