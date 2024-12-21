@@ -1,11 +1,11 @@
 
 <script>
 import {onMount} from 'svelte';
-import {SlideObject} from "$lib";
+import {SlideObject,EqPlayer} from "$lib";
 import ToolbarDiv from "../../lib/components/ToolbarDiv.svelte";
  import OpenFileButton from "../../lib/components/OpenFileButton.svelte";
 import StartStopToolbar from "./StartStopToolbar.svelte";
-const EqPlayer = SlideObject.EqPlayer;
+// const EqPlayer = SlideObject.EqPlayer;
 
 let currentTime = 0;
 let slide;

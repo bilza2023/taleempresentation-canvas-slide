@@ -1,9 +1,7 @@
 <script>
    
-  import {SlideObject}  from "$lib";
-  //????????????????
-  import CanvasEditor from "../../lib/slides/canvas/CanvasEditor/CanvasEditor.svelte";
   import {onMount} from "svelte";
+  import {SlideObject,CanvasEditor}  from "$lib";
   
   import ToolbarDiv from "../../lib/components/ToolbarDiv.svelte";
   import OpenFileButton from "../../lib/components/OpenFileButton.svelte";

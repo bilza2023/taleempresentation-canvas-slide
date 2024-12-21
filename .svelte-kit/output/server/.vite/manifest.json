@@ -8,6 +8,22 @@
       "_internal.js"
     ]
   },
+  "_OpenFileButton.js": {
+    "file": "chunks/OpenFileButton.js",
+    "name": "OpenFileButton",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_Player.js": {
+    "file": "chunks/Player.js",
+    "name": "Player",
+    "imports": [
+      "_ssr.js",
+      "_client.js",
+      "_slideObject.js"
+    ]
+  },
   "_client.js": {
     "file": "chunks/client.js",
     "name": "client",
@@ -33,23 +49,16 @@
       "_ssr.js"
     ]
   },
-  "_registerSlideTypes.js": {
-    "file": "chunks/registerSlideTypes.js",
-    "name": "registerSlideTypes",
-    "imports": [
-      "_ssr.js",
-      "_slideObject.js"
-    ]
-  },
   "_slideObject.js": {
     "file": "chunks/slideObject.js",
     "name": "slideObject",
     "imports": [
       "_ssr.js",
-      "_index.js"
+      "_index.js",
+      "_client.js"
     ],
     "css": [
-      "_app/immutable/assets/slideObject.BhBxKCG4.css"
+      "_app/immutable/assets/slideObject.BIRMvm46.css"
     ]
   },
   "_ssr.js": {
@@ -102,7 +111,8 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_slideObject.js"
+      "_slideObject.js",
+      "_client.js"
     ]
   },
   "src/routes/canvasPlayer/+page.svelte": {
@@ -112,7 +122,8 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_slideObject.js"
+      "_slideObject.js",
+      "_client.js"
     ]
   },
   "src/routes/editor/+page.svelte": {
@@ -123,10 +134,8 @@
     "imports": [
       "_ssr.js",
       "_slideObject.js",
-      "_registerSlideTypes.js"
-    ],
-    "css": [
-      "_app/immutable/assets/_page.BJl6mL1l.css"
+      "_client.js",
+      "_OpenFileButton.js"
     ]
   },
   "src/routes/eqEditor/+page.svelte": {
@@ -136,7 +145,8 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_slideObject.js"
+      "_slideObject.js",
+      "_client.js"
     ]
   },
   "src/routes/eqPlayer/+page.svelte": {
@@ -146,7 +156,8 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_slideObject.js"
+      "_slideObject.js",
+      "_client.js"
     ]
   },
   "src/routes/player/+page.svelte": {
@@ -157,11 +168,19 @@
     "imports": [
       "_ssr.js",
       "_slideObject.js",
-      "_client.js",
-      "_registerSlideTypes.js"
-    ],
-    "css": [
-      "_app/immutable/assets/_page.i9Z8OS_V.css"
+      "_Player.js",
+      "_OpenFileButton.js"
+    ]
+  },
+  "src/routes/testPlayer/+page.svelte": {
+    "file": "entries/pages/testPlayer/_page.svelte.js",
+    "name": "entries/pages/testPlayer/_page.svelte",
+    "src": "src/routes/testPlayer/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_slideObject.js",
+      "_Player.js"
     ]
   }
 }

@@ -1,8 +1,17 @@
-//there is no index.js file in this folder which is very wrong
 
-// add index.js and no one should touch anything from outside directly"
+
 import  healthCheckCanvas  from "./canvas/healthCheck/healthCheckCanvas"
+import CanvasEditor from "./canvas/CanvasEditor/CanvasEditor.svelte"
+import CanvasPlayer from "./canvas/CanvasPlayer/CanvasPlayer.svelte"
+import EqPlayer from "./eqs/EqPlayer/EqPlayer.svelte"
+import EqsEditor from "./eqs/EqsEditor/EqsEditor.svelte"
+
+
 
 export {
-    healthCheckCanvas
+    healthCheckCanvas,
+    CanvasEditor,
+    CanvasPlayer,
+    EqPlayer,
+    EqsEditor
 }

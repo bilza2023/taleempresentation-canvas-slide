@@ -10,6 +10,8 @@ taleem-presentation library is hosted at https://taleem.vercel.app/:<a href='htt
 </a>
 
 
+<span style="color: red;">Thelibrary is under heavy development and the code is being changed on regualr basis.</span> 
+
 ## Taleem Presentation library in Brief:
 
     1. The presentation is a javascript `.js` file. It is text based and can be opened in any text editor and edited manually.
@@ -36,7 +38,7 @@ taleem-presentation library is hosted at https://taleem.vercel.app/:<a href='htt
     10: TaleemPresentation is a lightweight Svelte-based library designed to create and run simple JavaScript/JSON-based presentations.
 
     11: The Presentation is designed to run as a `video` and not as a slide show.
- 
+
 ---
 
 ## Installation

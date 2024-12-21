@@ -1,11 +1,11 @@
 <script>
 
  import { onMount } from "svelte";  
- import {SlideObject} from "$lib";
+ import {SlideObject,CanvasPlayer} from "$lib";
  import ToolbarDiv from "../../lib/components/ToolbarDiv.svelte";
  import OpenFileButton from "../../lib/components/OpenFileButton.svelte";
 
-const CanvasPlayer = SlideObject.CanvasPlayer; 
+// const CanvasPlayer = SlideObject.CanvasPlayer; 
  let slide =null;
  let assets = null;
  

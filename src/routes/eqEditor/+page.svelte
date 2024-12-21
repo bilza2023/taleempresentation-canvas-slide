@@ -2,14 +2,14 @@
 <script>
 import {onMount} from "svelte"    
 import StartStopToolbar from "./StartStopToolbar.svelte";
-import {SlideObject} from "$lib"
+import {SlideObject,EqsEditor} from "$lib"
 // import {loadAssets} from "$lib";
 import ToolbarDiv from "../../lib/components/ToolbarDiv.svelte";
 import OpenFileButton from "../../lib/components/OpenFileButton.svelte";
 import CallbackButton from '../../lib/components/CallbackButton.svelte';
 import SaveFileButton from "../../lib/components/SaveFileButton.svelte";
 
-const EqsEditor = SlideObject.EqsEditor;
+// const EqsEditor = SlideObject.EqsEditor;
 let currentTime = 0;
 let slide;
 let interval;
